@@ -27,7 +27,11 @@ using namespace std;
 
     void bit_stream::writeBit(uint8_t val)
     {
+        // vai ler o 1º bit e escrever na posiçao do pointer
         byte |= (val & 0x01) << pointer;
+        cout << "val write: "<< val << endl;
+        cout << "byte write: "<< byte << endl;
+        cout << "pointer write: "<< pointer << endl; 
         if (pointer > 0) {
             pointer--;                    
             return;       
@@ -40,7 +44,7 @@ using namespace std;
         outputfile.write((char*)&byte, 1);
         pointer = 7;
         outputfile.close();
-        //byte = 0;
+        byte = 0;
     }
     
     void bit_stream::writeBits(uint32_t val, uint n)
@@ -52,7 +56,7 @@ using namespace std;
         }
         //outputfile.close();
     }
-
+    /*
     void bit_stream::writeBits(uint32_t* val, uint n)
     {
         for (uint i=0; i<n/32 ; i++)
@@ -64,34 +68,39 @@ using namespace std;
         }
         //outputfile.close();
     }
-
+    */
     uint8_t bit_stream::readBit()
     {
-        uint8_t bit;
+        uint8_t val_byte=0;
         // introduzir informação no byte da stream
-        if (pointer < 0) {
+        if (pointer_read < 0) {
             inputfile.read((char*)&byte, 1); 
-            pointer = 7;
+            cout << "value readfile: " << byte << endl;
+            pointer_read = 7;
         }
         // se tem informação no byte da stream
         if(!inputfile.is_open())
             inputfile.open(filename, fstream::out);
-        bit = ((byte >> pointer) & 0x01);
-        pointer--;
-        return bit;
+        //val_byte = ((byte >> pointer_read) & 0x01);
+        //cout << "read bit: " << ((byte << pointer_read) & (0x01 << pointer_read)) << endl;
+        cout << "read bit: " << ((byte >> pointer_read) & 0x01) << endl;
+        val_byte = ((byte >> pointer_read) & 0x01); 
+        //byte = byte >> 1;
+        pointer_read--;
+        return val_byte;
     }
 
-    void bit_stream::readBit(uint8_t* bit)
+    void bit_stream::readBit(uint8_t* val)
     {
         // introduzir informação no byte da stream
-        if(pointer < 0)
+        if(pointer_read < 0)
         {
             inputfile.read((char*)&byte,1);
             pointer = 7;
         }
         // se tem informação no byte da stream
-        *bit = ((byte >> pointer) & 0x01);
-        pointer --;
+        *val = ((byte >> pointer_read) & 0x01);
+        pointer_read --;
     }
     
     uint32_t bit_stream::readBits(uint n)

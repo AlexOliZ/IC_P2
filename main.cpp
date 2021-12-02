@@ -16,23 +16,32 @@ int main(int argc ,char *argv[])
     //outputfile.write((char*)&bit,1);
     //outputfile.close();
 
-    bitstream.writeBit('1');
-    bitstream.writeBit('1');
-    bitstream.writeBit('0');
-    bitstream.writeBit('1');
-    bitstream.writeBit('1');
-    bitstream.writeBit('0');
-    bitstream.writeBit('1');
-    bitstream.writeBit('0');
+    bitstream.writeBit(0);
+    bitstream.writeBit(1);
+    bitstream.writeBit(1);
+    bitstream.writeBit(1);
+    bitstream.writeBit(0);
+    bitstream.writeBit(0);
+    bitstream.writeBit(0);
+    bitstream.writeBit(1);
+    //bitstream.writeBit('1');
+    //bitstream.writeBit('1');
+    //bitstream.writeBit('0');
+    //bitstream.writeBit('1');
+    //bitstream.writeBit('0');
     
     // ler char
-    /*
-    uint32_t* val;
-    bitstream.readBits(val,8);
+    
+    uint32_t* val=0;
+    uint8_t aux = 0;
+    uint8_t value = bitstream.readBits(8);
     for(int i=0 ; i<8 ; i++)
     {
-       cout << "value: " << (val+i) << endl;
+        aux |= ((value >> i) & 0x01);
+        cout << ((value >> i) & 0x01) << endl;
     }
-    */
+    cout << "value: " << ((char)value)  << endl;
+    cout << "comp: " << (aux&&'a')<<endl;
+    
     return 0;
 }
