@@ -14,7 +14,7 @@ void golomb::set_m(int new_m)
     m = new_m; 
 }
 
-char* golomb::signed_encode(uint n)
+char* golomb::encode(uint n)
 {
     unary_size =(uint)floor((n)/m);
     uint b=floor(log2(m));
@@ -66,7 +66,13 @@ char* golomb::signed_encode(uint n)
     
     return rem;
 }
-char* golomb::signed_decode(uint q,uint r)
+
+char* golomb::signed_encode(int n)
+{
+    return encode(n>=0?2*n:-2*n-1);
+}
+
+char* golomb::decode(uint q,uint r)
 {
     return 0;
 }

@@ -19,8 +19,9 @@ class golomb
             //memset(code,0,sizeof(uint8_t)*(uint)ceil(log2(m)));
         };
 
-        char* signed_encode(uint n);
-        char* signed_decode(uint q,uint r);
+        char* encode(uint n);
+        char* signed_encode(int n);
+        char* decode(uint q,uint r);
         int get_m();
         void set_m(int new_m);
         uint get_unarySize();

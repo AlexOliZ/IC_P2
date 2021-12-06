@@ -11,7 +11,7 @@ int main(void)
     char*code;
     golomb g(m);
 
-    for(n=0 ; n<max_n ; n++){
+    for(n=-10 ; n<max_n ; n++){
         code = g.signed_encode(n);
         for(j=0 ; j< floor((g.get_unarySize()+g.get_remSize())/8+1) ; j++)
         {
