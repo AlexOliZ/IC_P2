@@ -24,6 +24,7 @@ int main(void)
         cout << "size: " << floor((g.get_unarySize()+g.get_remSize())) << endl;
         cout << "unary: " << floor((g.get_unarySize())) << endl;
         cout << "rem: " << floor((g.get_remSize()))<< endl;
+        //g.free_code();
     }
     //for(i=0 ; i<8 ; i++)
     //    cout<< ((code[1]>>(i)) &0x01);

@@ -14,11 +14,11 @@ class golomb
 {
     public:
         golomb(uint val){
-            code = malloc((sizeof(uint8_t)*(uint)ceil(log2(m))));
             m=val;
             //memset(code,0,sizeof(uint8_t)*(uint)ceil(log2(m)));
         };
 
+        void free_code();
         char* encode(uint n);
         char* signed_encode(int n);
         char* decode(uint q,uint r);
@@ -30,7 +30,7 @@ class golomb
 
     private:
         uint m;
-        void* code;
+        char* code;
         uint unary_size = 0;
         uint rem_size = 0;
 

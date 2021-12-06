@@ -6,6 +6,7 @@ using namespace std;
 // r = n -q*m -1
 // o codigo é codificado em ceilling( log2 b ) bits para os valores maiores
 
+void golomb::free_code(){ free(code); }
 uint golomb::get_unarySize(){ return unary_size; }
 uint golomb::get_remSize(){ return rem_size; }
 int golomb::get_m(){ return m; }
@@ -21,7 +22,7 @@ char* golomb::encode(uint n)
     uint r= n -unary_size*m;
     uint k=pow(2,(b + 1))-m;
     int i=0,j=0;
-    char* rem = (char*)malloc((floor((b+1+unary_size+1)/8) +1));
+    char* code = (char*)malloc((floor((b+1+unary_size+1)/8) +1));
     //cout << "size of rem -> " << (sizeof(char)*(floor((b+1+unary_size+1)/8) +1)) << endl;
     //cout << "size of rem -> " << sizeof(rem) << endl;
     //cout << "b: " << b << endl;
@@ -31,11 +32,11 @@ char* golomb::encode(uint n)
 
     if(r<k){      
         rem_size=b;
-        for(j=0 ; j<sizeof(rem)/8 && 8*j<b ; j++)
+        for(j=0 ; j<sizeof(code)/8 && 8*j<b ; j++)
             //rem[j] |= r&(0x0FF<<j);
             for(i=0 ; i+8*j<b ; i++)
             {
-                rem[j] |= r &(0x01<<(i+8*j));
+                code[j] |= r &(0x01<<(i+8*j));
                 //cout<< "bin: " << (r &(0x01<<(i+8*j))) <<endl;
             }
 
@@ -46,19 +47,19 @@ char* golomb::encode(uint n)
     }else{
         rem_size=b+1;
         r += k;
-        for(j=0 ; j<sizeof(rem)/8 ; j++)
+        for(j=0 ; j<sizeof(code)/8 ; j++)
             for(i=0 ; i<8 ; i++)
             {
                 if(i+8*j < b+1)
                 {
-                    rem[j] |= r &(0x01<<(i+8*j));
+                    code[j] |= r &(0x01<<(i+8*j));
                     //cout<< "else: " << (r &(0x01<<(i+8*j))) <<endl;
                 }
             }
     }
-    rem[(int)floor(unary_size/8)] |= (0x01 << rem_size);
+    code[(int)floor(unary_size/8)] |= (0x01 << rem_size);
     unary_size++;
-    return rem;
+    return code;
 }
 
 char* golomb::signed_encode(int n)
