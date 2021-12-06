@@ -56,14 +56,8 @@ char* golomb::encode(uint n)
                 }
             }
     }
-    if(unary_size>0){
-        rem[(int)floor(unary_size/8)] |= (0x01 << rem_size);
-        unary_size++;
-        //for(j=floor(l/8) ; j<floor((l+unary_size+1)/8)+1 ; j++)
-        //    for(i=0 ; i<8 ; i++)
-        //        rem[j] |= 0x0;
-    }
-    
+    rem[(int)floor(unary_size/8)] |= (0x01 << rem_size);
+    unary_size++;
     return rem;
 }
 
