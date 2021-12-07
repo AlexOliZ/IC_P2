@@ -67,7 +67,24 @@ char* golomb::signed_encode(int n)
     return encode(n>=0?2*n:-2*n-1);
 }
 
-char* golomb::decode(uint q,uint r)
+/*char* golomb::decode(uint q,uint r)
 {
+    uint b=floor(log2(m));
+    int j=0;
+    int q_value=q-1;
+
+    return 0;
+}*/
+
+uint golomb::decode(char* code){
+    int i = 0;
+    int num_q=unary_size-1;
+    int remainder = 0;
+    for(i = rem_size-1; i >=0; i--){
+        //cout << "code["<<i<<"]="<< ((code[0]>>(i)) &0x01) <<endl;
+        remainder += (pow(2,i)*((code[0]>>(i)) &0x01));
+    }
+    cout << "outcode" << num_q*m+remainder <<endl;
     return 0;
 }
+

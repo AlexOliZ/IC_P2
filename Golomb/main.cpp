@@ -10,20 +10,26 @@ int main(void)
     int i,j;
     char*code;
     golomb g(m);
+    
+    int out =0;
 
     for(n=0 ; n<max_n ; n++){
         cout << "N -> " << n << endl;
         code = g.encode(n);
         for(j=0 ; j< floor((g.get_unarySize()+g.get_remSize())/8+1) ; j++)
         {
-            for(i=7 ; i>=0 ; i--)
-                if(i+8*j < g.get_unarySize()+g.get_remSize())
+            for(i=7 ; i>=0 ; i--){
+               if(i+8*j < g.get_unarySize()+g.get_remSize()) {
                     cout<< ((code[j]>>(i)) &0x01);
+                }
+            }
         }   
         cout<< endl;
-        cout << "size: " << floor((g.get_unarySize()+g.get_remSize())) << endl;
-        cout << "unary: " << floor((g.get_unarySize())) << endl;
-        cout << "rem: " << floor((g.get_remSize()))<< endl;
+        //cout << "size: " << floor((g.get_unarySize()+g.get_remSize())) << endl;
+        //cout << "unary: " << floor((g.get_unarySize())) << endl;
+        //cout << "rem: " << floor((g.get_remSize()))<< endl;
+
+        out = g.decode(code);
         //g.free_code();
     }
     //for(i=0 ; i<8 ; i++)

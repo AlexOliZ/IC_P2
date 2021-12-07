@@ -21,7 +21,8 @@ class golomb
         void free_code();
         char* encode(uint n);
         char* signed_encode(int n);
-        char* decode(uint q,uint r);
+        //char* decode(uint q,uint r);
+        uint decode(char* code);
         int get_m();
         void set_m(int new_m);
         uint get_unarySize();
