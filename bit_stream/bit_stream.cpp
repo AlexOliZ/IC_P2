@@ -38,12 +38,12 @@ using namespace std;
     void bit_stream::writeBit(uint8_t val)
     {
         // vai ler o 1º bit e escrever na posiçao do pointer
-        byte |= (val & 0x01) << pointer;
+        byte |= (val & 0x01) << pointer_write;
         cout << "val write: "<< val << endl;
         cout << "byte write: "<< byte << endl;
-        cout << "pointer write: "<< pointer << endl; 
-        if (pointer > 0) {
-            pointer--;                    
+        cout << "pointer write: "<< pointer_write << endl; 
+        if (pointer_write < 7) {
+            pointer_write++;                    
             return;       
         }           
         //cout << filename << endl;     
@@ -52,7 +52,7 @@ using namespace std;
         //if(!outputfile.is_open())
         //    outputfile.open(filename, fstream::out);
         outputfile.write((char*)&byte, 1);
-        pointer = 7;
+        pointer_write = 0;
         //outputfile.close();
         byte = 0;
     }
@@ -106,7 +106,7 @@ using namespace std;
         if(pointer_read < 0)
         {
             inputfile.read((char*)&byte,1);
-            pointer = 7;
+            pointer_read = 7;
         }
         // se tem informação no byte da stream
         *val = ((byte >> pointer_read) & 0x01);

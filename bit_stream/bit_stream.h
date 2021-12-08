@@ -12,8 +12,7 @@ class bit_stream {
     public:
         bit_stream(char *fname){
             pointer_read = -1;
-            pointer_write = 7;
-            pointer = 7;
+            pointer_write = 0;
             filename = fname;
             byteCount = 0;
             inputfile = ifstream(fname, ios::binary);
@@ -53,7 +52,6 @@ class bit_stream {
         ifstream inputfile;
         int pointer_read;
         int pointer_write;
-        int pointer;
         int byteCount;
         bool writeMode;
 };

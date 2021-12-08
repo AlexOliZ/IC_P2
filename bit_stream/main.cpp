@@ -16,30 +16,33 @@ int main(int argc ,char *argv[])
     //outputfile.write((char*)&bit,1);
     //outputfile.close();
 
-    bitstream.writeBit(0);
-    bitstream.writeBit(1);
-    bitstream.writeBit(1);
     bitstream.writeBit(1);
     bitstream.writeBit(0);
     bitstream.writeBit(0);
     bitstream.writeBit(0);
     bitstream.writeBit(1);
-    bitstream.writeBit(0);
-    bitstream.writeBit(1);
     bitstream.writeBit(1);
     bitstream.writeBit(1);
     bitstream.writeBit(0);
-    bitstream.writeBit(0);
-    bitstream.writeBit(0);
-    bitstream.writeBit(1);
-    bitstream.writeBit(0);
-    bitstream.writeBit(1);
-    bitstream.writeBit(1);
+
     bitstream.writeBit(1);
     bitstream.writeBit(0);
     bitstream.writeBit(0);
     bitstream.writeBit(0);
     bitstream.writeBit(1);
+    bitstream.writeBit(1);
+    bitstream.writeBit(1);
+    bitstream.writeBit(0);
+
+    bitstream.writeBit(1);
+    bitstream.writeBit(0);
+    bitstream.writeBit(0);
+    bitstream.writeBit(0);
+    bitstream.writeBit(1);
+    bitstream.writeBit(1);
+    bitstream.writeBit(1);
+    bitstream.writeBit(0);
+
     bitstream.close_file_write();
     //bitstream.writeBit('1');
     //bitstream.writeBit('1');
@@ -59,7 +62,6 @@ int main(int argc ,char *argv[])
         cout << ((value >> i) & 0x01) << endl;
     }
     cout << "value: " << ((char)value)  << endl;
-    cout << "comp: " << (aux&&'a')<<endl;
     
     return 0;
 }
