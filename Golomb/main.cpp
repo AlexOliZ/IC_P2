@@ -2,7 +2,7 @@
 
 using namespace std;
 
-int main(void)
+int main(void) //colocar um parametro m.........
 {
     int n;
     int max_n = 20;
