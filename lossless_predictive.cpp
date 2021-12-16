@@ -14,10 +14,10 @@
 
 using namespace std;
 
-void lossless_predictive::predictive_encode(predictor p,char* outfile){
+void lossless_predictive::predictive_encode(predictor predictor_encoder,char* outfile){
 
     char* code;
-    int *buf;
+    int *buf,i,j,avg;
     int num_items,num;
 
     SF_INFO inFileInfo;
@@ -38,39 +38,37 @@ void lossless_predictive::predictive_encode(predictor p,char* outfile){
     sf_close(inFile);
     printf("Read %d items\n",num);
 
-    bit_stream stream(outfile);    
-    golomb golomb_encoder(m);
+    bit_stream stream(outfile);   
 
     // encode predictor
     // para ser lossy dar shift << N vezes para cortar N bits+
-    for(int i=0 ; i<num ; i+= channels)
+    // audio é stereo ou mono~
+    
+    int average = 0;
+    for(i=0 ; i<num ; i++)
+        average += buf[i];
+
+    m=(int)ceil(-1/log2(average/(average+1.0)));
+    golomb golomb_encoder(m);
+
+    for(i=0 ; i<num ; i++)
     {
-        for (int j=0; j < channels; ++j){
-            //cout << "val: " << buf[i+j] << endl;
-            code = golomb_encoder.signed_encode(buf[i+j]);
-            stream.writeChars(code,golomb_encoder.get_remSize()+golomb_encoder.get_unarySize());
-            /*
-            for(j=0 ; j< floor((golomb_encoder.get_unarySize()+golomb_encoder.get_remSize())/8+1) ; j++)
-            {
-                for(i=7 ; i>=0 ; i--){
-                if(i+8*j < golomb_encoder.get_unarySize()+golomb_encoder.get_remSize()) {
-                        cout<< ((code[j]>>(i)) &0x01);
-                    }
-                }
-            }   
-            cout<< endl;
-            */
-            free(code);
-        }
+        code = golomb_encoder.signed_encode(predictor_encoder.residual(buf[i]));
+        stream.writeChars(code,golomb_encoder.get_remSize()+golomb_encoder.get_unarySize());
+        free(code);
     }
     sf_close(inFile);
     stream.close_file_write();
     printf("Read %d items\n",num);
 }
 
-void lossless_predictive::predictive_decode(predictor p,char* infile)
+void lossless_predictive::predictive_decode(predictor predictor_encoder,char* infile)
 {
+    bit_stream stream(infile);
+    uint32_t unary_size = 0;
+    uint32_t res_size = 0;
 
+    
 
 
 }
@@ -78,9 +76,6 @@ void lossless_predictive::predictive_decode(predictor p,char* infile)
 int main(int argc, char* argv[])
 {
     
-    if(argc < 2)
-        cout << "missing args, ./a.out <m>" << endl;
-    int m = atoi(argv[1]);
     string file = "./wavfiles/sample06.wav";
     string binfile = "testfile.bin";
     //cout << floor(0.9) << endl;
@@ -111,7 +106,7 @@ int main(int argc, char* argv[])
     sf_close(inFile);
     printf("Read %d items\n",num);
     */
-    lossless_predictive lossless((char*)file.data(),m);
+    lossless_predictive lossless((char*)file.data());
     predictor p((char*)file.data());
     lossless.predictive_encode(p,(char*)binfile.data());
 

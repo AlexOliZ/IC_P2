@@ -10,8 +10,8 @@ using namespace std;
 
 class lossless_predictive {
     public:
-        lossless_predictive(char* fname ,uint m_val){
-            m=m_val;
+        lossless_predictive(char* fname){
+            //m=m_val;
             filename = fname;
         };
 
