@@ -49,6 +49,11 @@ void YUV (Mat image, Mat &y, Mat &u, Mat &v){
     }
 }
 
+//retorna o erro da previsao
+int erroEnc (int valor, int valorPrevisto){
+    return valor-valorPrevisto;
+}
+
 // funcao de previsao do proximo pixel usando os anteriores 
 int preditor (int a, int b, int c){ 
     int x;
@@ -63,7 +68,10 @@ int preditor (int a, int b, int c){
 }
 
 //atribui o a,b,c para chamar a funcao de prever o proximo pixel
-void preditor_JPEG_LS (Mat matriz, int div){
+void preditor_JPEG_LS (Mat matriz, int div, char* outfile, int m){
+    char* code;
+    bit_stream stream(outfile);   
+    golomb golomb_encoder(m);
     for (int i=0;i<matriz.size().height/div;++i){ //row
         for(int j=0;j<matriz.size().width/div;++j){ //columns
             int a,b,c;
@@ -87,17 +95,23 @@ void preditor_JPEG_LS (Mat matriz, int div){
             }
     
             int previsao = preditor(a,b,c);
-            printf("previsao = %d\n" ,previsao);   
+            
+            int Auxerro = erroEnc (PixelAtual, previsao);
+            uint erro = abs(Auxerro); //entropia
+            code = golomb_encoder.encode(erro);
+            //stream.writeChar(code);
+            printf("erro = %d , codigo = %s\n" ,erro,code); 
+            /*
+            //char bit = g.encode(erro);
+            char code = golomb_encoder.signed_encode(erro);
+            stream.writeChars(code,golomb_encoder.get_remSize()+golomb_encoder.get_unarySize());
+           
+            //imprimir num ficheiro o bit -> usar a bit_stream
+            stream.writeChars(bit,);  */
             //falta chamar o golomb para cada disto, e o bitStream para imprimir num ficheiro as coisas codificadas pelo golomb
         }
     }
 
-}
-
-
-//retorna o erro da previsao
-int erro (int valor, int valorPrevisto){
-    return valor-valorPrevisto;
 }
 
 int main(int argc,char *argv[]) {
@@ -132,9 +146,8 @@ int main(int argc,char *argv[]) {
     Mat u (input_image.size().height/4,input_image.size().width/4,CV_8UC1);
     YUV(input_image,y,u,v);
                 
-    preditor_JPEG_LS(v,4);
-    bit_stream stream(outfile);    
-    golomb g(m);
+    preditor_JPEG_LS(y,1, outfile,m);
+    
     //preditor_JPEG_LS(y,1);
     //preditor_JPEG_LS(v,4);
     //preditor_JPEG_LS(u,4);
@@ -187,7 +200,7 @@ int main(int argc,char *argv[]) {
         }
     }*/
 
-    imshow("Input image",input_image); //show image
+    //imshow("Input image",input_image); //show image
      
     //imwrite(output_name,output_image); //write image
 
