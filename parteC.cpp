@@ -68,12 +68,10 @@ int preditor (int a, int b, int c){
 }
 
 //atribui o a,b,c para chamar a funcao de prever o proximo pixel
-void preditor_JPEG_LS (Mat matriz, int div, char* outfile, int m){
-    char* code;
-    bit_stream stream(outfile);   
-    golomb golomb_encoder(m);
-    for (int i=0;i<matriz.size().height/div;++i){ //row
-        for(int j=0;j<matriz.size().width/div;++j){ //columns
+void preditor_JPEG_LS (Mat matriz,Mat &erMat){
+    
+    for (int i=0;i<(matriz.size().height);++i){ //row
+        for(int j=0;j<(matriz.size().width);++j){ //columns
             int a,b,c;
             int PixelAtual = matriz.at<int>(i,j);
             if (j==0 && i!=0){  // se estivermos na 1 coluna
@@ -96,22 +94,14 @@ void preditor_JPEG_LS (Mat matriz, int div, char* outfile, int m){
     
             int previsao = preditor(a,b,c);
             
-            int Auxerro = erroEnc (PixelAtual, previsao);
-            uint erro = abs(Auxerro); //entropia
-            code = golomb_encoder.encode(erro);
-            //stream.writeChar(code);
-            printf("erro = %d , codigo = %s\n" ,erro,code); 
-            /*
-            //char bit = g.encode(erro);
-            char code = golomb_encoder.signed_encode(erro);
-            stream.writeChars(code,golomb_encoder.get_remSize()+golomb_encoder.get_unarySize());
-           
-            //imprimir num ficheiro o bit -> usar a bit_stream
-            stream.writeChars(bit,);  */
-            //falta chamar o golomb para cada disto, e o bitStream para imprimir num ficheiro as coisas codificadas pelo golomb
+            int erro = erroEnc (PixelAtual, previsao);
+            //erro tem +3 espacos que as outras matrizes por causa das pontas
+            erMat.at<int>(i,j)  = erro;
+            //printf("erro[%d][%d] -> %d\n",i,j,erMat.at<int>(i,j));
+        
         }
-    }
-
+    }  
+    
 }
 
 int main(int argc,char *argv[]) {
@@ -145,12 +135,88 @@ int main(int argc,char *argv[]) {
     Mat v (input_image.size().height/4,input_image.size().width/4,CV_8UC1);
     Mat u (input_image.size().height/4,input_image.size().width/4,CV_8UC1);
     YUV(input_image,y,u,v);
-                
-    preditor_JPEG_LS(y,1, outfile,m);
+
+    //matriz com os erros todos de y
+    //precisas dos +2 para as pontas das imagens (a,b,c nas pontas acrescentas 0)
+    Mat erroY (y.size().height+3,y.size().width+3,CV_8UC1); 
+    preditor_JPEG_LS(y,erroY);
+    Mat erroV (v.size().height+3,v.size().width+3,CV_8UC1); 
+    preditor_JPEG_LS(v,erroV);
+    Mat erroU (u.size().height+3,u.size().width+3,CV_8UC1); 
+    preditor_JPEG_LS(u,erroU);
+
+    //printf("%d",v.size().height);
+    //imprimir uma matriz 
+    for (int i = 0;i<erroY.size().height-1;i++){
+        for (int j = 0;j<erroY.size().width-1;j++){
+            //printf("erro[%d][%d] -> %d\n",i,j,erroY.at<int>(i,j));
+        }
+    }
     
-    //preditor_JPEG_LS(y,1);
-    //preditor_JPEG_LS(v,4);
-    //preditor_JPEG_LS(u,4);
+    for (int i = 0;i<erroV.size().height;i++){
+        for (int j = 0;j<erroV.size().width;j++){
+            //printf("erro[%d][%d] -> %d\n",i,j,erroV.at<int>(i,j));
+            //printf("erro[%d][%d] -> %d\n",i,j,erroU.at<int>(i,j));
+        }
+    }
+  
+    //para o erro do y
+    
+    Mat codeY (erroY.size().height,erroY.size().width,CV_8UC1);
+    Mat codeV (erroV.size().height,erroV.size().width,CV_8UC1);
+    Mat codeU (erroU.size().height,erroU.size().width,CV_8UC1);
+    char* code;
+    golomb golomb_encoder(m);
+    for (int i = 0;i<erroV.size().height-1;i++){
+        for (int j = 0;j<erroV.size().width-1;j++){
+            code = golomb_encoder.encode(erroV.at<int>(i,j));
+            codeV.at<char>(i,j)= *code;   
+        }
+    }
+    //print(codeY);
+
+    for (int i = 0;i<codeV.size().height-1;i++){
+        for (int j = 0;j<codeV.size().width-1;j++){
+           
+            printf("golom[%d][%d] -> %d\n",i,j,codeV.at<int>(i,j));
+
+        }
+    }
+   
+   
+
+
+    /*golomb golomb_encoder(m);
+    char* code;
+    code = golomb_encoder.encode(erro);
+    for(j=0 ; j< floor((golomb_encoder.get_unarySize()+golomb_encoder.get_remSize())/8+1) ; j++)
+    {
+        for(i=7 ; i>=0 ; i--){
+        if(i+8*j < golomb_encoder.get_unarySize()+golomb_encoder.get_remSize()) {
+                cout<< ((code[j]>>(i)) &0x01);
+            }
+        }
+    }   
+    cout<< endl;*/
+
+
+     
+    //printf("erro -> %d\n",erroy.at<int>(i,j));
+    //uint erro = abs(Auxerro); //entropia
+    // code = golomb_encoder.encode(erro);
+    //stream.writeChar(code);
+    //printf("erro = %d , codigo = %s\n" ,erro,code); 
+    /*
+    //char bit = g.encode(erro);
+    char code = golomb_encoder.signed_encode(erro);
+    stream.writeChars(code,golomb_encoder.get_remSize()+golomb_encoder.get_unarySize());
+    
+    //imprimir num ficheiro o bit -> usar a bit_stream
+    stream.writeChars(bit,);  */
+    //falta chamar o golomb para cada disto, e o bitStream para imprimir num ficheiro as coisas codificadas pelo golomb
+                
+
+   
     //create the matrix of the output image 
     //Mat output_image = Mat::zeros(input_image.size(),input_image.type());
 
@@ -170,35 +236,17 @@ int main(int argc,char *argv[]) {
 
 
 
-    /*for (int i=0;i<input_image.size().height;++i) //row
-    {
-        for(int j=0;j<input_image.size().width;++j) //columns
-        {
-
-            int a,b,c;
-            //no preditor temos que por 0 no a ou b ou c quando for nas pontas....
-            int PixelAtual = input_image.at<Vec3b>(i,j);
-            a = input_image.at<Vec3b>(i,j-1);
-            b = input_image.at<Vec3b>(i-1,j);
-            c = input_image.at<Vec3b>(i-1,j-1);
-            if (j==0){  // se estivermos na 1 coluna
-                a = 0;
-            }
-            if (i==0){  // se estivermos na 1 linha
-                c = 0;
-                b = 0;
-            }
-            int previsao = preditor(a,b,c);
-            int Auxerro = erro (PixelAtual, previsao);
-            uint erro = abs(Auxerro); //entropia
-            //char bit = g.encode(erro);
-            char code = golomb_encoder.signed_encode(erro);
-            stream.writeChars(code,golomb_encoder.get_remSize()+golomb_encoder.get_unarySize());
-           
-            //imprimir num ficheiro o bit -> usar a bit_stream
-            stream.writeChars(bit,);
-        }
-    }*/
+    /*   
+    int previsao = preditor(a,b,c);
+    int Auxerro = erro (PixelAtual, previsao);
+    uint erro = abs(Auxerro); //entropia
+    //char bit = g.encode(erro);
+    char code = golomb_encoder.signed_encode(erro);
+    stream.writeChars(code,golomb_encoder.get_remSize()+golomb_encoder.get_unarySize());
+    
+    //imprimir num ficheiro o bit -> usar a bit_stream
+    stream.writeChars(bit,);
+    */
 
     //imshow("Input image",input_image); //show image
      
