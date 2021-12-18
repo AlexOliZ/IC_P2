@@ -25,6 +25,12 @@ class golomb
         //~golomb();
         
         void free_code();
+        /**
+         * @brief 
+         * Function to encode 
+         * @param n N parameter given 
+         * @return char* 
+         */
         char* encode(uint n);
         char* signed_encode(int n);
         //char* decode(uint q,uint r);

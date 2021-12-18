@@ -1,0 +1,76 @@
+\hypertarget{classgolomb}{}\doxysection{golomb Class Reference}
+\label{classgolomb}\index{golomb@{golomb}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgolomb_abbfc53b1967661481a8dc6f0d7169ac1}\label{classgolomb_abbfc53b1967661481a8dc6f0d7169ac1}} 
+{\bfseries golomb} (uint val)
+\item 
+\mbox{\Hypertarget{classgolomb_acd56a9cb8969008ceb00cc371cd5063a}\label{classgolomb_acd56a9cb8969008ceb00cc371cd5063a}} 
+{\bfseries golomb} (uint val, char $\ast$fname)
+\item 
+\mbox{\Hypertarget{classgolomb_a138ecdfc0a6030dbba7a42ec101c4a6a}\label{classgolomb_a138ecdfc0a6030dbba7a42ec101c4a6a}} 
+void {\bfseries free\+\_\+code} ()
+\item 
+char $\ast$ \mbox{\hyperlink{classgolomb_a4e0df9f915237a812338121ad72d08b4}{encode}} (uint n)
+\begin{DoxyCompactList}\small\item\em Function to encode. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgolomb_acfc8ca737e70ebd068afd4d885def6af}\label{classgolomb_acfc8ca737e70ebd068afd4d885def6af}} 
+char $\ast$ {\bfseries signed\+\_\+encode} (int n)
+\item 
+\mbox{\Hypertarget{classgolomb_a0f12fcb487deaa5d824e11375e3f2f0c}\label{classgolomb_a0f12fcb487deaa5d824e11375e3f2f0c}} 
+int {\bfseries get\+\_\+m} ()
+\item 
+\mbox{\Hypertarget{classgolomb_aaa698e9f6b74f815001e6e8fcb416fc7}\label{classgolomb_aaa698e9f6b74f815001e6e8fcb416fc7}} 
+void {\bfseries set\+\_\+m} (int new\+\_\+m)
+\item 
+\mbox{\Hypertarget{classgolomb_a08fe2daa692ee2fc43cf562efd5e4ac3}\label{classgolomb_a08fe2daa692ee2fc43cf562efd5e4ac3}} 
+uint {\bfseries get\+\_\+unary\+Size} ()
+\item 
+\mbox{\Hypertarget{classgolomb_ab001bf1155b8f2b022f804ada003ac8f}\label{classgolomb_ab001bf1155b8f2b022f804ada003ac8f}} 
+uint {\bfseries get\+\_\+rem\+Size} ()
+\item 
+\mbox{\Hypertarget{classgolomb_aa0ea7dd46d4e604b68ae8c91735660fb}\label{classgolomb_aa0ea7dd46d4e604b68ae8c91735660fb}} 
+uint {\bfseries decode} (char $\ast$code, uint remainder, uint unary\+\_\+size)
+\item 
+\mbox{\Hypertarget{classgolomb_a432ce6c95f9c15002a99466343fe34a0}\label{classgolomb_a432ce6c95f9c15002a99466343fe34a0}} 
+int {\bfseries signed\+\_\+decode} (char $\ast$code, uint remainder\+\_\+size, uint unary\+\_\+size)
+\item 
+\mbox{\Hypertarget{classgolomb_af48e0025598cc94fca098ed344f31853}\label{classgolomb_af48e0025598cc94fca098ed344f31853}} 
+void {\bfseries stream\+\_\+encode} (uint n)
+\item 
+\mbox{\Hypertarget{classgolomb_ac88dfc2b36b2ce173e13609dd14c284b}\label{classgolomb_ac88dfc2b36b2ce173e13609dd14c284b}} 
+void {\bfseries signed\+\_\+stream\+\_\+encode} (uint n)
+\item 
+\mbox{\Hypertarget{classgolomb_a8f3da61695a6edd35a12599df191bc00}\label{classgolomb_a8f3da61695a6edd35a12599df191bc00}} 
+uint {\bfseries stream\+\_\+decode} ()
+\item 
+\mbox{\Hypertarget{classgolomb_a997f84414e2fa8cfd0d43206302affa0}\label{classgolomb_a997f84414e2fa8cfd0d43206302affa0}} 
+int {\bfseries signed\+\_\+stream\+\_\+decode} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classgolomb_a4e0df9f915237a812338121ad72d08b4}\label{classgolomb_a4e0df9f915237a812338121ad72d08b4}} 
+\index{golomb@{golomb}!encode@{encode}}
+\index{encode@{encode}!golomb@{golomb}}
+\doxysubsubsection{\texorpdfstring{encode()}{encode()}}
+{\footnotesize\ttfamily char $\ast$ golomb\+::encode (\begin{DoxyParamCaption}\item[{uint}]{n }\end{DoxyParamCaption})}
+
+
+
+Function to encode. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & N parameter given \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+char$\ast$ 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Golomb/golomb.\+h\item 
+Golomb/golomb.\+cpp\end{DoxyCompactItemize}
