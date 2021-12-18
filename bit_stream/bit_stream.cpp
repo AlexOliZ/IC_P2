@@ -56,6 +56,7 @@ using namespace std;
         }           
         
         //cout << endl;
+        outputfile.write((char*)&byte,1);
         pointer_write = 0;
         byte = 0;
     }
