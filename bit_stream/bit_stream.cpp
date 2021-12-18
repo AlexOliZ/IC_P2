@@ -1,4 +1,5 @@
 #include "bit_stream.h"
+#include "math.h"
 using namespace std;
 /*
 *   bit stream to read/write bits from/to file
@@ -11,7 +12,11 @@ using namespace std;
 */
 //class bit_stream
 //{
-    
+    bool bit_stream::end_of_file()
+    {   
+        return inputfile.eof();
+    }
+
     void bit_stream::open_file_write()
     {
         outputfile.open(filename);
@@ -33,36 +38,48 @@ using namespace std;
         inputfile.close();
     }
     
-
+    void bit_stream::write_byte()
+    {
+        if(pointer_write > 0){
+            outputfile.write((char*)&byte,1);
+            pointer_write = 0;
+        }
+    }
 
     void bit_stream::writeBit(uint8_t val)
     {
-        // vai ler o 1º bit e escrever na posiçao do pointer
         byte |= (val & 0x01) << pointer_write;
-        cout << "val write: "<< val << endl;
-        cout << "byte write: "<< byte << endl;
-        cout << "pointer write: "<< pointer_write << endl; 
+        //cout << "bit: " << ((val & 0x01) << pointer_write) << ' ';
         if (pointer_write < 7) {
             pointer_write++;                    
             return;       
         }           
-        //cout << filename << endl;     
-        //fwrite(&byte, sizeof(byte), 1, fopen(filename,"wb"));
-        //cout << (char)byte << endl;
-        //if(!outputfile.is_open())
-        //    outputfile.open(filename, fstream::out);
-        outputfile.write((char*)&byte, 1);
+        
+        //cout << endl;
         pointer_write = 0;
-        //outputfile.close();
         byte = 0;
     }
     
-    void bit_stream::writeBits(uint32_t val, uint n)
-    {
-        uint bit;
-        for (int i = n-1; i >= 0; i--) {
-            bit = (val >> i%32) & 0x01;
+    void bit_stream::writeBits(int val, uint n)
+    {   
+        char bit;
+        //cout << "val: " << val << endl;
+        for(int i=n-1 ; i>=0 ; i--)
+        {  
+            bit = (val >> i%64) & 0x01;
+            //bit = (val) & (0x01 << i);
+            //cout << "bits: " << (int)bit << endl;
             writeBit(bit);
+        }
+    }
+
+    void bit_stream::writeBits(char* val, uint n)
+    {   
+        int j;
+        for(int i=0 ; i<(int)(n/8) ; i++)
+        {
+            for(j=0 ; j<8 && 8*i+j<n ; j++)
+                writeBit((val[i] >> j) & 0x01);
         }
         //outputfile.close();
     }
@@ -82,21 +99,21 @@ using namespace std;
     uint8_t bit_stream::readBit()
     {
         uint8_t val_byte=0;
-        // introduzir informação no byte da stream
-        if (pointer_read < 0) {
+        int i,j;
+        if (pointer_read > 7) {
             inputfile.read((char*)&byte, 1); 
-            cout << "value readfile: " << byte << endl;
-            pointer_read = 7;
+            //cout << "byte ";
+            for(i=0 ; i<8 ; i++){
+                //cout<< ((byte>>(i)) &0x01);
+            }
+            //cout << endl;
+            //cout << (int)byte << endl;
+            pointer_read = 0;
         }
-        // se tem informação no byte da stream
-        //if(!inputfile.is_open())
-        //    inputfile.open(filename, fstream::out);
-        //val_byte = ((byte >> pointer_read) & 0x01);
-        //cout << "read bit: " << ((byte << pointer_read) & (0x01 << pointer_read)) << endl;
-        cout << "read bit: " << ((byte >> pointer_read) & 0x01) << endl;
+        
         val_byte = ((byte >> pointer_read) & 0x01); 
-        //byte = byte >> 1;
-        pointer_read--;
+        pointer_read++;
+        //cout << "bit: " << (int)val_byte << endl;
         return val_byte;
     }
 
@@ -113,22 +130,29 @@ using namespace std;
         pointer_read --;
     }
     
-    uint32_t bit_stream::readBits(uint n)
+    char* bit_stream::readBits(uint n)
     {
-        //n = n&0xFFFF; // para uint_32
-        uint64_t value=0;
-        for(int i=0 ; i<n ; i++)
-        {
-            value = value << 1 | readBit();
+        uint i,j;
+        char* value = (char*)malloc((uint)(n/8) + 1);
+        for(j=0; j*8 < n; j++){
+            for (i=0; i < 8; i++) {
+                if(i+8*j < n){
+                    value[j] |= (readBit()<<i);
+                    //cout<< ((value[j]>>(i)) &0x01);
+                }
+            }
         }
+        //cout << endl;
         return value;
     }
-
-    void bit_stream::readBits(uint32_t* bits, uint n)
+    
+    void bit_stream::readBits(char* bits, uint n)
     {
-        for(uint i=0 ; i<n ; i++)
-        {
-            bits[i] = readBit();
+        for(int j = 0; j*8 < n; j++){
+            for (uint i = 0; i < 8; i++) {
+                if(i+8*j < n)
+                    bits[j] = (readBit()<<i); 
+            }
         }
     }
 
@@ -139,27 +163,21 @@ using namespace std;
 
     void bit_stream::writeChars(char* val, uint n)
     {
-        for(int i=0 ; i<n ; i++)
+        int j;
+        for(int i=0 ; i<(int)(n/8) ; i++)
         {
-            *(val+i) = readBits(sizeof(char)*8);
+            for(j=0 ; j<8 ; j++)
+                writeBit(val[i]);
         }
     }
 
     char bit_stream::readChar()
     {
-        return readBits(sizeof(char)*8);
+        return readBits(sizeof(char)*8)[0];
     }
 
     void bit_stream::readChar(char* c)
     {
-        *c = readBits(sizeof(char)*8);
-    }
-
-    void bit_stream::readChars(char* c, uint n)
-    {
-        for(uint i=0 ; i<n ; i++)
-        {
-            *(c+i) = readBits(sizeof(char)*8);
-        }
+        c = readBits(sizeof(char)*8);
     }
 //};

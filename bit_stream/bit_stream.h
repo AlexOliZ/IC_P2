@@ -4,44 +4,59 @@
 #include <iostream>
 #include <fstream>
 #include <bitset>
-#include <cassert>
 
 using namespace std;
 
 class bit_stream {
     public:
         bit_stream(char *fname){
-            pointer_read = -1;
+            pointer_read = 8;
             pointer_write = 0;
             filename = fname;
             byteCount = 0;
-            inputfile = ifstream(fname, ios::binary);
-            outputfile = ofstream(fname, ios::binary);
-            byte = '0';
+            inputfile = ifstream(filename, ios::binary);
+            outputfile = ofstream(filename, ios::binary|ios_base::app);
+            byte = 0;
             //inputfile.open(fname, fstream::in);
             //outputfile.open(fname, fstream::out);
             
         };
-        //~bitstream();
+        bit_stream(char *fname,bool read_file,bool write_file){
+            pointer_read = 8;
+            pointer_write = 0;
+            filename = fname;
+            byteCount = 0;
+            if(read_file)
+                inputfile = ifstream(filename, ios::binary);
+            if(write_file)
+                outputfile = ofstream(filename, ios::binary|ios_base::app);
+            byte = 0;
+            //inputfile.open(fname, fstream::in);
+            //outputfile.open(fname, fstream::out);
+            
+        };
+        bit_stream();
+        
         //void open_file(char* filename);
         //void close_file(ofstream myfile);
         void open_file_write();
         void close_file_write();
         void open_file_read();
         void close_file_read();
+        bool end_of_file();
+        void write_byte();
 
         void writeBit(uint8_t val);
-        void writeBits(uint32_t val, uint n);
-        void writeBits(uint32_t* val, uint n);
+        void writeBits(int val, uint n);
+        void writeBits(char* val, uint n);
         uint8_t readBit();
         void readBit(uint8_t* bit);
-        uint32_t readBits(uint n);
-        void readBits(uint32_t* bits, uint n);
+        char* readBits(uint n);
+        void readBits(char* bits, uint n);
         void writeChar(char val);
         void writeChars(char* val, uint n);
         char readChar();
         void readChar(char* c);
-        void readChars(char* c, uint n);
         
     private:
         uint8_t  byte = 0;
@@ -53,7 +68,6 @@ class bit_stream {
         int pointer_read;
         int pointer_write;
         int byteCount;
-        bool writeMode;
 };
 
 #endif

@@ -33,7 +33,7 @@ int main(int argc ,char *argv[])
     bitstream.writeBit(1);
     bitstream.writeBit(1);
     bitstream.writeBit(0);
-
+    /*
     bitstream.writeBit(1);
     bitstream.writeBit(0);
     bitstream.writeBit(0);
@@ -42,7 +42,9 @@ int main(int argc ,char *argv[])
     bitstream.writeBit(1);
     bitstream.writeBit(1);
     bitstream.writeBit(0);
-
+    */
+    bitstream.writeBits('q',8);
+    
     bitstream.close_file_write();
     //bitstream.writeBit('1');
     //bitstream.writeBit('1');
@@ -54,14 +56,17 @@ int main(int argc ,char *argv[])
     
     uint32_t* val=0;
     uint8_t aux = 0;
-    uint8_t value = bitstream.readBits(8);
+    char* code = bitstream.readBits(24);
+    //char* value = bitstream.readBits(8);
     bitstream.close_file_read();
-    for(int i=0 ; i<8 ; i++)
-    {
-        aux |= ((value >> i) & 0x01);
-        cout << ((value >> i) & 0x01) << endl;
+    for(int j=0 ; j<3 ; j++){
+        for(int i=0 ; i<8 ; i++)
+        {
+            cout << ((code[j] >> i) & 0x01) << endl;
+        }
+        cout << code[j] << endl;
     }
-    cout << "value: " << ((char)value)  << endl;
+    //cout << "value: " << code  << endl;
     
     return 0;
 }
