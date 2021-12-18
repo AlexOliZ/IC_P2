@@ -1,11 +1,6 @@
 #include "golomb.h"
 using namespace std;
 
-// para um n inteiro positivo
-// q = floor( (n-1)/m ) 
-// r = n -q*m -1
-// o codigo é codificado em ceilling( log2 b ) bits para os valores maiores
-
 void golomb::free_code(){ free(code); }
 uint golomb::get_unarySize(){ return unary_size; }
 uint golomb::get_remSize(){ return rem_size; }
@@ -17,49 +12,63 @@ void golomb::set_m(int new_m)
 
 char* golomb::encode(uint n)
 {
-    unary_size =(uint)floor((n)/m);
-    uint b=floor(log2(m));
-    uint r= n -unary_size*m;
+    unary_size = (int)((n)/m);
+    uint b=(int)(log2(m));
+    uint r = n -unary_size*m;
     uint k=pow(2,(b + 1))-m;
     int i=0,j=0;
-    char* code = (char*)malloc((floor((b+1+unary_size+1)/8) +1));
-    //cout << "size of rem -> " << (sizeof(char)*(floor((b+1+unary_size+1)/8) +1)) << endl;
-    //cout << "size of rem -> " << sizeof(rem) << endl;
-    //cout << "b: " << b << endl;
-    //cout << "r: " << r << endl;
-    //cout << "k: " << k << endl;
-    //cout << "q: " << q << endl;
+    char* code = (char*)malloc(((int)((b+1+unary_size+1)/8) +1));
 
     if(r<k){      
         rem_size=b;
-        for(j=0 ; j<sizeof(code)/8 && 8*j<b ; j++)
-            //rem[j] |= r&(0x0FF<<j);
-            for(i=0 ; i+8*j<b ; i++)
+        for(j=0 ; 8*j<rem_size ; j++)
+            //code[j] |= r&(0x0FF<<(j<<3));
+            for(i=0 ; i+8*j<rem_size ; i++)
             {
-                code[j] |= r &(0x01<<(i+8*j));
+                code[j] |= r &(0x01<<(i));
                 //cout<< "bin: " << (r &(0x01<<(i+8*j))) <<endl;
-            }
-
-        //for(i=0 ; i<b ; i++)
-        //    cout<< "check: " << ((rem[0]>>(i)) &0x01) <<endl;
-                
-        
+            }                    
     }else{
         rem_size=b+1;
         r += k;
-        for(j=0 ; j<sizeof(code)/8 ; j++)
-            for(i=0 ; i<8 ; i++)
+        for(j=0 ; 8*j<rem_size ; j++)
+            for(i=0 ; i+8*j<rem_size ; i++)
             {
-                if(i+8*j < b+1)
-                {
-                    code[j] |= r &(0x01<<(i+8*j));
-                    //cout<< "else: " << (r &(0x01<<(i+8*j))) <<endl;
-                }
+                code[j] |= r &(0x01<<(i));
             }
     }
-    code[(int)floor(unary_size/8)] |= (0x01 << rem_size);
-    unary_size++;
+
+    code[(int)((rem_size)/8)] |= 0x01 << (rem_size-((int)(rem_size)/8)*8);
+    //cout << "unary: " << unary_size << endl;
+    //cout << "rem_size: " << rem_size << endl;
     return code;
+}
+
+void golomb::stream_encode(uint n)
+{
+    bit_stream stream(filename,false,true);
+    unary_size = (int)((n)/m);
+    uint b=(int)(log2(m));
+    uint r = n -unary_size*m;
+    uint k=pow(2,(b + 1))-m;
+    int i=0,j=0;
+
+    stream.writeBits(0,unary_size);
+    stream.writeBit(1);
+
+    if(r<k){      
+        rem_size=b;
+        stream.writeBits(r,rem_size);
+    }else{
+        rem_size=b+1;
+        r += k;
+        stream.writeBits(r,rem_size);
+    }
+
+    //cout << "unary: " << unary_size << endl;
+    //cout << "rem_size: " << rem_size << endl;
+    stream.write_byte();
+    stream.close_file_write();
 }
 
 char* golomb::signed_encode(int n)
@@ -67,24 +76,41 @@ char* golomb::signed_encode(int n)
     return encode(n>=0?2*n:-2*n-1);
 }
 
-/*char* golomb::decode(uint q,uint r)
+void golomb::signed_stream_encode(uint n)
 {
-    uint b=floor(log2(m));
-    int j=0;
-    int q_value=q-1;
+    stream_encode(n>=0?2*n:-2*n-1);
+}
 
-    return 0;
-}*/
-
-uint golomb::decode(char* code){
-    int i = 0;
-    int num_q=unary_size-1;
+uint golomb::decode(char* code,uint remainder_size, uint unary_size)
+{
     int remainder = 0;
-    for(i = rem_size-1; i >=0; i--){
-        //cout << "code["<<i<<"]="<< ((code[0]>>(i)) &0x01) <<endl;
-        remainder += (pow(2,i)*((code[0]>>(i)) &0x01));
-    }
-    cout << "outcode" << num_q*m+remainder <<endl;
+    int i,j;
+    uint b=(int)(log2(m));
+    uint k=pow(2,(b + 1))-m;
+
+    for(j=0 ; j*8<remainder_size ; j++)
+        for(i=0; i+8*j < remainder_size; i++){
+            remainder += (pow(2,i)*((code[j]>>(i)) &0x01));
+        }
+    if(b<remainder_size)
+        remainder-=k;
+    return (unary_size)*m+remainder;
+}
+
+int golomb::signed_decode(char*code,uint remainder_size,uint unary_size){
+	//odd -> negative 
+	//even -> positive
+	uint res=decode(code,remainder_size,unary_size);
+	return res%2 ? ((int)res+1)/-2 : res/2;
+}
+
+uint stream_decode()
+{
     return 0;
 }
 
+int signed_stream_decode()
+{
+    uint res=stream_decode();
+	return res%2 ? ((int)res+1)/-2 : res/2;
+}
