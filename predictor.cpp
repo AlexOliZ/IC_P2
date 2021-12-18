@@ -42,3 +42,5 @@ void predictor::showBuffer()
 {
     cout << buffer[0] << ',' << buffer[1] << ',' <<  buffer[2] << endl;
 }
+//int main(void)
+//{return 0;}

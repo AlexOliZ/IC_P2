@@ -7,10 +7,9 @@ using namespace std;
 
 class predictor {
     public:
-        predictor(char *fname){
+        predictor(){
             num_inputs = 0;
             pointer = 0;
-            filename = fname;
         };
 
         short predict();
@@ -24,7 +23,6 @@ class predictor {
         int num_inputs;
         short pointer;
         short buffer[3] = {0,0,0};
-        char* filename;
 };
 
 #endif
