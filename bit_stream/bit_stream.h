@@ -10,8 +10,8 @@ using namespace std;
 class bit_stream {
     public:
         bit_stream(char *fname){
-            pointer_read = 8;
-            pointer_write = 0;
+            pointer_read = -1;
+            pointer_write = 7;
             filename = fname;
             byteCount = 0;
             inputfile = ifstream(filename, ios::binary);
@@ -22,8 +22,8 @@ class bit_stream {
             
         };
         bit_stream(char *fname,bool read_file,bool write_file){
-            pointer_read = 8;
-            pointer_write = 0;
+            pointer_read = -1;
+            pointer_write = 7;
             filename = fname;
             byteCount = 0;
             if(read_file)

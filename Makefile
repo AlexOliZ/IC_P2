@@ -1,5 +1,5 @@
 bit_stream.o: ./bit_stream/bit_stream.cpp
-			g++ bit_stream/main.cpp bit_stream/bit_stream.cpp -o bitstream
+			g++ bit_stream/main.cpp bit_stream/bit_stream.cpp -o bitstream_output
 
 stream_header.o: bit_stream/bit_stream.h
 			g++ bit_stream/bit_stream.h 
@@ -7,10 +7,11 @@ stream_header.o: bit_stream/bit_stream.h
 golomb_header.o: Golomb/golomb.h
 			g++ Golomb/golomb.h
 
-golomb.o:  Golomb/golomb.cpp
-		g++ Golomb/main.cpp Golomb/golomb.cpp bit_stream/bit_stream.cpp -o golomb
+golomb.o:  ./Golomb/golomb.cpp
+		g++ Golomb/main.cpp Golomb/golomb.cpp bit_stream/bit_stream.cpp -o golomb_output
 
-lossless.o:  g++ lossless_predictive.cpp Golomb/golomb.cpp predictor.cpp bit_stream/bit_stream.cpp -lsndfile
+lossless.o:  lossless.o
+		g++ lossless_predictive.cpp Golomb/golomb.cpp predictor.cpp bit_stream/bit_stream.cpp -lsndfile -o lossless_output
 
 lossless_header.o: lossless_predictive.h
 
