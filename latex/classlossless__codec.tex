@@ -1,0 +1,122 @@
+\hypertarget{classlossless__codec}{}\doxysection{lossless\+\_\+codec Class Reference}
+\label{classlossless__codec}\index{lossless\_codec@{lossless\_codec}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classlossless__codec_a00127b187275c722071a73d187092c93}\label{classlossless__codec_a00127b187275c722071a73d187092c93}} 
+{\bfseries lossless\+\_\+codec} (string fname)
+\item 
+void \mbox{\hyperlink{classlossless__codec_a7eb968583835230c0bf68c08b2582605}{Y\+UV}} (Mat image, Mat \&y, Mat \&u, Mat \&v)
+\item 
+int \mbox{\hyperlink{classlossless__codec_aded9fb935d117772d7b6267052c02032}{erro\+Enc}} (int valor\+Pixel, int valor\+Previsto)
+\item 
+int \mbox{\hyperlink{classlossless__codec_a406cb812ade106c37c88fcb49ef0799f}{erro\+Dec}} (int erro, int valor\+Previsto)
+\item 
+int \mbox{\hyperlink{classlossless__codec_a0493a5ddacfd0a8e720c87050fdcf726}{preditor}} (int a, int b, int c)
+\item 
+void \mbox{\hyperlink{classlossless__codec_a626990ab6b44de963a619ec1d1164d08}{preditor\+\_\+\+J\+P\+E\+G\+\_\+\+LS}} (Mat matriz, Mat \&er\+Mat)
+\item 
+void \mbox{\hyperlink{classlossless__codec_a0b973463b4e63682bd986d1b14c57893}{golombfuction}} (int erro, int m)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classlossless__codec_a406cb812ade106c37c88fcb49ef0799f}\label{classlossless__codec_a406cb812ade106c37c88fcb49ef0799f}} 
+\index{lossless\_codec@{lossless\_codec}!erroDec@{erroDec}}
+\index{erroDec@{erroDec}!lossless\_codec@{lossless\_codec}}
+\doxysubsubsection{\texorpdfstring{erroDec()}{erroDec()}}
+{\footnotesize\ttfamily int lossless\+\_\+codec\+::erro\+Dec (\begin{DoxyParamCaption}\item[{int}]{erro,  }\item[{int}]{valor\+Previsto }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em erro} & residual \\
+\hline
+{\em valor\+Previsto} & expected pixel value \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int -\/$>$ pixel value for each value of the predicted pixel 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classlossless__codec_aded9fb935d117772d7b6267052c02032}\label{classlossless__codec_aded9fb935d117772d7b6267052c02032}} 
+\index{lossless\_codec@{lossless\_codec}!erroEnc@{erroEnc}}
+\index{erroEnc@{erroEnc}!lossless\_codec@{lossless\_codec}}
+\doxysubsubsection{\texorpdfstring{erroEnc()}{erroEnc()}}
+{\footnotesize\ttfamily int lossless\+\_\+codec\+::erro\+Enc (\begin{DoxyParamCaption}\item[{int}]{valor\+Pixel,  }\item[{int}]{valor\+Previsto }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em valor\+Pixel} & pixel value \\
+\hline
+{\em valor\+Previsto} & expected pixel value \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int -\/$>$ residual for each value of the predicted pixel 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classlossless__codec_a0b973463b4e63682bd986d1b14c57893}\label{classlossless__codec_a0b973463b4e63682bd986d1b14c57893}} 
+\index{lossless\_codec@{lossless\_codec}!golombfuction@{golombfuction}}
+\index{golombfuction@{golombfuction}!lossless\_codec@{lossless\_codec}}
+\doxysubsubsection{\texorpdfstring{golombfuction()}{golombfuction()}}
+{\footnotesize\ttfamily void lossless\+\_\+codec\+::golombfuction (\begin{DoxyParamCaption}\item[{int}]{erro,  }\item[{int}]{m }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em erro} & residual \\
+\hline
+{\em m} & golomg parameter m \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classlossless__codec_a0493a5ddacfd0a8e720c87050fdcf726}\label{classlossless__codec_a0493a5ddacfd0a8e720c87050fdcf726}} 
+\index{lossless\_codec@{lossless\_codec}!preditor@{preditor}}
+\index{preditor@{preditor}!lossless\_codec@{lossless\_codec}}
+\doxysubsubsection{\texorpdfstring{preditor()}{preditor()}}
+{\footnotesize\ttfamily int lossless\+\_\+codec\+::preditor (\begin{DoxyParamCaption}\item[{int}]{a,  }\item[{int}]{b,  }\item[{int}]{c }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & parameter a to calculate the expected pixel value \\
+\hline
+{\em b} & parameter b to calculate the expected pixel value \\
+\hline
+{\em c} & parameter c to calculate the expected pixel value \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int -\/$>$ the predicted value of the next pixel 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classlossless__codec_a626990ab6b44de963a619ec1d1164d08}\label{classlossless__codec_a626990ab6b44de963a619ec1d1164d08}} 
+\index{lossless\_codec@{lossless\_codec}!preditor\_JPEG\_LS@{preditor\_JPEG\_LS}}
+\index{preditor\_JPEG\_LS@{preditor\_JPEG\_LS}!lossless\_codec@{lossless\_codec}}
+\doxysubsubsection{\texorpdfstring{preditor\_JPEG\_LS()}{preditor\_JPEG\_LS()}}
+{\footnotesize\ttfamily void lossless\+\_\+codec\+::preditor\+\_\+\+J\+P\+E\+G\+\_\+\+LS (\begin{DoxyParamCaption}\item[{Mat}]{matriz,  }\item[{Mat \&}]{er\+Mat }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em matriz} & matrix to calculate the calculated error \\
+\hline
+{\em er\+Mat} & matrix with the calculated error \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classlossless__codec_a7eb968583835230c0bf68c08b2582605}\label{classlossless__codec_a7eb968583835230c0bf68c08b2582605}} 
+\index{lossless\_codec@{lossless\_codec}!YUV@{YUV}}
+\index{YUV@{YUV}!lossless\_codec@{lossless\_codec}}
+\doxysubsubsection{\texorpdfstring{YUV()}{YUV()}}
+{\footnotesize\ttfamily void lossless\+\_\+codec\+::\+Y\+UV (\begin{DoxyParamCaption}\item[{Mat}]{image,  }\item[{Mat \&}]{y,  }\item[{Mat \&}]{u,  }\item[{Mat \&}]{v }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em image} & original image matrix \\
+\hline
+{\em y} & address for the matrix y \\
+\hline
+{\em u} & address for the matrix u \\
+\hline
+{\em v} & address for the matrix v \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+lossless\+\_\+codec.\+h\item 
+parte\+C.\+cpp\end{DoxyCompactItemize}
