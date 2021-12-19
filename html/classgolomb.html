@@ -100,12 +100,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a138ecdfc0a6030dbba7a42ec101c4a6a"><td class="memItemLeft" align="right" valign="top"><a id="a138ecdfc0a6030dbba7a42ec101c4a6a"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>free_code</b> ()</td></tr>
 <tr class="separator:a138ecdfc0a6030dbba7a42ec101c4a6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4e0df9f915237a812338121ad72d08b4"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgolomb.html#a4e0df9f915237a812338121ad72d08b4">encode</a> (uint n)</td></tr>
-<tr class="memdesc:a4e0df9f915237a812338121ad72d08b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to encode.  <a href="classgolomb.html#a4e0df9f915237a812338121ad72d08b4">More...</a><br /></td></tr>
-<tr class="separator:a4e0df9f915237a812338121ad72d08b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acfc8ca737e70ebd068afd4d885def6af"><td class="memItemLeft" align="right" valign="top"><a id="acfc8ca737e70ebd068afd4d885def6af"></a>
-char *&#160;</td><td class="memItemRight" valign="bottom"><b>signed_encode</b> (int n)</td></tr>
-<tr class="separator:acfc8ca737e70ebd068afd4d885def6af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0f12fcb487deaa5d824e11375e3f2f0c"><td class="memItemLeft" align="right" valign="top"><a id="a0f12fcb487deaa5d824e11375e3f2f0c"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>get_m</b> ()</td></tr>
 <tr class="separator:a0f12fcb487deaa5d824e11375e3f2f0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -118,6 +112,12 @@ uint&#160;</td><td class="memItemRight" valign="bottom"><b>get_unarySize</b> ()<
 <tr class="memitem:ab001bf1155b8f2b022f804ada003ac8f"><td class="memItemLeft" align="right" valign="top"><a id="ab001bf1155b8f2b022f804ada003ac8f"></a>
 uint&#160;</td><td class="memItemRight" valign="bottom"><b>get_remSize</b> ()</td></tr>
 <tr class="separator:ab001bf1155b8f2b022f804ada003ac8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e0df9f915237a812338121ad72d08b4"><td class="memItemLeft" align="right" valign="top"><a id="a4e0df9f915237a812338121ad72d08b4"></a>
+char *&#160;</td><td class="memItemRight" valign="bottom"><b>encode</b> (uint n)</td></tr>
+<tr class="separator:a4e0df9f915237a812338121ad72d08b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acfc8ca737e70ebd068afd4d885def6af"><td class="memItemLeft" align="right" valign="top"><a id="acfc8ca737e70ebd068afd4d885def6af"></a>
+char *&#160;</td><td class="memItemRight" valign="bottom"><b>signed_encode</b> (int n)</td></tr>
+<tr class="separator:acfc8ca737e70ebd068afd4d885def6af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa0ea7dd46d4e604b68ae8c91735660fb"><td class="memItemLeft" align="right" valign="top"><a id="aa0ea7dd46d4e604b68ae8c91735660fb"></a>
 uint&#160;</td><td class="memItemRight" valign="bottom"><b>decode</b> (char *code, uint remainder, uint unary_size)</td></tr>
 <tr class="separator:aa0ea7dd46d4e604b68ae8c91735660fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -127,44 +127,22 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>signed_decode</b> (cha
 <tr class="memitem:af48e0025598cc94fca098ed344f31853"><td class="memItemLeft" align="right" valign="top"><a id="af48e0025598cc94fca098ed344f31853"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>stream_encode</b> (uint n)</td></tr>
 <tr class="separator:af48e0025598cc94fca098ed344f31853"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac88dfc2b36b2ce173e13609dd14c284b"><td class="memItemLeft" align="right" valign="top"><a id="ac88dfc2b36b2ce173e13609dd14c284b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>signed_stream_encode</b> (uint n)</td></tr>
-<tr class="separator:ac88dfc2b36b2ce173e13609dd14c284b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec3e512bdc4bce3655be95bf8ca4aa96"><td class="memItemLeft" align="right" valign="top"><a id="aec3e512bdc4bce3655be95bf8ca4aa96"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>signed_stream_encode</b> (int n)</td></tr>
+<tr class="separator:aec3e512bdc4bce3655be95bf8ca4aa96"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8f3da61695a6edd35a12599df191bc00"><td class="memItemLeft" align="right" valign="top"><a id="a8f3da61695a6edd35a12599df191bc00"></a>
 uint&#160;</td><td class="memItemRight" valign="bottom"><b>stream_decode</b> ()</td></tr>
 <tr class="separator:a8f3da61695a6edd35a12599df191bc00"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a997f84414e2fa8cfd0d43206302affa0"><td class="memItemLeft" align="right" valign="top"><a id="a997f84414e2fa8cfd0d43206302affa0"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>signed_stream_decode</b> ()</td></tr>
 <tr class="separator:a997f84414e2fa8cfd0d43206302affa0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53410bd8f43bd23f63d9dcb3843b7103"><td class="memItemLeft" align="right" valign="top"><a id="a53410bd8f43bd23f63d9dcb3843b7103"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>close_stream</b> ()</td></tr>
+<tr class="separator:a53410bd8f43bd23f63d9dcb3843b7103"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ca586a5768c4d92f3e3ba28d8a66530"><td class="memItemLeft" align="right" valign="top"><a id="a2ca586a5768c4d92f3e3ba28d8a66530"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>end_of_file</b> ()</td></tr>
+<tr class="separator:a2ca586a5768c4d92f3e3ba28d8a66530"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a id="a4e0df9f915237a812338121ad72d08b4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4e0df9f915237a812338121ad72d08b4">&#9670;&nbsp;</a></span>encode()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">char * golomb::encode </td>
-          <td>(</td>
-          <td class="paramtype">uint&#160;</td>
-          <td class="paramname"><em>n</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Function to encode. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">n</td><td>N parameter given </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>char* </dd></dl>
-
-</div>
-</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>Golomb/<a class="el" href="golomb_8h_source.html">golomb.h</a></li>
 <li>Golomb/golomb.cpp</li>

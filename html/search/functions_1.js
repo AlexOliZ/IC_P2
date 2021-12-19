@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['golombfuction_20',['golombfuction',['../classlossless__codec.html#a0b973463b4e63682bd986d1b14c57893',1,'lossless_codec']]]
+  ['golombenc_17',['golombEnc',['../classlossless__codec.html#a4cae23509d94b18cac0d387e64d691b8',1,'lossless_codec']]]
 ];

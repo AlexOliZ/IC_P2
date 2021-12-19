@@ -1,5 +1,5 @@
-// g++ parteC.cpp lossless_codec.cpp ./bit_stream/bit_stream.cpp ./Golomb/golomb.cpp -o parteC `pkg-config --cflags --libs opencv`
-// ./parteC <m> <input image> <output filename> (por ex ./ex4 5 lena.ppm copy.ppm)
+// g++ parteC.cpp ./bit_stream/bit_stream.cpp ./Golomb/golomb.cpp -o parteC `pkg-config --cflags --libs opencv`
+// ./parteC <input image> <output filename> (por ex ./parteC lena.ppm copy.ppm)
 #include <string>
 #include "./bit_stream/bit_stream.h"
 #include "./Golomb/golomb.h"
@@ -55,7 +55,7 @@ void lossless_codec::YUV (Mat image, Mat &y, Mat &u, Mat &v){
 int lossless_codec::erroEnc (int valorPixel, int valorPrevisto){
     return valorPixel-valorPrevisto;
 }
-int lossless_codec::erroDec (int erro, int valorPrevisto){
+int lossless_codec::ValorPixelDec (int erro, int valorPrevisto){
     return erro + valorPrevisto;
 }
 
@@ -73,7 +73,7 @@ int lossless_codec::preditor (int a, int b, int c){
 }
 
 //atribui o a,b,c para chamar a funcao de prever o proximo pixel
-void lossless_codec::preditor_JPEG_LS (Mat matriz,Mat &erMat){
+void lossless_codec::preditor_JPEG_LS (Mat matriz,Mat &erMat, Mat &prev){
     
     for (int i=0;i<(matriz.size().height);++i){ //row
         for(int j=0;j<(matriz.size().width);++j){ //columns
@@ -103,18 +103,20 @@ void lossless_codec::preditor_JPEG_LS (Mat matriz,Mat &erMat){
             
             int erro = erroEnc (PixelAtual, previsao);
             erMat.at<int>(i,j)  = erro;
+            prev.at<int>(i,j) = previsao;
             //printf("erro[%d][%d] -> %d\n",i,j,erMat.at<int>(i,j));
         
         }
     }  
     
 }
-void lossless_codec::golombfuction(int erro,int m){
+void lossless_codec::golombEnc(int erro,int m){
     
     golomb golomb_encoder(m);
     char* code;
     code = golomb_encoder.encode(erro);
-    //escrever no ficheiro
+    //escrever no ficheiro -> mandas tudo para o ficheiro depois a ler e tens que diferenciar ... 
+    //les 10 da matriz y (o size da matriz y)  e depois les da matriz v (size da matriz v)
     //golomb_encoder.signed_stream_encode(value);
 
     //printf("erro -> %d\n", erro);
@@ -134,6 +136,36 @@ void lossless_codec::golombfuction(int erro,int m){
     
     //imprimir num ficheiro o bit -> usar a bit_stream
     //stream.writeChars(bit,);  
+}
+
+void lossless_codec::golombDesc(Mat prevY, Mat prevV, Mat prevU, Mat erroY, Mat erroV, Mat erroU, Mat &ValorY, Mat &ValorV, Mat &ValorU){
+    //ler de um ficheiro 
+    for (int i=0;i<(erroY.size().height)-1;++i){ //row
+        for(int j=0;j<(erroY.size().width);++j){ //columns
+            //ler para o code
+            int code=0; //vem do descodificador de golomb
+            ValorY.at<int>(i,j) = ValorPixelDec(code, prevY.at<int>(i,j));
+        }
+    }
+
+    for (int i=0;i<(erroV.size().height)-1;++i){ //row
+        for(int j=0;j<(erroV.size().width);++j){ //columns
+            //ler para o code
+            int code=0; //vem do descodificador de golomb
+            ValorV.at<int>(i,j)  = ValorPixelDec(code, prevY.at<int>(i,j));
+        }
+    }
+
+    for (int i=0;i<(erroU.size().height)-1;++i){ //row
+        for(int j=0;j<(erroU.size().width);++j){ //columns
+            //ler para o code
+            int code=0; //vem do descodificador de golomb
+            ValorU.at<int>(i,j) = ValorPixelDec(code, prevY.at<int>(i,j));
+        }
+    }
+
+
+    
 }
 
 int main(int argc,char *argv[]) {
@@ -173,13 +205,15 @@ int main(int argc,char *argv[]) {
     //matriz com os erros todos de y
     //precisas dos +3 para as pontas das imagens (a,b,c nas pontas acrescentas 0)
     Mat erroY (y.size().height+3,y.size().width+3,CV_8UC1); 
-    lossless.preditor_JPEG_LS(y,erroY);
+    Mat prevY (y.size().height+3,y.size().width+3,CV_8UC1); 
+    lossless.preditor_JPEG_LS(y,erroY,prevY);
     Mat erroV (v.size().height+3,v.size().width+3,CV_8UC1); 
-    lossless.preditor_JPEG_LS(v,erroV);
+    Mat prevV (y.size().height+3,y.size().width+3,CV_8UC1);
+    lossless.preditor_JPEG_LS(v,erroV,prevV);
     Mat erroU (u.size().height+3,u.size().width+3,CV_8UC1); 
-    lossless.preditor_JPEG_LS(u,erroU);
-
- 
+    Mat prevU (y.size().height+3,y.size().width+3,CV_8UC1);
+    lossless.preditor_JPEG_LS(u,erroU,prevU);
+    
     //imprimir uma matriz 
     /*for (int i = 0;i<erroY.size().height-1;i++){
         for (int j = 0;j<erroY.size().width-1;j++){
@@ -202,22 +236,45 @@ int main(int argc,char *argv[]) {
     
     for (int h =0;h<erroY.size().height ; h++){
         for(int c = 0;c<erroY.size().width;c++){
-            lossless.golombfuction(erroY.at<int>(h,c),m);
+            lossless.golombEnc(erroY.at<int>(h,c),m);
         }
     }
 
     for (int h =0;h<erroV.size().height ; h++){
         for(int c = 0;c<erroV.size().width;c++){
-            lossless.golombfuction(erroV.at<int>(h,c),m);
+            lossless.golombEnc(erroV.at<int>(h,c),m);
         }
     }
 
     for (int h =0;h<erroU.size().height ; h++){
         for(int c = 0;c<erroU.size().width;c++){
-            lossless.golombfuction(erroU.at<int>(h,c),m);
+            lossless.golombEnc(erroU.at<int>(h,c),m);
         }
     }
- 
+
+    //matrizes com o valor do pixel em YUV 
+    Mat ValorY (erroY.size().height+3,erroY.size().width+3,CV_8UC1); 
+    Mat ValorV (erroV.size().height+3,erroV.size().width+3,CV_8UC1); 
+    Mat ValorU (erroU.size().height+3,erroU.size().width+3,CV_8UC1); 
+    lossless.golombDesc(prevY,prevV,prevU,erroY,erroV,erroU,ValorY,ValorV,ValorU);
+
+    
+    //imprimir uma matriz -> é suposto da igual acho eu ---- por o codigo do descodificador do golomb na funcao e ver
+    for (int i = 0;i<ValorY.size().height-1;i++){
+        for (int j = 0;j<ValorY.size().width-1;j++){
+           //printf("ValorY[%d][%d] -> %d\n",i,j,ValorY.at<int>(i,j));
+        }
+    }
+
+
+    //é preciso passarmos YUV par RGB e imprimir a imagem como antes???
+
+    
+    //teste do erro -> funciona
+    //int erpijorg = lossless.erroEnc (986452865,7);
+    //int ver = lossless.ValorPixelDec(erpijorg,7);
+    //printf("ola-< %d",ver);
+
     imshow("Input image",input_image); //show image
     
     //imwrite(output_name,output_image); //write image

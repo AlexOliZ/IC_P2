@@ -35,7 +35,7 @@ class lossless_codec{
          * @param valorPrevisto expected pixel value
          * @return int -> pixel value for each value of the predicted pixel
          */
-        int erroDec (int erro, int valorPrevisto);
+        int ValorPixelDec (int erro, int valorPrevisto);
         /**
          * @brief 
          * 
@@ -50,15 +50,19 @@ class lossless_codec{
          * 
          * @param matriz matrix to calculate the calculated error
          * @param erMat matrix with the calculated error
+         * @param prev matrix with the calculated predictor
          */
-        void preditor_JPEG_LS (Mat matriz,Mat &erMat);
+        void preditor_JPEG_LS (Mat matriz,Mat &erMat, Mat &prev);
         /**
          * @brief 
          * 
          * @param erro residual
          * @param m golomg parameter m
          */
-        void golombfuction(int erro,int m);
+        void golombEnc(int erro,int m);
+
+        void golombDesc(Mat prevY, Mat prevV, Mat prevU, Mat erroY, Mat erroV, Mat erroU, Mat &ValorY, Mat &ValorV, Mat &ValorU);
+
         private:
             //int m;
             string filename;
