@@ -1,14 +1,6 @@
 #include "lossless_predictive.h"
-#include "./bit_stream/bit_stream.h"
-#include "./Golomb/golomb.h"
-#include <iostream>
-#include <string>
-#include <fstream>
-#include <map>
-#include <vector>
-//#include "matplotlibcpp.h"
-#include <cmath>
-#include <math.h>
+//s#include "./bit_stream/bit_stream.h"
+
 
 //g++ lossless_predictive.cpp Golomb/golomb.cpp predictor.cpp bit_stream/bit_stream.cpp -lsndfile
 
@@ -43,7 +35,7 @@ void lossless_predictive::predictive_encode(char* outfile){
 
     // encode predictor
     // para ser lossy dar shift << N vezes para cortar N bits+
-    // audio é stereo ou mono~
+    // audio é stereo ou mono
     
     int average = 0;
     for(i=0 ; i<20 ; i++)
@@ -54,8 +46,9 @@ void lossless_predictive::predictive_encode(char* outfile){
 
     for(i=0 ; i<22 ; i++)
     {
-        code = golomb_encoder.signed_encode(test[i]);
-        stream.writeBits(code,1+golomb_encoder.get_remSize()+golomb_encoder.get_unarySize());
+        golomb_encoder.signed_stream_encode(test[i]);
+        //stream.writeBits(code,1+golomb_encoder.get_remSize()+golomb_encoder.get_unarySize());
+        /*
         for(int j=0 ; j*8< 1+golomb_encoder.get_remSize()+golomb_encoder.get_unarySize() ; j++){
             for(int i=0 ; i<8 ; i++)
             {
@@ -63,6 +56,7 @@ void lossless_predictive::predictive_encode(char* outfile){
                     cout << ((code[j] >> i) & 0x01) ;
             }
         }
+        */
         cout << endl;
         cout << "unary: " << golomb_encoder.get_unarySize() << endl;
         cout << "res: " << golomb_encoder.get_remSize() << endl;
@@ -77,7 +71,7 @@ void lossless_predictive::predictive_decode(char* infile)
 {
     bit_stream stream(infile,true,false);
     predictor predictor_decoder;
-    golomb golomb_decoder(m);
+    golomb golomb_decoder(m,infile);
     uint32_t unary_size = 0;
     uint32_t r,k,b;
     uint32_t res_size = 0;
@@ -104,8 +98,9 @@ void lossless_predictive::predictive_decode(char* infile)
             res_size = b;
             if(r>=k)
                 res_size++;
-            encoded_code = stream.readBits(res_size);
-            code = golomb_decoder.signed_decode(encoded_code,res_size,unary_size-1);
+            //encoded_code = stream.readBits(res_size);
+            
+            code = golomb_decoder.signed_stream_decode();
             for(int j=0 ; j*8< unary_size+res_size ; j++){
                 for(int i=0 ; i<8 ; i++)
                 {
@@ -118,6 +113,7 @@ void lossless_predictive::predictive_decode(char* infile)
             cout << "unary: " << unary_size << endl;
             cout << "res: " << res_size << endl;
             unary_size = 0;
+            
         }
     }
     //cout << "code: " << code << endl;

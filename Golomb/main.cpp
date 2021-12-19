@@ -41,6 +41,7 @@ int main(void)
     golomb golomb_encoder(m,(char*)file.data());
     
     // 00100000
+    
     golomb_encoder.signed_stream_encode(10);
     
     bit_stream stream((char*)file.data(),true,false);

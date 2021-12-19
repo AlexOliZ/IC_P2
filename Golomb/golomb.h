@@ -1,5 +1,5 @@
-#ifndef H_GOLOMB
-#define H_GOLOMB
+#ifndef H_GOLOM
+#define H_GOLOM
 
 #include <tuple>
 #include <cmath>
@@ -20,25 +20,28 @@ class golomb
         {
             filename = fname;
             m = val;
+            stream = bit_stream(fname,false,true);
         }
         golomb(){};
         //~golomb();
         
         void free_code();
-        char* encode(uint n);
-        char* signed_encode(int n);
-        //char* decode(uint q,uint r);
-        //uint decode(char* code);
         int get_m();
         void set_m(int new_m);
         uint get_unarySize();
         uint get_remSize();
+
+        char* encode(uint n);
+        char* signed_encode(int n);
         uint decode(char* code,uint remainder, uint unary_size);
         int signed_decode(char*code,uint remainder_size,uint unary_size);
+        
         void stream_encode(uint n);
         void signed_stream_encode(uint n);
         uint stream_decode();
         int signed_stream_decode();
+        
+        void close_stream();
 
     private:
         uint m;
@@ -46,6 +49,6 @@ class golomb
         uint unary_size = 0;
         uint rem_size = 0;
         char* filename;
-
+        bit_stream stream;
 };
 #endif

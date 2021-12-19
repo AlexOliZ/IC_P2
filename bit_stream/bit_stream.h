@@ -35,8 +35,7 @@ class bit_stream {
             //outputfile.open(fname, fstream::out);
             
         };
-        bit_stream();
-        
+        bit_stream(){};
         //void open_file(char* filename);
         //void close_file(ofstream myfile);
         void open_file_write();
@@ -60,8 +59,6 @@ class bit_stream {
         
     private:
         uint8_t  byte = 0;
-        //uint8_t byte_read = 0;
-        //uint8_t byte_write = 0;
         char* filename;
         ofstream outputfile;
         ifstream inputfile;

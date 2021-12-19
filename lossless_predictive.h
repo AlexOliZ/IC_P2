@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include "predictor.h"
+#include "Golomb/golomb.h"
+#include "bit_stream/bit_stream.h"
 #include <sndfile.h>
 
 

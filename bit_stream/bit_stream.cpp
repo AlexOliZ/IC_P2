@@ -54,7 +54,7 @@ using namespace std;
     void bit_stream::writeBit(uint8_t val)
     {
         byte |= (val & 0x01) << pointer_write;
-        cout << "bit: " << ((val & 0x01) << pointer_write) << ' ';
+        //cout << "bit: " << ((val & 0x01) << pointer_write) << ' ';
         if (pointer_write > 0) {
             pointer_write--;                    
             return;       
@@ -151,7 +151,7 @@ using namespace std;
             }
         }
         //cout << endl;
-        cout << "VALUE -> " << (int)value[0] << endl;
+        //cout << "VALUE -> " << (int)value[0] << endl;
         return value;
     }
     
