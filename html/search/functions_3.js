@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['yuv_23',['YUV',['../classlossless__codec.html#a7eb968583835230c0bf68c08b2582605',1,'lossless_codec']]]
+  ['valorpixeldec_20',['ValorPixelDec',['../classlossless__codec.html#a8bc8d7b9fd6a7787855b24c2268f82c9',1,'lossless_codec']]]
 ];

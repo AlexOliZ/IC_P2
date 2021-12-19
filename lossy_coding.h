@@ -5,9 +5,9 @@
 
 using namespace std;
 using namespace cv;
-class lossless_codec{
+class  lossy_coding{
     public:
-        lossless_codec(string fname){
+         lossy_coding(string fname){
             //m=m_val;
             filename = fname;
         };
@@ -35,7 +35,7 @@ class lossless_codec{
          * @param valorPrevisto expected pixel value
          * @return int -> pixel value for each value of the predicted pixel
          */
-        int ValorPixelDec (int erro, int valorPrevisto);
+        int ValorPixelDec (int erro, int valorPrevisto, int quantization);
         /**
          * @brief 
          * 
@@ -51,8 +51,9 @@ class lossless_codec{
          * @param matriz matrix to calculate the calculated error
          * @param erMat matrix with the calculated error
          * @param prev matrix with the calculated predictor
+         * @param quantization quantization parameter set as program argument
          */
-        void preditor_JPEG_LS (Mat matriz,Mat &erMat, Mat &prev);
+        void preditor_JPEG_LS (Mat matriz,Mat &erMat, Mat &prev, int quantization);
         /**
          * @brief 
          * 
@@ -61,7 +62,7 @@ class lossless_codec{
          */
         void golombEnc(int erro,int m);
 
-        void golombDesc(Mat prevY, Mat prevV, Mat prevU, Mat erroY, Mat erroV, Mat erroU, Mat &ValorY, Mat &ValorV, Mat &ValorU);
+        void golombDesc(Mat prevY, Mat prevV, Mat prevU, Mat erroY, Mat erroV, Mat erroU, Mat &ValorY, Mat &ValorV, Mat &ValorU, int quantization);
 
         private:
             //int m;

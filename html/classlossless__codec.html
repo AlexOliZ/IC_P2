@@ -98,52 +98,19 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a7eb968583835230c0bf68c08b2582605"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aded9fb935d117772d7b6267052c02032"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlossless__codec.html#aded9fb935d117772d7b6267052c02032">erroEnc</a> (int valorPixel, int valorPrevisto)</td></tr>
 <tr class="separator:aded9fb935d117772d7b6267052c02032"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a406cb812ade106c37c88fcb49ef0799f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlossless__codec.html#a406cb812ade106c37c88fcb49ef0799f">erroDec</a> (int erro, int valorPrevisto)</td></tr>
-<tr class="separator:a406cb812ade106c37c88fcb49ef0799f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8bc8d7b9fd6a7787855b24c2268f82c9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlossless__codec.html#a8bc8d7b9fd6a7787855b24c2268f82c9">ValorPixelDec</a> (int erro, int valorPrevisto)</td></tr>
+<tr class="separator:a8bc8d7b9fd6a7787855b24c2268f82c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0493a5ddacfd0a8e720c87050fdcf726"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlossless__codec.html#a0493a5ddacfd0a8e720c87050fdcf726">preditor</a> (int a, int b, int c)</td></tr>
 <tr class="separator:a0493a5ddacfd0a8e720c87050fdcf726"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a626990ab6b44de963a619ec1d1164d08"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlossless__codec.html#a626990ab6b44de963a619ec1d1164d08">preditor_JPEG_LS</a> (Mat matriz, Mat &amp;erMat)</td></tr>
-<tr class="separator:a626990ab6b44de963a619ec1d1164d08"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0b973463b4e63682bd986d1b14c57893"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlossless__codec.html#a0b973463b4e63682bd986d1b14c57893">golombfuction</a> (int erro, int m)</td></tr>
-<tr class="separator:a0b973463b4e63682bd986d1b14c57893"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a23d31600dc9fc0e1be22906c75b9624e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlossless__codec.html#a23d31600dc9fc0e1be22906c75b9624e">preditor_JPEG_LS</a> (Mat matriz, Mat &amp;erMat, Mat &amp;prev)</td></tr>
+<tr class="separator:a23d31600dc9fc0e1be22906c75b9624e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4cae23509d94b18cac0d387e64d691b8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlossless__codec.html#a4cae23509d94b18cac0d387e64d691b8">golombEnc</a> (int erro, int m)</td></tr>
+<tr class="separator:a4cae23509d94b18cac0d387e64d691b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad79d1eff15aa48acea8b339fd5a37f6a"><td class="memItemLeft" align="right" valign="top"><a id="ad79d1eff15aa48acea8b339fd5a37f6a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>golombDesc</b> (Mat prevY, Mat prevV, Mat prevU, Mat erroY, Mat erroV, Mat erroU, Mat &amp;ValorY, Mat &amp;ValorV, Mat &amp;ValorU)</td></tr>
+<tr class="separator:ad79d1eff15aa48acea8b339fd5a37f6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a406cb812ade106c37c88fcb49ef0799f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a406cb812ade106c37c88fcb49ef0799f">&#9670;&nbsp;</a></span>erroDec()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int lossless_codec::erroDec </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>erro</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>valorPrevisto</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">erro</td><td>residual </td></tr>
-    <tr><td class="paramname">valorPrevisto</td><td>expected pixel value </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>int -&gt; pixel value for each value of the predicted pixel </dd></dl>
-
-</div>
-</div>
 <a id="aded9fb935d117772d7b6267052c02032"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aded9fb935d117772d7b6267052c02032">&#9670;&nbsp;</a></span>erroEnc()</h2>
 
@@ -180,14 +147,14 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a0b973463b4e63682bd986d1b14c57893"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0b973463b4e63682bd986d1b14c57893">&#9670;&nbsp;</a></span>golombfuction()</h2>
+<a id="a4cae23509d94b18cac0d387e64d691b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4cae23509d94b18cac0d387e64d691b8">&#9670;&nbsp;</a></span>golombEnc()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void lossless_codec::golombfuction </td>
+          <td class="memname">void lossless_codec::golombEnc </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>erro</em>, </td>
@@ -258,8 +225,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a626990ab6b44de963a619ec1d1164d08"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a626990ab6b44de963a619ec1d1164d08">&#9670;&nbsp;</a></span>preditor_JPEG_LS()</h2>
+<a id="a23d31600dc9fc0e1be22906c75b9624e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a23d31600dc9fc0e1be22906c75b9624e">&#9670;&nbsp;</a></span>preditor_JPEG_LS()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -274,7 +241,13 @@ Public Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">Mat &amp;&#160;</td>
-          <td class="paramname"><em>erMat</em>&#160;</td>
+          <td class="paramname"><em>erMat</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Mat &amp;&#160;</td>
+          <td class="paramname"><em>prev</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -287,9 +260,46 @@ Public Member Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">matriz</td><td>matrix to calculate the calculated error </td></tr>
     <tr><td class="paramname">erMat</td><td>matrix with the calculated error </td></tr>
+    <tr><td class="paramname">prev</td><td>matrix with the calculated predictor </td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="a8bc8d7b9fd6a7787855b24c2268f82c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8bc8d7b9fd6a7787855b24c2268f82c9">&#9670;&nbsp;</a></span>ValorPixelDec()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int lossless_codec::ValorPixelDec </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>erro</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>valorPrevisto</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">erro</td><td>residual </td></tr>
+    <tr><td class="paramname">valorPrevisto</td><td>expected pixel value </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>int -&gt; pixel value for each value of the predicted pixel </dd></dl>
 
 </div>
 </div>
