@@ -1,8 +1,8 @@
 var indexSectionsWithContent =
 {
-  0: "beglp",
+  0: "beglpy",
   1: "bglp",
-  2: "e"
+  2: "egpy"
 };
 
 var indexSectionNames =

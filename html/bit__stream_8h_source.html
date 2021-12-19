@@ -97,8 +97,8 @@ $(document).ready(function(){initNavTree('bit__stream_8h_source.html',''); initR
 <div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="classbit__stream.html">   10</a></span>&#160;<span class="keyword">class </span><a class="code" href="classbit__stream.html">bit_stream</a> {</div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;        <a class="code" href="classbit__stream.html">bit_stream</a>(<span class="keywordtype">char</span> *fname){</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;            pointer_read = 8;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;            pointer_write = 0;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;            pointer_read = -1;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;            pointer_write = 7;</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;            filename = fname;</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;            byteCount = 0;</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;            inputfile = ifstream(filename, ios::binary);</div>
@@ -109,8 +109,8 @@ $(document).ready(function(){initNavTree('bit__stream_8h_source.html',''); initR
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;            </div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        };</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <a class="code" href="classbit__stream.html">bit_stream</a>(<span class="keywordtype">char</span> *fname,<span class="keywordtype">bool</span> read_file,<span class="keywordtype">bool</span> write_file){</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;            pointer_read = 8;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;            pointer_write = 0;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;            pointer_read = -1;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;            pointer_write = 7;</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;            filename = fname;</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            byteCount = 0;</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            <span class="keywordflow">if</span>(read_file)</div>
