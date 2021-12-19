@@ -120,10 +120,12 @@ uint golomb::stream_decode()
     
     uint j,i;
     
+    /*
     if(r>=k){
         rem_size++;
         remainder-=k;
     }
+    */
     //cout << "REMAINDER_SIZE " << remainder_size << endl;
     char* code = stream.readBits(rem_size);
 
@@ -131,7 +133,7 @@ uint golomb::stream_decode()
         for(i=0; i<8 & i+8*j < rem_size; i++)
             remainder += (pow(2,i)*((code[j]>>(i)) &0x01));
     
-    if(remainder != r & r<k){
+    if(remainder != r){
         remainder += pow(2,rem_size)*stream.readBit() -k;
         rem_size +=1;
     }
