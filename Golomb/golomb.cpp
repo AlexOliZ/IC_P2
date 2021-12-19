@@ -8,7 +8,8 @@ uint golomb::get_unarySize(){ return unary_size; }
 uint golomb::get_remSize(){ return rem_size; }
 int golomb::get_m(){ return m; }
 void golomb::set_m(int new_m){ m = new_m; }
-void golomb::close_stream(){ stream.write_byte(); stream.close_file_write(); }
+void golomb::close_stream_write(){ stream.write_byte(); stream.close_file_write(); }
+void golomb::close_stream_read(){ stream.close_file_read(); }
 bool golomb::end_of_file(){
     return stream.end_of_file();
 }

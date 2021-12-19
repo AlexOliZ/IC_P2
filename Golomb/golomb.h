@@ -41,7 +41,8 @@ class golomb
         uint stream_decode();
         int signed_stream_decode();
         
-        void close_stream();
+        void close_stream_write();
+        void close_stream_read();
         bool end_of_file();
 
     private:

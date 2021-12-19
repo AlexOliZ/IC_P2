@@ -43,12 +43,14 @@ int main(void)
     for(int i=0 ; i<22 ; i++)
         golomb_encoder.signed_stream_encode(test[i]);
     
-    golomb_encoder.close_stream();
+    golomb_encoder.close_stream_write();
     
     golomb golomb_decoder(m,(char*)file.data());
     for(int i=0 ; i<22 ; i++){
         out = golomb_decoder.signed_stream_decode();
         cout << "decode: "<< out << endl;
     }
+    golomb_decoder.close_stream_read();
+    
     return 0;
 }

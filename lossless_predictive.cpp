@@ -51,7 +51,7 @@ void lossless_predictive::predictive_encode(char* outfile){
         cout << "unary_size: " << golomb_encoder.get_unarySize() << endl;
         cout << "rem_size: " << golomb_encoder.get_remSize() << endl;
     }
-    golomb_encoder.close_stream();
+    golomb_encoder.close_stream_write();
     //stream.close_file_read();
     printf("Read %d items\n",num);
 }
@@ -78,6 +78,7 @@ void lossless_predictive::predictive_decode(char* infile)
         if(count >= 22)
             break;
     }
+    golomb_decoder.close_stream_read();
     //cout << "code: " << code << endl;
     //stream.close_file_read();
 }
