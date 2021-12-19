@@ -38,6 +38,8 @@ using namespace std;
         inputfile.close();
     }
     
+    // usado para escrever os bits restantes antes de fechar o ficheiro
+    // apenas escreve se tiver informação no byte
     void bit_stream::write_byte()
     {
         if(pointer_write < 7){
@@ -60,10 +62,9 @@ using namespace std;
             return;       
         }           
         
-        //cout << endl;
         //for(int i=0 ; i<8 ; i++)
         //    cout<< (int)((byte>>(i)) &0x01);   
-        //byte = 0x0F;
+        //cout << endl;
         outputfile.write((char*)&byte,1);
         pointer_write = 7;
         byte = 0;
@@ -123,6 +124,7 @@ using namespace std;
         val_byte = ((byte >> pointer_read) & 0x01); 
         pointer_read--;
         //cout << " read bit: " << (int)val_byte << endl;
+        //cout << "bit " << (int)val_byte << endl;
         return val_byte;
     }
 

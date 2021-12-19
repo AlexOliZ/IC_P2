@@ -20,7 +20,7 @@ class golomb
         {
             filename = fname;
             m = val;
-            stream = bit_stream(fname,false,true);
+            stream = bit_stream(fname,true,true);
         }
         golomb(){};
         //~golomb();
@@ -37,11 +37,12 @@ class golomb
         int signed_decode(char*code,uint remainder_size,uint unary_size);
         
         void stream_encode(uint n);
-        void signed_stream_encode(uint n);
+        void signed_stream_encode(int n);
         uint stream_decode();
         int signed_stream_decode();
         
         void close_stream();
+        bool end_of_file();
 
     private:
         uint m;

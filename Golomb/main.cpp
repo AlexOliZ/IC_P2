@@ -39,17 +39,16 @@ int main(void)
 
     string file = "test_file.bin";
     golomb golomb_encoder(m,(char*)file.data());
-    
     // 00100000
-    
     golomb_encoder.signed_stream_encode(10);
+    golomb_encoder.close_stream();
     
-    bit_stream stream((char*)file.data(),true,false);
     
     //cout << "unary_size: " << golomb_encoder.get_unarySize() << endl;
     //cout << "rem_size: " << golomb_encoder.get_remSize() << endl;
 
     /*
+    bit_stream stream((char*)file.data(),true,false);
     int un_size = 0;
     while(stream.readBit() != 1)
         un_size++;
@@ -57,6 +56,7 @@ int main(void)
     cout << "un_size: " << un_size << endl;
     */
     
+    /*
     code = stream.readBits(golomb_encoder.get_remSize() + golomb_encoder.get_unarySize() + 1);
     cout << "code: ";
     
@@ -69,9 +69,12 @@ int main(void)
     cout<< endl;
     cout << "VAL " <<(int)code[0]<< endl;
     stream.close_file_read();
+    */
     
-    out = g.signed_decode((char*)code,golomb_encoder.get_remSize(),golomb_encoder.get_unarySize());
-    cout << "decode: "<<out << endl;
+    golomb golomb_decoder(m,(char*)file.data());
+    out = golomb_decoder.signed_stream_decode();
+    //out = g.signed_decode((char*)code,golomb_encoder.get_remSize(),golomb_encoder.get_unarySize());
+    cout << "decode: "<< out << endl;
     
     return 0;
 }
