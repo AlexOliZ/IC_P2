@@ -118,8 +118,6 @@ uint golomb::stream_decode()
     uint k=pow(2,(rem_size + 1))-m;
     uint remainder=0;
     
-    uint j,i;
-    
     /*
     if(r>=k){
         rem_size++;
@@ -128,15 +126,37 @@ uint golomb::stream_decode()
     */
     //cout << "REMAINDER_SIZE " << remainder_size << endl;
     char* code = stream.readBits(rem_size);
-
+    
+    uint j,i;
     for(j=0 ; j*8<rem_size ; j++)
         for(i=0; i<8 & i+8*j < rem_size; i++)
             remainder += (pow(2,i)*((code[j]>>(i)) &0x01));
     
-    if(remainder != r){
-        remainder += pow(2,rem_size)*stream.readBit() -k;
+    // ver apenas os B bits do remainder
+    uint aux = 0;
+    for(i=0 ; i<rem_size ; i++)
+    {
+        aux |= r&(0x01 << i); // (pow(2,i)*((r>>(i)) &0x01))
+    }
+    // se remainder for diferente de R em rem_size bits
+    if(remainder != aux && remainder == r+k){
+        remainder = remainder<< 1;
+        remainder += stream.readBit() -k;
         rem_size +=1;
     }
+    
+    /*
+    int j,i;
+    for(j=rem_size/8 ; j>=0 ; j--)
+        for(i=7; i>=0; i--)
+            if(8*j +i < rem_size)
+                remainder += (pow(2,i)*((code[j]>>(i)) &0x01));
+    
+    if(remainder != r){
+        remainder += pow(2,0)*stream.readBit() -k;
+        rem_size +=1;
+    }
+    */
     
     return remainder+m*unary_size;
 }
