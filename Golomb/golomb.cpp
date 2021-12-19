@@ -111,13 +111,11 @@ int golomb::signed_decode(char*code,uint remainder_size,uint unary_size)
 
 uint golomb::stream_decode()
 {
-    cout << "???" << endl;
     return 0;
 }
 
 int golomb::signed_stream_decode()
 {
     uint res=stream_decode();
-    cout << "LEL" << endl;
 	return res%2 ? ((int)res+1)/-2 : res/2;
 }

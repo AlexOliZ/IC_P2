@@ -100,7 +100,7 @@ void lossless_predictive::predictive_decode(char* infile)
                 res_size++;
             //encoded_code = stream.readBits(res_size);
             
-            code = golomb_decoder.signed_stream_decode();
+            //code = golomb_decoder.stream_decode();
             for(int j=0 ; j*8< unary_size+res_size ; j++){
                 for(int i=0 ; i<8 ; i++)
                 {
