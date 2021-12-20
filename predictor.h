@@ -7,7 +7,8 @@ using namespace std;
 
 class predictor {
     public:
-        predictor(){
+        predictor(bool lossy){
+            lossy = lossy;
             num_inputs = 0;
             pointer = 0;
         };
@@ -20,6 +21,7 @@ class predictor {
         void  updateBuffer(short sample);
         
     private:
+        bool lossy;
         int num_inputs;
         short pointer;
         short buffer[3] = {0,0,0};

@@ -12,7 +12,7 @@ void lossless_predictive::predictive_encode(char* outfile){
     char* code;
     int *buf,i,j,avg;
     int num_items,num;
-    predictor predictor_encoder;
+    predictor predictor_encoder(false);
 
     SF_INFO inFileInfo;
     SNDFILE* inFile;
@@ -59,7 +59,7 @@ void lossless_predictive::predictive_encode(char* outfile){
 void lossless_predictive::predictive_decode(char* infile)
 {
     //bit_stream stream(infile,true,false);
-    predictor predictor_decoder;
+    predictor predictor_decoder(false);
     golomb golomb_decoder(5,infile);
     int code;
     cout << "------------------------------------" << endl;
