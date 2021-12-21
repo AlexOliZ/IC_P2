@@ -7,7 +7,7 @@ int main(void)
 {
     int n;
     int max_n = 15;
-    int m = 5;
+    int m = 1396216511;
     int i,j;
     char*code;
     golomb g(m);
@@ -38,15 +38,15 @@ int main(void)
     //cout<< endl; 
 
     string file = "test_file.bin";
-    int test[] = {6,15,70,60,50,0,-10,-20,-7,0,0,0,5,6,6,8,6,3,10,0,0,-10};
+    int test[] = {6,15,70,60,50,0,-10,-20,-7,0,0,0,5,6,6,8,6,3,10,0,0,-10,-100,100,200,500,10,50,60,70,-100,-800,1000,100000,-100000};
     golomb golomb_encoder(m,(char*)file.data());
-    for(int i=0 ; i<22 ; i++)
+    for(int i=0 ; i<35 ; i++)
         golomb_encoder.signed_stream_encode(test[i]);
     
     golomb_encoder.close_stream_write();
     
     golomb golomb_decoder(m,(char*)file.data());
-    for(int i=0 ; i<22 ; i++){
+    for(int i=0 ; i<35 ; i++){
         out = golomb_decoder.signed_stream_decode();
         cout << "decode: "<< out << endl;
     }

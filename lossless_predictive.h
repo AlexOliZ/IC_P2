@@ -17,8 +17,8 @@ class lossless_predictive {
             filename = fname;
         };
 
-        void predictive_encode(char* outfile);
-        void predictive_decode(char* infile);
+        SF_INFO predictive_encode(char* outfile);
+        void predictive_decode(char* infile,SF_INFO num);
         void setM(uint m);
         
     private:
