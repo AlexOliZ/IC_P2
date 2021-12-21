@@ -54,7 +54,7 @@ void lossless_codec::YUV (Mat image, Mat &y, Mat &u, Mat &v){
 
 
 //converter a imagem YUV  para RGB
-void lossless_codec::RGB (Mat &y, Mat &u, Mat &v, Mat &ImagemRBG){
+void lossless_codec::RGB (Mat y, Mat u, Mat v, Mat &ImagemRBG){
     
     int cn = ImagemRBG.channels(); //da nos os canais das cores... da para sabermos que cores e que sao
     uint8_t* pixelPtr = (uint8_t*)ImagemRBG.data; //ler a imagem pixel a pixel
@@ -89,10 +89,12 @@ void lossless_codec::RGB (Mat &y, Mat &u, Mat &v, Mat &ImagemRBG){
 
 
 //fiz testes destes erros e funciona
-//retorna o erro da previsao
+//retorna o erro da previsao (residual)
 int lossless_codec::erroEnc (int valorPixel, int valorPrevisto){
     return valorPixel-valorPrevisto;
 }
+
+//retorna o valor final do pixel -> depois da codificacao e descodificacao
 int lossless_codec::ValorPixelDec (int erro, int valorPrevisto){
     return erro + valorPrevisto;
 }
@@ -110,19 +112,19 @@ int lossless_codec::preditor (int a, int b, int c){
     return x;
 }
 
+
 //atribui o a,b,c para chamar a funcao de prever o proximo pixel
 void lossless_codec::preditor_JPEG_LS (Mat matriz,Mat &erMat, Mat &prev){
-    
     for (int i=0;i<(matriz.size().height);++i){ //row
         for(int j=0;j<(matriz.size().width);++j){ //columns
             int a,b,c;
-            int PixelAtual = matriz.at<int>(i,j);
+            int PixelAtual = matriz.at<uchar>(i,j);
             if (j==0 && i!=0){  // se estivermos na 1 coluna
                 a = 0;
-                b = matriz.at<int>(i-1,j);
+                b = matriz.at<uchar>(i-1,j);
                 c = 0;
             }else if (i==0 && j!=0){  // se estivermos na 1 linha
-                a = matriz.at<int>(i,j-1);
+                a = matriz.at<uchar>(i,j-1);
                 b = 0;
                 c = 0;
             }else if (i==0 && j==0){ //se tivermos na 1 coluna e na 1 linha
@@ -130,9 +132,9 @@ void lossless_codec::preditor_JPEG_LS (Mat matriz,Mat &erMat, Mat &prev){
                 b = 0;
                 c = 0;
             }else{
-                a = matriz.at<int>(i,j-1);
-                b = matriz.at<int>(i-1,j);
-                c = matriz.at<int>(i-1,j-1);
+                a = matriz.at<uchar>(i,j-1);
+                b = matriz.at<uchar>(i-1,j);
+                c = matriz.at<uchar>(i-1,j-1);
             }
     
             int previsao = preditor(a,b,c);
@@ -140,71 +142,88 @@ void lossless_codec::preditor_JPEG_LS (Mat matriz,Mat &erMat, Mat &prev){
             //printf("previsao -> %d\n", previsao);
             
             int erro = erroEnc (PixelAtual, previsao);
-            erMat.at<int>(i,j)  = erro;
-            prev.at<int>(i,j) = previsao;
-            //printf("erro[%d][%d] -> %d\n",i,j,erMat.at<int>(i,j));
+            erMat.at<uchar>(i,j)  = erro;
+            prev.at<uchar>(i,j) = previsao;
+           // printf("erro[%d][%d] -> %d\n",i,j,erMat.at<uchar>(i,j));
         
         }
     }  
     
 }
-void lossless_codec::golombEnc(int erro,int m, char* namefile){
+
+//codificar o residual para um ficheiro
+void lossless_codec::golombEnc(Mat erroY,Mat erroV,Mat erroU, int m, char* namefile){
     
     golomb golomb_encoder(m,namefile);
     //char* code;
     //code = golomb_encoder.encode(erro);
     //escrever no ficheiro -> mandas tudo para o ficheiro depois a ler e tens que diferenciar ... 
     //les 10 da matriz y (o size da matriz y)  e depois les da matriz v (size da matriz v)
-    golomb_encoder.signed_stream_encode(erro);
-   // golomb_encoder.close_stream();
+   // golomb_encoder.signed_stream_encode(erro);
+   // golomb_encoder.close_stream_write();
     //printf("erro -> %d\n", erro);
-    //escrever o codigo num ficheiro
     
-    /*for(int j=0 ; j< floor((golomb_encoder.get_unarySize()+golomb_encoder.get_remSize())/10000+1) ; j++)
-    {
-        for(int i=9999 ; i>=0 ; i--){
-        if(i+10000*j < golomb_encoder.get_unarySize()+golomb_encoder.get_remSize()) {
-                cout<< ((code[j]>>(i)) &0x01);
-            }
-        }
-    }   
-    cout<< endl;*/
 
-    //stream.writeChars(code,golomb_encoder.get_remSize()+golomb_encoder.get_unarySize());
+    for (int h =0;h<erroY.size().height ; h++){
+        for(int c = 0;c<erroY.size().width;c++){
+            int erro = erroY.at<uchar>(h,c);
+            golomb_encoder.signed_stream_encode(erro);
+        }
+    }
+
+    for (int h =0;h<erroV.size().height ; h++){
+        for(int c = 0;c<erroV.size().width;c++){
+            int erro = erroV.at<uchar>(h,c);
+            golomb_encoder.signed_stream_encode(erro);
+        }
+    }
+
+    for (int h =0;h<erroU.size().height ; h++){
+        for(int c = 0;c<erroU.size().width;c++){
+            int erro = erroU.at<uchar>(h,c);
+            golomb_encoder.signed_stream_encode(erro);
+        }
+    }
     
-    //imprimir num ficheiro o bit -> usar a bit_stream
-    //stream.writeChars(bit,);  
+    golomb_encoder.close_stream_write();
+    
 }
 
-void lossless_codec::golombDesc(Mat prevY, Mat prevV, Mat prevU, Mat erroY, Mat erroV, Mat erroU, Mat &ValorY, Mat &ValorV, Mat &ValorU){
+//ler o ficheiro codificado
+void lossless_codec::golombDesc(Mat &DescY, Mat &DescV, Mat &DescU,int m,char* namefile){
+    golomb golomb_Decoder(m,namefile); 
+
+     for (int h =0;h<DescY.size().height ; h++){
+        for(int c = 0;c<DescY.size().width;c++){
+            int desc = golomb_Decoder.signed_stream_decode();
+            DescY.at<uchar>(h,c) = desc;
+        }
+    }
+
+    for (int h =0;h<DescV.size().height ; h++){
+        for(int c = 0;c<DescV.size().width;c++){
+            int desc = golomb_Decoder.signed_stream_decode();
+            DescV.at<uchar>(h,c) = desc;
+        }
+    }
+
+    for (int h =0;h<DescU.size().height ; h++){
+        for(int c = 0;c<DescU.size().width;c++){
+            int desc = golomb_Decoder.signed_stream_decode();
+            DescU.at<uchar>(h,c) = desc;
+        }
+    }
+    
+    golomb_Decoder.close_stream_read();
+}
+ /*
+void lossless_codec::golombDesc(Mat prevY, Mat prevV, Mat prevU, Mat erroY, Mat erroV, Mat erroU, Mat &DescY, Mat &DescV, Mat &DescU){
     //ler de um ficheiro 
-    for (int i=0;i<(erroY.size().height)-1;++i){ //row
-        for(int j=0;j<(erroY.size().width);++j){ //columns
-            //ler para o code
-            int code=0; //vem do descodificador de golomb
-            ValorY.at<int>(i,j) = ValorPixelDec(code, prevY.at<int>(i,j));
-        }
-    }
-
-    for (int i=0;i<(erroV.size().height)-1;++i){ //row
-        for(int j=0;j<(erroV.size().width);++j){ //columns
-            //ler para o code
-            int code=0; //vem do descodificador de golomb
-            ValorV.at<int>(i,j)  = ValorPixelDec(code, prevY.at<int>(i,j));
-        }
-    }
-
-    for (int i=0;i<(erroU.size().height)-1;++i){ //row
-        for(int j=0;j<(erroU.size().width);++j){ //columns
-            //ler para o code
-            int code=0; //vem do descodificador de golomb
-            ValorU.at<int>(i,j) = ValorPixelDec(code, prevY.at<int>(i,j));
-        }
-    }
+    
 
 
     
-}
+}*/
 
 int main(int argc,char *argv[]) {
     
@@ -239,93 +258,144 @@ int main(int argc,char *argv[]) {
     Mat y (input_image.size().height,input_image.size().width,CV_8UC1);
     Mat v (input_image.size().height/2,input_image.size().width/2,CV_8UC1);
     Mat u (input_image.size().height/2,input_image.size().width/2,CV_8UC1);
-    printf("1 pixel -> antes -> %d\n", input_image.at<Vec3b>(0,0)[2]);
-    printf("2 pixel -> antes -> %d\n", input_image.at<Vec3b>(0,1)[2]);
-    printf("3 pixel -> antes -> %d\n", input_image.at<Vec3b>(0,2)[2]);
+    //printf("1 pixel -> antes -> %d\n", input_image.at<Vec3b>(0,0)[2]);
+    //printf("2 pixel -> antes -> %d\n", input_image.at<Vec3b>(0,1)[2]);
+    //printf("3 pixel -> antes -> %d\n", input_image.at<Vec3b>(0,2)[2]);
     lossless.YUV(input_image,y,u,v);
-    imshow("y",y);
-    imshow("u",u);
-    imshow("v",v);
-    lossless.RGB(y,u,v, output_image);
-    printf("1 pixel -> depiois -> %d\n", output_image.at<Vec3b>(0,0)[2]);
-    printf("2 pixel -> depiois -> %d\n", output_image.at<Vec3b>(0,1)[2]);
-    printf("3 pixel -> depiois -> %d\n", output_image.at<Vec3b>(0,2)[2]);
+   // imshow("y",y);
+   // imshow("u",u);
+   // imshow("v",v);
+    //lossless.RGB(y,u,v, output_image);
+   // printf("1 pixel -> depiois -> %d\n", output_image.at<Vec3b>(0,0)[2]);
+   // printf("2 pixel -> depiois -> %d\n", output_image.at<Vec3b>(0,1)[2]);
+   // printf("3 pixel -> depiois -> %d\n", output_image.at<Vec3b>(0,2)[2]);
    
     
 
 
-/*
+
     //matriz com os erros todos de y
     //precisas dos +3 para as pontas das imagens (a,b,c nas pontas acrescentas 0)
-    Mat erroY (y.size().height+3,y.size().width+3,CV_8UC1); 
-    Mat prevY (y.size().height+3,y.size().width+3,CV_8UC1); 
-    lossless.preditor_JPEG_LS(y,erroY,prevY);
-    Mat erroV (v.size().height+3,v.size().width+3,CV_8UC1); 
-    Mat prevV (y.size().height+3,y.size().width+3,CV_8UC1);
-    lossless.preditor_JPEG_LS(v,erroV,prevV);
-    Mat erroU (u.size().height+3,u.size().width+3,CV_8UC1); 
-    Mat prevU (y.size().height+3,y.size().width+3,CV_8UC1);
-    lossless.preditor_JPEG_LS(u,erroU,prevU);
-    */
+    Mat erroY (y.size().height,y.size().width,CV_8UC1); 
+    Mat prevAuxY (y.size().height,y.size().width,CV_8UC1); 
+    lossless.preditor_JPEG_LS(y,erroY,prevAuxY);
+    Mat erroV (v.size().height,v.size().width,CV_8UC1); 
+    Mat prevAuxV (v.size().height,v.size().width,CV_8UC1);
+    lossless.preditor_JPEG_LS(v,erroV,prevAuxV);
+    Mat erroU (u.size().height,u.size().width,CV_8UC1); 
+    Mat prevAuxU (u.size().height,u.size().width,CV_8UC1);
+    lossless.preditor_JPEG_LS(u,erroU,prevAuxU);
+    
 
 
-    //imprimir uma matriz 
+    //imprimir uma matriz de erro das componentes y,v e u 
     /*for (int i = 0;i<erroY.size().height-1;i++){
         for (int j = 0;j<erroY.size().width-1;j++){
-            printf("erro[%d][%d] -> %d\n",i,j,erroY.at<int>(i,j));
+            printf("erro[%d][%d] -> %d\n",i,j,erroY.at<uchar>(i,j));
         }
     }
     
     for (int i = 0;i<erroV.size().height;i++){
         for (int j = 0;j<erroV.size().width;j++){
-            //printf("erro[%d][%d] -> %d\n",i,j,erroV.at<int>(i,j));
-            printf("erro[%d][%d] -> %d\n",i,j,erroU.at<int>(i,j));
+            //printf("erro[%d][%d] -> %d\n",i,j,erroV.at<uchar>(i,j));
+            printf("erro[%d][%d] -> %d\n",i,j,erroU.at<uchar>(i,j));
         }
     }*/
   
     //char* code;
     //double mean = (codeY.size().height*codeY.size().width + codeV.size().height*codeV.size().width + codeU.size().height*codeU.size().width)/3;
-  /*
+/*
+
     double mean = ((erroV.size().height*erroV.size().width)*10);
     double alpha = mean/(mean+1.0);
     int m = (int) ceil(-1/log2(alpha));
-    
-    for (int h =0;h<erroY.size().height ; h++){
-        for(int c = 0;c<erroY.size().width;c++){
-            lossless.golombEnc(erroY.at<int>(h,c),m,outfile);
-        }
-    }
+    printf("1 erro -> antes -> %d\n", erroY.at<uchar>(0,0));
+    printf("2 erro -> antes -> %d\n", erroY.at<uchar>(0,1));
+    printf("3 erro -> antes -> %d\n", erroY.at<uchar>(0,2));
+    lossless.golombEnc(erroY,erroV,erroU,m,outfile); //da nos o erro para a funcao ValorPixelDec
 
-    for (int h =0;h<erroV.size().height ; h++){
-        for(int c = 0;c<erroV.size().width;c++){
-            lossless.golombEnc(erroV.at<int>(h,c),m,outfile);
-        }
-    }
-
-    for (int h =0;h<erroU.size().height ; h++){
-        for(int c = 0;c<erroU.size().width;c++){
-            lossless.golombEnc(erroU.at<int>(h,c),m,outfile);
-        }
-    }
-
-    //matrizes com o valor do pixel em YUV 
-    Mat ValorY (erroY.size().height+3,erroY.size().width+3,CV_8UC1); 
-    Mat ValorV (erroV.size().height+3,erroV.size().width+3,CV_8UC1); 
-    Mat ValorU (erroU.size().height+3,erroU.size().width+3,CV_8UC1); 
-    lossless.golombDesc(prevY,prevV,prevU,erroY,erroV,erroU,ValorY,ValorV,ValorU);
-
-    
-    //imprimir uma matriz -> é suposto da igual acho eu ---- por o codigo do descodificador do golomb na funcao e ver
-    for (int i = 0;i<ValorY.size().height-1;i++){
-        for (int j = 0;j<ValorY.size().width-1;j++){
-           //printf("ValorY[%d][%d] -> %d\n",i,j,ValorY.at<int>(i,j));
-        }
-    }
-
-
-    //é preciso passarmos YUV par RGB e imprimir a imagem como antes???
+    //da nos o erro de cada pixel para cada componente
+    Mat DescY (erroY.size().height,erroY.size().width,CV_8UC1); 
+    Mat DescV (erroV.size().height,erroV.size().width,CV_8UC1); 
+    Mat DescU (erroU.size().height,erroU.size().width,CV_8UC1); 
+    lossless.golombDesc(DescY,DescV,DescU,m,outfile);
+    printf("1 erro -> depiois -> %d\n", DescY.at<uchar>(0,0));
+    printf("2 erro -> depiois -> %d\n", DescY.at<uchar>(0,1));
+    printf("3 erro -> depiois -> %d\n", DescY.at<uchar>(0,2));
+   
 */
+    //para termos o valor previsto do pixel para cada componente
+    Mat erroAuxY (y.size().height,y.size().width,CV_8UC1); 
+    Mat prevY (y.size().height,y.size().width,CV_8UC1); 
+    lossless.preditor_JPEG_LS(y,erroAuxY,prevY);
+    Mat erroAuxV (v.size().height,v.size().width,CV_8UC1); 
+    Mat prevV (v.size().height,v.size().width,CV_8UC1);
+    lossless.preditor_JPEG_LS(v,erroAuxV,prevV);
+    Mat erroAuxU (u.size().height,u.size().width,CV_8UC1); 
+    Mat prevU (u.size().height,u.size().width,CV_8UC1);
+    lossless.preditor_JPEG_LS(u,erroAuxU,prevU);
     
+
+    //onde tem o erro é DescY V e U
+    //matrizes com o valor dos pixeis depois do processo de compressao
+    Mat ValorY (erroY.size().height,erroY.size().width,CV_8UC1); 
+    Mat ValorV (erroV.size().height,erroV.size().width,CV_8UC1); 
+    Mat ValorU (erroU.size().height,erroU.size().width,CV_8UC1); 
+
+
+    for (int i=0;i<(ValorY.size().height)-1;++i){ //row
+        for(int j=0;j<(ValorY.size().width);++j){ //columns
+            //ler para o code
+            int code= erroY.at<uchar>(i,j); //vem do descodificador de golomb
+            ValorY.at<uchar>(i,j) = lossless.ValorPixelDec(code, prevY.at<uchar>(i,j));
+        }
+    }
+    //int lossless_codec::ValorPixelDec (int erro, int valorPrevisto){
+
+    for (int i=0;i<(ValorV.size().height)-1;++i){ //row
+        for(int j=0;j<(ValorV.size().width);++j){ //columns
+            //ler para o code
+            int code= erroV.at<uchar>(i,j);; //vem do descodificador de golomb
+            ValorV.at<uchar>(i,j)  = lossless.ValorPixelDec(code, prevV.at<uchar>(i,j));
+        }
+    }
+
+    for (int i=0;i<(ValorU.size().height)-1;++i){ //row
+        for(int j=0;j<(ValorU.size().width);++j){ //columns
+            //ler para o code
+            int code= erroU.at<uchar>(i,j);; //vem do descodificador de golomb
+            ValorU.at<uchar>(i,j) = lossless.ValorPixelDec(code, prevU.at<uchar>(i,j));
+        }
+    }
+    printf("1 erro -> depiois preditor -> %d\n", ValorY.at<uchar>(0,0));
+    printf("2 erro -> depiois preditor-> %d\n", ValorY.at<uchar>(0,1));
+    printf("3 erro -> depiois preditor-> %d\n", ValorY.at<uchar>(0,2));
+   
+
+//int lossless_codec::ValorPixelDec (int erro, int valorPrevisto){ erro = golomb -> valor previsto = preditor
+
+
+
+    //imprimir uma matriz -> é suposto da igual acho eu ---- por o codigo do descodificador do golomb na funcao e ver
+    
+   /* for (int i = 0;i<ValorY.size().height-1;i++){
+        for (int j = 0;j<ValorY.size().width-1;j++){
+            //printf("valor do pixel[%d][%d] -> %d\n",i,j,ValorY.at<uchar>(i,j));
+        }
+    }
+    
+    for (int i = 0;i<ValorV.size().height;i++){
+        for (int j = 0;j<ValorV.size().width;j++){
+            //printf("erro[%d][%d] -> %d\n",i,j,ValorV.at<uchar>(i,j));
+            //printf("erro[%d][%d] -> %d\n",i,j,ValorU.at<uchar>(i,j));
+        }
+    }*/
+
+    lossless.RGB(ValorY,ValorU,ValorV, output_image);
+
+
+
+
     //teste do erro -> funciona
     //int erpijorg = lossless.erroEnc (986452865,7);
     //int ver = lossless.ValorPixelDec(erpijorg,7);
@@ -339,3 +409,23 @@ int main(int argc,char *argv[]) {
     waitKey();
 
 }
+
+
+    /*
+    for (int h =0;h<erroY.size().height ; h++){
+        for(int c = 0;c<erroY.size().width;c++){
+            lossless.golombEnc(erroY.at<uchar>(h,c),m,outfile);
+        }
+    }
+
+    for (int h =0;h<erroV.size().height ; h++){
+        for(int c = 0;c<erroV.size().width;c++){
+            lossless.golombEnc(erroV.at<uchar>(h,c),m,outfile);
+        }
+    }
+
+    for (int h =0;h<erroU.size().height ; h++){
+        for(int c = 0;c<erroU.size().width;c++){
+            lossless.golombEnc(erroU.at<uchar>(h,c),m,outfile);
+        }
+    }*/

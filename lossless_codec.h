@@ -20,7 +20,7 @@ class lossless_codec{
          * @param v address for the matrix v
          */
         void YUV(Mat image, Mat &y, Mat &u, Mat &v);
-        void RGB (Mat &y, Mat &u, Mat &v, Mat &ImagemRBG);
+        void RGB (Mat y, Mat u, Mat v, Mat &ImagemRBG);
         /**
          * @brief 
          * 
@@ -57,12 +57,15 @@ class lossless_codec{
         /**
          * @brief 
          * 
-         * @param erro residual
+         * @param erroY residual
+         * @param erroV residual
+         * @param erroU residual
          * @param m golomg parameter m
+         * @param namefile 
          */
-        void golombEnc(int erro,int m, char* outfile);
+        void golombEnc(Mat erroY,Mat erroV,Mat erroU, int m, char* namefile);
 
-        void golombDesc(Mat prevY, Mat prevV, Mat prevU, Mat erroY, Mat erroV, Mat erroU, Mat &ValorY, Mat &ValorV, Mat &ValorU);
+        void golombDesc(Mat &DescY, Mat &DescV, Mat &DescU,int m,char* namefile);
 
         private:
             //int m;
