@@ -9,16 +9,16 @@ class predictor {
     public:
         predictor(bool lossy){
             this->lossy = lossy;
-            num_inputs = 0;
-            pointer = 0;
+            this->num_inputs = 0;
+            this->pointer = 0;
         };
 
-        short predict();
-        int residual(short sample);
-        short reconstruct(int residual);
-        void updateBufferConst(short quant);
+        int predict();
+        int residual(int sample);
+        int reconstruct(int residual);
+        void updateBufferConst(int quant);
         void showBuffer();
-        void  updateBuffer(short sample);
+        void  updateBuffer(int sample);
         
     private:
         bool lossy;

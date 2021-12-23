@@ -12,7 +12,7 @@ SF_INFO lossless_predictive::predictive_encode(char* outfile){
     char* code;
     int *buf,i,j,avg;
     int num_items,num;
-    //predictor predictor_encoder(false);
+    predictor predictor_encoder(false);
 
     SF_INFO inFileInfo;
     SNDFILE* inFile;
@@ -45,17 +45,19 @@ SF_INFO lossless_predictive::predictive_encode(char* outfile){
     this->m=(int)ceil(-1/log2(average/(average+1.0)));
     cout << "M: " << this->m << endl;
     golomb golomb_encoder(this->m,outfile);
+    int predictor_val;
+    
     for(i=0 ; i<num_items ; i++)
     {
         //predictor_val = predictor_encoder.residual(buf[i]);
-        //golomb_encoder.signed_stream_encode(predictor_encoder.residual(buf[i]));
-        golomb_encoder.signed_stream_encode(buf[i]);
-        check_validity[i] = buf[i];
+        golomb_encoder.signed_stream_encode(predictor_encoder.residual(buf[i]));
+        //golomb_encoder.signed_stream_encode(predictor_val);
+        //check_validity[i] = buf[i];
         //golomb_encoder.signed_stream_encode(buf[i]);
-        if(i==0){
+        /*if(i==0){
             cout << "REM: " << golomb_encoder.get_remSize() << endl;
             cout << "UN_SIZE: " << golomb_encoder.get_unarySize() << endl;
-        }
+        }*/
         //cout << endl;
         //cout << "number: " << buf[i] << endl;      
         //cout << "unary_size: " << golomb_encoder.get_unarySize() << endl;
@@ -71,21 +73,21 @@ SF_INFO lossless_predictive::predictive_encode(char* outfile){
 void lossless_predictive::predictive_decode(char* infile,SF_INFO info)
 {
     //bit_stream stream(infile,true,false);
-    //predictor predictor_decoder(false);
+    predictor predictor_decoder(false);
     golomb golomb_decoder(this->m,infile);
     int num_items = info.channels*info.frames;
     int* code = (int*)malloc(sizeof(int)*num_items);
     int count = 0;
     while(1){
-        //code[count] = predictor_decoder.reconstruct(golomb_decoder.signed_stream_decode());
-        code[count]=golomb_decoder.signed_stream_decode();
-        if(check_validity[count] != code[count]){
+        code[count] = predictor_decoder.reconstruct(golomb_decoder.signed_stream_decode());
+        //code[count]=golomb_decoder.signed_stream_decode();
+        /*if(check_validity[count] != code[count]){
             cout << count << endl;
             cout << "NUMBER: " << code[count] << ' ' << check_validity[count] << endl;
             cout << "REM: " << golomb_decoder.get_remSize() << endl;
             cout << "UN_SIZE: " << golomb_decoder.get_unarySize() << endl;
             cout << "M: " << golomb_decoder.get_m() << endl;
-        }
+        }*/
         count ++;
         if(count>=info.frames*info.channels){
             break;
