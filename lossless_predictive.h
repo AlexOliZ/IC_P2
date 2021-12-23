@@ -14,6 +14,7 @@ class lossless_predictive {
     public:
         lossless_predictive(char* fname){
             //m=m_val;
+            m=0;
             filename = fname;
         };
 

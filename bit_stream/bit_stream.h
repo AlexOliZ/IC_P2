@@ -26,11 +26,12 @@ class bit_stream {
             pointer_write = 7;
             filename = fname;
             byteCount = 0;
+            byte = 0;
             if(read_file)
                 inputfile = ifstream(filename, ios::binary);
             if(write_file)
                 outputfile = ofstream(filename, ios::binary|ios_base::app);
-            byte = 0;
+            
             //inputfile.open(fname, fstream::in);
             //outputfile.open(fname, fstream::out);
             
@@ -52,13 +53,9 @@ class bit_stream {
         void readBit(uint8_t* bit);
         char* readBits(uint n);
         void readBits(char* bits, uint n);
-        void writeChar(char val);
-        void writeChars(char* val, uint n);
-        char readChar();
-        void readChar(char* c);
         
     private:
-        uint8_t  byte = 0;
+        uint8_t  byte;
         char* filename;
         ofstream outputfile;
         ifstream inputfile;

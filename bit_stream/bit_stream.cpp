@@ -1,5 +1,4 @@
 #include "bit_stream.h"
-#include "math.h"
 using namespace std;
 /*
 *   bit stream to read/write bits from/to file
@@ -88,6 +87,7 @@ using namespace std;
             pointer_read = 7;
         }
         val_byte = ((byte >> pointer_read) & 0x01); 
+        //cout << (int)val_byte << endl;
         pointer_read--;
         return val_byte;
     }
@@ -119,36 +119,12 @@ using namespace std;
     void bit_stream::readBits(char* bits, uint n)
     {
         int i,j;
-        for(j=(n-1)/8; j>=0; j--){
+        for(j=n/8; j>=0; j--){
+            bits[j] = 0x00;
             for (i=7; i>=0; i--) {
                 if(i+8*j < n){
-                    bits[j] |= (readBit()<<i); 
+                    bits[j] += (readBit()<<i); 
                 }
             }
         }
-    }
-
-    void bit_stream::writeChar(char val)
-    {
-        writeBits(val,sizeof(char)*8);
-    }
-
-    void bit_stream::writeChars(char* val, uint n)
-    {
-        int j;
-        for(int i=0 ; i<(int)(n/8) ; i++)
-        {
-            for(j=0 ; j<8 ; j++)
-                writeBit(val[i]);
-        }
-    }
-
-    char bit_stream::readChar()
-    {
-        return readBits(sizeof(char)*8)[0];
-    }
-
-    void bit_stream::readChar(char* c)
-    {
-        c = readBits(sizeof(char)*8);
     }

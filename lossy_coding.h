@@ -5,6 +5,7 @@
 
 using namespace std;
 using namespace cv;
+
 class  lossy_coding{
     public:
          lossy_coding(string fname){
@@ -20,6 +21,7 @@ class  lossy_coding{
          * @param v address for the matrix v
          */
         void YUV(Mat image, Mat &y, Mat &u, Mat &v);
+        void RGB (Mat y, Mat u, Mat v, Mat &ImagemRBG);
         /**
          * @brief 
          * 
@@ -27,7 +29,7 @@ class  lossy_coding{
          * @param valorPrevisto expected pixel value
          * @return int -> residual for each value of the predicted pixel
          */
-        int erroEnc (int valorPixel, int valorPrevisto);
+        int erroEnc (int valorPixel, int valorPrevisto, int quantization);
         /**
          * @brief 
          * 
@@ -60,10 +62,9 @@ class  lossy_coding{
          * @param erro residual
          * @param m golomg parameter m
          */
-        void golombEnc(int erro,int m);
+        void golombEnc(Mat erroY,Mat erroV,Mat erroU, int m, char* namefile);
 
-        void golombDesc(Mat prevY, Mat prevV, Mat prevU, Mat erroY, Mat erroV, Mat erroU, Mat &ValorY, Mat &ValorV, Mat &ValorU, int quantization);
-
+        void golombDesc(Mat &DescY, Mat &DescV, Mat &DescU,int m,char* namefile);
         private:
             //int m;
             string filename;

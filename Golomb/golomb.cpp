@@ -3,7 +3,6 @@ using namespace std;
 
 // unary || 1 || remainder
 
-void golomb::free_code(){ free(code); }
 uint golomb::get_unarySize(){ return unary_size; }
 uint golomb::get_remSize(){ return rem_size; }
 int golomb::get_m(){ return m; }
@@ -14,60 +13,59 @@ bool golomb::end_of_file(){ return stream.end_of_file(); }
 
 char* golomb::encode(uint n)
 {
-    unary_size = (uint)((n)/m);
-    uint b=(uint)(log2(m));
-    uint r = n -unary_size*m;
-    uint k=pow(2,(b + 1))-m;
+    this->unary_size = (uint)((n)/this->m);
+    uint b=ceil(log2(this->m));
+    uint r = n -unary_size*this->m;
+    uint k=pow(2,(b))-this->m;
     int i=0,j=0;
-    char* code = (char*)malloc(((int)((b+1+unary_size+1)/8) +1));
-
+    char* code = (char*)malloc(((int)((b+1+this->unary_size+1)/8) +1));
+    
     if(r<k){      
-        rem_size=b;
-        for(j=0 ; 8*j<rem_size ; j++)
-            for(i=0 ; i+8*j<rem_size ; i++)
+        this->rem_size=b;
+        for(j=0 ; 8*j<this->rem_size ; j++)
+            for(i=0 ; i+8*j<this->rem_size ; i++)
             {
                 code[j] |= r &(0x01<<(i));
             }                    
     }else{
-        rem_size=b+1;
+        this->rem_size=b+1;
         r += k;
-        for(j=0 ; 8*j<rem_size ; j++)
-            for(i=0 ; i+8*j<rem_size ; i++)
+        for(j=0 ; 8*j<this->rem_size ; j++)
+            for(i=0 ; i+8*j<this->rem_size ; i++)
             {
                 code[j] |= r &(0x01<<(i));
             }
     }
 
-    code[(int)((rem_size)/8)] |= 0x01 << (rem_size-((int)(rem_size)/8)*8);
+    code[(int)((this->rem_size)/8)] |= 0x01 << (this->rem_size-((int)(this->rem_size)/8)*8);
     return code;
 }
 
 
 void golomb::stream_encode(uint n)
 {
-    unary_size = (uint)((n)/m);
-    uint b=(uint)(log2(m));
-    uint r = n -unary_size*m;
-    uint k=pow(2,(b + 1))-m;
+    this->unary_size = (uint)((n)/this->m);
+    uint b=ceil(log2(this->m));
+    uint r = n -this->unary_size*this->m;
+    uint k=pow(2,b)-this->m;
     int i=0,j=0;
     
-    stream.writeBits(0,unary_size);
-    stream.writeBit(1);
+    this->stream.writeBits(0,this->unary_size);
+    this->stream.writeBit(1);
 
-    uint aux = 0;
-    for(i=0 ; i<b ; i++)
-    {
-        aux += r&(0x01 << i); 
-    }
- 
     if(r<k){      
-        rem_size=b;
-        stream.writeBits(r,rem_size);
+        this->rem_size=b-1;
     }else{
-        rem_size=b+1;
+        this->rem_size=b;
         r += k;
-        stream.writeBits(r,rem_size);
     }
+    
+    this->stream.writeBits(r,this->rem_size);
+    int aux=0;
+    for(i=0;i<rem_size;i++)
+        aux |= r &(0x01 << i);
+
+    rem_size = aux;
 }
 
 char* golomb::signed_encode(int n)
@@ -77,15 +75,15 @@ char* golomb::signed_encode(int n)
 
 void golomb::signed_stream_encode(int n)
 {
-    stream_encode(n>=0?2*n:-2*n-1);
+    stream_encode((uint)(n>=0?2*n:-2*n-1));
 }
 
 uint golomb::decode(char* code,uint remainder_size, uint unary_size)
 {
     int remainder = 0;
     int i,j;
-    uint b=(uint)(log2(m));
-    uint k=pow(2,(b + 1))-m;
+    uint b=ceil(log2(this->m));
+    uint k=pow(2,b)-this->m;
 
     for(j=0 ; j*8<remainder_size ; j++)
         for(i=0; i<8 & i+8*j < remainder_size; i++){
@@ -98,46 +96,60 @@ uint golomb::decode(char* code,uint remainder_size, uint unary_size)
 
 uint golomb::stream_decode()
 {   
-    unary_size = 0;
-    while(stream.readBit() != 1){
-        unary_size ++;
+    this->unary_size = 0;
+    while(this->stream.readBit() != 1){
+        this->unary_size ++;
     }
     
-    uint n=unary_size*m; 
-    rem_size=(uint)(log2(m));
-    uint r_min = n -unary_size*m;
-    uint k=pow(2,(rem_size + 1))-m;
-    uint r_max = n-unary_size*m -1 ;
+    this->rem_size=ceil(log2(this->m));
+    uint k=pow(2,(this->rem_size))-this->m;
+    
+    int j,i;
+    
+    this->rem_size--;
+    char* code = (char*)malloc((uint)(this->rem_size/8) + 1);
+    this->stream.readBits(code,this->rem_size);
+    //char* code = this->stream.readBits(this->rem_size);
     uint remainder=0;
-    uint j,i;
+    /*
+    for(j=0 ; 8*j < this->rem_size ; j++){
+        for(i=0; i<8; i++){
+            if(i+8*j < this->rem_size){
+                cout << ((code[j] >> i) &0x01);
+            }
+        }
+    }
     
-    char* code = (char*)malloc((uint)(rem_size/8) + 1);
-    stream.readBits(code,rem_size);
-    
-    for(j=0 ; j*8<=rem_size ; j++)
-        for(i=0; i<8; i++)
-            if(i+8*j <= rem_size){
+    cout << endl;
+    */
+    for(j=0 ; 8*j < this->rem_size ; j++){
+        for(i=0; i<8; i++){
+            if(i+8*j < this->rem_size){
+                //cout << ((code[j]&(0x01 << (i))) << (8*j)) << endl;
                 remainder += (code[j]&(0x01 << (i))) << (8*j);
             }
-
+        }
+    }
+    
     if(remainder >= k)
     {
-        remainder = remainder<< 1;
-        remainder += stream.readBit() -k;
+        remainder = remainder << 1;
+        remainder += this->stream.readBit() -k;
         rem_size +=1;
-    }
-
-    return remainder+m*unary_size;
+    } 
+    rem_size = remainder;
+    free(code);
+    return remainder+(this->m*this->unary_size);
 }
 
 int golomb::signed_decode(char*code,uint remainder_size,uint unary_size)
 {
 	uint res=decode(code,remainder_size,unary_size);
-	return res%2 ? ((int)res+1)/-2 : res/2;
+    return res%2 ? ((int)res+1)/-2 : res/2;
 }
 
 int golomb::signed_stream_decode()
 {
     uint res=stream_decode();
-	return res%2 ? ((int)res+1)/-2 : res/2;
+    return res%2 ? -ceil((res+1)/2) : res/2;
 }

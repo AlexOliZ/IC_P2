@@ -14,6 +14,8 @@ class golomb
     public:
         golomb(uint val){
             m=val;
+            rem_size=0;
+            unary_size=0;
             //memset(code,0,sizeof(uint8_t)*(uint)ceil(log2(m)));
         };
         golomb(uint val,char* fname)
@@ -21,11 +23,12 @@ class golomb
             filename = fname;
             m = val;
             stream = bit_stream(fname,true,true);
+            rem_size=0;
+            unary_size=0;
         }
         golomb(){};
         //~golomb();
         
-        void free_code();
         int get_m();
         void set_m(int new_m);
         uint get_unarySize();
@@ -47,9 +50,8 @@ class golomb
 
     private:
         uint m;
-        char* code;
-        uint unary_size = 0;
-        uint rem_size = 0;
+        uint unary_size;
+        uint rem_size;
         char* filename;
         bit_stream stream;
 };

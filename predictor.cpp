@@ -3,14 +3,14 @@
 
 short predictor::predict()
 {
-    if(num_inputs == 0){
+    if(this->num_inputs == 0){
         return 0;
-    } else if (num_inputs == 1) {
-        return buffer[pointer];
-    } else if (num_inputs == 2) {
-        return 2*buffer[pointer] - 2*buffer[pointer-1];
+    } else if (this->num_inputs == 1) {
+        return this->buffer[this->pointer];
+    } else if (this->num_inputs == 2) {
+        return 2*this->buffer[this->pointer] - 2*this->buffer[this->pointer-1];
     } 
-    return 3*buffer[pointer] - 3*buffer[pointer-1] + buffer[pointer-2];
+    return 3*this->buffer[this->pointer] - 3*this->buffer[pointer-1] + this->buffer[pointer-2];
 }
 
 int predictor::residual(short sample)
@@ -35,14 +35,14 @@ void predictor::updateBufferConst(short quant)
 }
 
 void predictor::updateBuffer(short sample) {
-    pointer = (pointer+1)&0x03;
-    buffer[pointer] = sample;
-    num_inputs++;
+    this->pointer = (pointer+1)%3;
+    this->buffer[pointer] = sample;
+    this->num_inputs++;
 }
 
 void predictor::showBuffer()
 {
-    cout << buffer[0] << ',' << buffer[1] << ',' <<  buffer[2] << endl;
+    cout << this->buffer[0] << ',' << this->buffer[1] << ',' <<  this->buffer[2] << endl;
 }
 //int main(void)
 //{return 0;}

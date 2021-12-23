@@ -262,17 +262,14 @@ int main(int argc,char *argv[]) {
     //printf("2 pixel -> antes -> %d\n", input_image.at<Vec3b>(0,1)[2]);
     //printf("3 pixel -> antes -> %d\n", input_image.at<Vec3b>(0,2)[2]);
     lossless.YUV(input_image,y,u,v);
-   // imshow("y",y);
-   // imshow("u",u);
-   // imshow("v",v);
+    //imshow("y",y);
+    //imshow("u",u);
+    //imshow("v",v);
     //lossless.RGB(y,u,v, output_image);
    // printf("1 pixel -> depiois -> %d\n", output_image.at<Vec3b>(0,0)[2]);
    // printf("2 pixel -> depiois -> %d\n", output_image.at<Vec3b>(0,1)[2]);
    // printf("3 pixel -> depiois -> %d\n", output_image.at<Vec3b>(0,2)[2]);
    
-    
-
-
 
     //matriz com os erros todos de y
     //precisas dos +3 para as pontas das imagens (a,b,c nas pontas acrescentas 0)
@@ -286,8 +283,6 @@ int main(int argc,char *argv[]) {
     Mat prevAuxU (u.size().height,u.size().width,CV_8UC1);
     lossless.preditor_JPEG_LS(u,erroU,prevAuxU);
     
-
-
     //imprimir uma matriz de erro das componentes y,v e u 
     /*for (int i = 0;i<erroY.size().height-1;i++){
         for (int j = 0;j<erroY.size().width-1;j++){
@@ -302,13 +297,11 @@ int main(int argc,char *argv[]) {
         }
     }*/
   
-    //char* code;
-    //double mean = (codeY.size().height*codeY.size().width + codeV.size().height*codeV.size().width + codeU.size().height*codeU.size().width)/3;
-/*
-
+    //codificador e descodificador nao dao bem :(
     double mean = ((erroV.size().height*erroV.size().width)*10);
     double alpha = mean/(mean+1.0);
     int m = (int) ceil(-1/log2(alpha));
+
     printf("1 erro -> antes -> %d\n", erroY.at<uchar>(0,0));
     printf("2 erro -> antes -> %d\n", erroY.at<uchar>(0,1));
     printf("3 erro -> antes -> %d\n", erroY.at<uchar>(0,2));
@@ -323,7 +316,7 @@ int main(int argc,char *argv[]) {
     printf("2 erro -> depiois -> %d\n", DescY.at<uchar>(0,1));
     printf("3 erro -> depiois -> %d\n", DescY.at<uchar>(0,2));
    
-*/
+
     //para termos o valor previsto do pixel para cada componente
     Mat erroAuxY (y.size().height,y.size().width,CV_8UC1); 
     Mat prevY (y.size().height,y.size().width,CV_8UC1); 
@@ -346,7 +339,7 @@ int main(int argc,char *argv[]) {
     for (int i=0;i<(ValorY.size().height)-1;++i){ //row
         for(int j=0;j<(ValorY.size().width);++j){ //columns
             //ler para o code
-            int code= erroY.at<uchar>(i,j); //vem do descodificador de golomb
+            int code= DescY.at<uchar>(i,j); //vem do descodificador de golomb
             ValorY.at<uchar>(i,j) = lossless.ValorPixelDec(code, prevY.at<uchar>(i,j));
         }
     }
@@ -355,7 +348,7 @@ int main(int argc,char *argv[]) {
     for (int i=0;i<(ValorV.size().height)-1;++i){ //row
         for(int j=0;j<(ValorV.size().width);++j){ //columns
             //ler para o code
-            int code= erroV.at<uchar>(i,j);; //vem do descodificador de golomb
+            int code= DescV.at<uchar>(i,j);; //vem do descodificador de golomb
             ValorV.at<uchar>(i,j)  = lossless.ValorPixelDec(code, prevV.at<uchar>(i,j));
         }
     }
@@ -363,7 +356,7 @@ int main(int argc,char *argv[]) {
     for (int i=0;i<(ValorU.size().height)-1;++i){ //row
         for(int j=0;j<(ValorU.size().width);++j){ //columns
             //ler para o code
-            int code= erroU.at<uchar>(i,j);; //vem do descodificador de golomb
+            int code= DescU.at<uchar>(i,j);; //vem do descodificador de golomb
             ValorU.at<uchar>(i,j) = lossless.ValorPixelDec(code, prevU.at<uchar>(i,j));
         }
     }
@@ -409,23 +402,3 @@ int main(int argc,char *argv[]) {
     waitKey();
 
 }
-
-
-    /*
-    for (int h =0;h<erroY.size().height ; h++){
-        for(int c = 0;c<erroY.size().width;c++){
-            lossless.golombEnc(erroY.at<uchar>(h,c),m,outfile);
-        }
-    }
-
-    for (int h =0;h<erroV.size().height ; h++){
-        for(int c = 0;c<erroV.size().width;c++){
-            lossless.golombEnc(erroV.at<uchar>(h,c),m,outfile);
-        }
-    }
-
-    for (int h =0;h<erroU.size().height ; h++){
-        for(int c = 0;c<erroU.size().width;c++){
-            lossless.golombEnc(erroU.at<uchar>(h,c),m,outfile);
-        }
-    }*/
