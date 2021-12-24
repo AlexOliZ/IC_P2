@@ -13,7 +13,6 @@ using namespace std;
 class lossy_predictive {
     public:
         lossy_predictive(char* fname){
-            //m=m_val;
             filename = fname;
         };
 

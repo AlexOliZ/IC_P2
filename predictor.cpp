@@ -1,41 +1,41 @@
 #include "predictor.h"
 
 
-short predictor::predict()
+int predictor::predict()
 {
     if(this->num_inputs == 0){
         return 0;
     } else if (this->num_inputs == 1) {
         return this->buffer[this->pointer];
     } else if (this->num_inputs == 2) {
-        return 2*this->buffer[this->pointer] - 2*this->buffer[this->pointer-1];
+        return 2*this->buffer[this->pointer] - this->buffer[this->pointer-1];
     } 
     return 3*this->buffer[this->pointer] - 3*this->buffer[pointer-1] + this->buffer[pointer-2];
 }
 
-int predictor::residual(short sample)
+int predictor::residual(int sample)
 {
-    short val = predict(); // buffer[pointer]
-    if(!lossy){
+    int val = predict(); // buffer[pointer]
+    if(!this->lossy){
         updateBuffer(sample);
     }
     return sample-val;   
 }
 
-short predictor::reconstruct(int residual)
+int predictor::reconstruct(int residual)
 {
     int val_res = predict() + residual;
     updateBuffer(val_res);
     return val_res;
 }
 
-void predictor::updateBufferConst(short quant)
+void predictor::updateBufferConst(int quant)
 {
     updateBuffer(predict()+quant);
 }
 
-void predictor::updateBuffer(short sample) {
-    this->pointer = (pointer+1)%3;
+void predictor::updateBuffer(int sample) {
+    this->pointer = (this->pointer+1)%3;
     this->buffer[pointer] = sample;
     this->num_inputs++;
 }

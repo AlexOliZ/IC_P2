@@ -30,21 +30,25 @@ void lossy_predictive::lossypredictive_encode(char* outfile){
     sf_close(inFile);
         
     int average = 0;
-    for(i=0 ; i<20 ; i++)
-        average += test[i];
-
+    for(i=0 ; i<num ; i++){
+        average += buf[i];
+    }
+    //average = average/22;
     m=(int)ceil(-1/log2(average/(average+1.0)));
-    golomb golomb_encoder(5,outfile);
-    int avgsample = 0;
-    for(i=0 ; i<num_items ; i+=channels)
+    //cout << m << endl;
+    golomb golomb_encoder(m,outfile);
+    int qtbits = 4;
+
+    for(i=0 ; i<num ; i++)
     {
-        avgsample = (buf[i]+buf[i+1])/2;
-        int quant_value = quantize(predictor_encoder.residual(avgsample), 8);
+        int residual = predictor_encoder.residual(buf[i]);
+        int quant_value = quantize(residual,qtbits);
+        //cout << quant_value<<endl;
         predictor_encoder.updateBufferConst(quant_value);
         golomb_encoder.signed_stream_encode(quant_value);
+
     }
     golomb_encoder.close_stream_write();
-    //stream.close_file_read();
     printf("Read %d items\n",num);
 }
 
@@ -53,67 +57,43 @@ int lossy_predictive::quantize(int sample,int nbits){
     int qtsample = delta*floor(sample/delta+0.5);
     return qtsample; 
 }
-//nao implementado
+
 void lossy_predictive::lossypredictive_decode(char* infile)
 {
-    //bit_stream stream(infile,true,false);
     predictor predictor_decoder(true);
-    golomb golomb_decoder(5,infile);
-    int code;
-    cout << "------------------------------------" << endl;
-    // unary_size = m/n
-    // n = unary_size*m
-    // k = n-unary_size*m
-    // r = b  se r < k|| r = b+1 se r >= k
-    int count = 0;
-    while(!golomb_decoder.end_of_file()){
-        code = golomb_decoder.signed_stream_decode();
-        cout << endl;
-        cout << "code: " << code << endl;      
-        cout << "unary_size: " << golomb_decoder.get_unarySize() << endl;
-        cout << "rem_size: " << golomb_decoder.get_remSize() << endl;
-        count ++;
-        if(count >= 22)
-            break;
-    }
-    golomb_decoder.close_stream_read();
-    //cout << "code: " << code << endl;
-    //stream.close_file_read();
-}
-
-int main(int argc, char* argv[])
-{
-    
-    string file = "./wavfiles/sample06.wav";
-    string binfile = "testfile.bin";
-    //cout << floor(0.9) << endl;
-    //cout << (int)0.9 << endl;
-    /*
-    char *filename = new char[file.length()];
-    strcpy(filename, file.c_str());
-
-    int *buf;
-    int num_items,num;
+    golomb golomb_decoder(m,infile);
 
     SF_INFO inFileInfo;
     SNDFILE* inFile;
 
     inFileInfo.format = 0;
-    inFile = sf_open((char*)file.data(), SFM_READ, &inFileInfo);
+    inFile = sf_open(filename, SFM_READ, &inFileInfo);
     int channels = inFileInfo.channels;
+    int num_items = inFileInfo.frames*channels;
 
-    num_items = inFileInfo.frames*channels;
-    */
-    /* Allocate space for the data to be read, then read it. */
-    /*
-    buf = (int *) malloc(num_items*sizeof(int));
-    num = sf_read_int(inFile,buf,num_items);
-
-    cout << num << endl;
-    cout << channels << endl;
     sf_close(inFile);
-    printf("Read %d items\n",num);
-    */
+
+    int* code = (int*)malloc(sizeof(int)*num_items);
+    int count = 0;
+    cout << "-----------" <<endl;
+    while(!golomb_decoder.end_of_file() && count < num_items){
+        code[count] = predictor_decoder.reconstruct(golomb_decoder.signed_stream_decode());
+        count++;
+    }
+    golomb_decoder.close_stream_read();
+
+    const char* outfilename = "lossyoutput.wav";
+    SNDFILE* outFile = sf_open (outfilename, SFM_WRITE, &inFileInfo);
+    sf_write_int (outFile, code, num_items) ;
+    sf_close(outFile) ;
+}
+
+int main(int argc, char* argv[])
+{
+    
+    string file = "./wavfiles/sample01.wav";
+    string binfile = "testfile.bin";
+   
     lossy_predictive lossy((char*)file.data());
     lossy.lossypredictive_encode((char*)binfile.data());
     lossy.lossypredictive_decode((char*)binfile.data());
