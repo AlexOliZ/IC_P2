@@ -35,19 +35,17 @@ void lossy_predictive::lossypredictive_encode(char* outfile){
     }
     //average = average/22;
     m=(int)ceil(-1/log2(average/(average+1.0)));
-    cout << m << endl;
+    //cout << m << endl;
     golomb golomb_encoder(m,outfile);
-    long avgsample = 0;
+    int qtbits = 4;
+
     for(i=0 ; i<num ; i++)
     {
-        //avgsample = (buf[i]+buf[i+1])/2;
         int residual = predictor_encoder.residual(buf[i]);
-
-        int quant_value = quantize(residual,4);
+        int quant_value = quantize(residual,qtbits);
         //cout << quant_value<<endl;
-        //cout << quant_value << endl;
-        predictor_encoder.updateBufferConst(residual);
-        golomb_encoder.signed_stream_encode(residual);
+        predictor_encoder.updateBufferConst(quant_value);
+        golomb_encoder.signed_stream_encode(quant_value);
 
     }
     golomb_encoder.close_stream_write();
@@ -57,14 +55,9 @@ void lossy_predictive::lossypredictive_encode(char* outfile){
 int lossy_predictive::quantize(int sample,int nbits){
     int delta = (2147483647 - (-2147483648)) / (pow(2,nbits)-1);
     int qtsample = delta*floor(sample/delta+0.5);
-    //cout << qtsample << endl;
     return qtsample; 
 }
-/*
-int lossy_predictive::quantize(int sample,int nbits)
-{
-    return sample & ~((1 << nbits) - 1);
-}*/
+
 void lossy_predictive::lossypredictive_decode(char* infile)
 {
     predictor predictor_decoder(true);
@@ -84,11 +77,8 @@ void lossy_predictive::lossypredictive_decode(char* infile)
     int count = 0;
     cout << "-----------" <<endl;
     while(!golomb_decoder.end_of_file() && count < num_items){
-        //golomb_decoder.set_m(m);
         code[count] = predictor_decoder.reconstruct(golomb_decoder.signed_stream_decode());
-        //cout << "code[count]="<< code[count] << endl;
         count++;
-        //cout << "count =" << count << endl;
     }
     golomb_decoder.close_stream_read();
 
