@@ -96,6 +96,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a00127b187275c722071a73d187092c93"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7eb968583835230c0bf68c08b2582605"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlossless__codec.html#a7eb968583835230c0bf68c08b2582605">YUV</a> (Mat image, Mat &amp;y, Mat &amp;u, Mat &amp;v)</td></tr>
 <tr class="separator:a7eb968583835230c0bf68c08b2582605"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae20cc15e38f52ebff6a5f5799a8a8c54"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlossless__codec.html#ae20cc15e38f52ebff6a5f5799a8a8c54">RGB</a> (Mat y, Mat u, Mat v, Mat &amp;ImagemRBG)</td></tr>
+<tr class="separator:ae20cc15e38f52ebff6a5f5799a8a8c54"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aded9fb935d117772d7b6267052c02032"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlossless__codec.html#aded9fb935d117772d7b6267052c02032">erroEnc</a> (int valorPixel, int valorPrevisto)</td></tr>
 <tr class="separator:aded9fb935d117772d7b6267052c02032"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8bc8d7b9fd6a7787855b24c2268f82c9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlossless__codec.html#a8bc8d7b9fd6a7787855b24c2268f82c9">ValorPixelDec</a> (int erro, int valorPrevisto)</td></tr>
@@ -104,11 +106,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a0493a5ddacfd0a8e720c87050fdcf726"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a23d31600dc9fc0e1be22906c75b9624e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlossless__codec.html#a23d31600dc9fc0e1be22906c75b9624e">preditor_JPEG_LS</a> (Mat matriz, Mat &amp;erMat, Mat &amp;prev)</td></tr>
 <tr class="separator:a23d31600dc9fc0e1be22906c75b9624e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4cae23509d94b18cac0d387e64d691b8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlossless__codec.html#a4cae23509d94b18cac0d387e64d691b8">golombEnc</a> (int erro, int m)</td></tr>
-<tr class="separator:a4cae23509d94b18cac0d387e64d691b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad79d1eff15aa48acea8b339fd5a37f6a"><td class="memItemLeft" align="right" valign="top"><a id="ad79d1eff15aa48acea8b339fd5a37f6a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>golombDesc</b> (Mat prevY, Mat prevV, Mat prevU, Mat erroY, Mat erroV, Mat erroU, Mat &amp;ValorY, Mat &amp;ValorV, Mat &amp;ValorU)</td></tr>
-<tr class="separator:ad79d1eff15aa48acea8b339fd5a37f6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7b4b8e42da2b52a49d333e0cf9ba44d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlossless__codec.html#aa7b4b8e42da2b52a49d333e0cf9ba44d">golombEnc</a> (Mat erroY, Mat erroV, Mat erroU, int m, char *namefile)</td></tr>
+<tr class="separator:aa7b4b8e42da2b52a49d333e0cf9ba44d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec8c51143b34ae2bde57d239e6a26c9f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlossless__codec.html#aec8c51143b34ae2bde57d239e6a26c9f">golombDesc</a> (Mat &amp;DescY, Mat &amp;DescV, Mat &amp;DescU, int m, char *namefile)</td></tr>
+<tr class="separator:aec8c51143b34ae2bde57d239e6a26c9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="aded9fb935d117772d7b6267052c02032"></a>
@@ -147,23 +148,41 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>golombDesc</b> (Mat p
 
 </div>
 </div>
-<a id="a4cae23509d94b18cac0d387e64d691b8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4cae23509d94b18cac0d387e64d691b8">&#9670;&nbsp;</a></span>golombEnc()</h2>
+<a id="aec8c51143b34ae2bde57d239e6a26c9f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec8c51143b34ae2bde57d239e6a26c9f">&#9670;&nbsp;</a></span>golombDesc()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void lossless_codec::golombEnc </td>
+          <td class="memname">void lossless_codec::golombDesc </td>
           <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>erro</em>, </td>
+          <td class="paramtype">Mat &amp;&#160;</td>
+          <td class="paramname"><em>DescY</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Mat &amp;&#160;</td>
+          <td class="paramname"><em>DescV</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Mat &amp;&#160;</td>
+          <td class="paramname"><em>DescU</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>m</em>&#160;</td>
+          <td class="paramname"><em>m</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>namefile</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -174,8 +193,67 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>golombDesc</b> (Mat p
 </div><div class="memdoc">
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">erro</td><td>residual </td></tr>
+    <tr><td class="paramname">DescY</td><td>decoded y matrix </td></tr>
+    <tr><td class="paramname">DescV</td><td>decoded v matrix </td></tr>
+    <tr><td class="paramname">DescU</td><td>decoded u matrix </td></tr>
     <tr><td class="paramname">m</td><td>golomg parameter m </td></tr>
+    <tr><td class="paramname">namefile</td><td>name of the file to be read from golomb </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aa7b4b8e42da2b52a49d333e0cf9ba44d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7b4b8e42da2b52a49d333e0cf9ba44d">&#9670;&nbsp;</a></span>golombEnc()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void lossless_codec::golombEnc </td>
+          <td>(</td>
+          <td class="paramtype">Mat&#160;</td>
+          <td class="paramname"><em>erroY</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Mat&#160;</td>
+          <td class="paramname"><em>erroV</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Mat&#160;</td>
+          <td class="paramname"><em>erroU</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>m</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>namefile</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">erroY</td><td>residual of the y parameter to be encoded </td></tr>
+    <tr><td class="paramname">erroV</td><td>residual of the v parameter to be encoded </td></tr>
+    <tr><td class="paramname">erroU</td><td>residual of the u parameter to be encoded </td></tr>
+    <tr><td class="paramname">m</td><td>golomg parameter m </td></tr>
+    <tr><td class="paramname">namefile</td><td>name of the file to be write from golomb </td></tr>
   </table>
   </dd>
 </dl>
@@ -261,6 +339,55 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>golombDesc</b> (Mat p
     <tr><td class="paramname">matriz</td><td>matrix to calculate the calculated error </td></tr>
     <tr><td class="paramname">erMat</td><td>matrix with the calculated error </td></tr>
     <tr><td class="paramname">prev</td><td>matrix with the calculated predictor </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ae20cc15e38f52ebff6a5f5799a8a8c54"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae20cc15e38f52ebff6a5f5799a8a8c54">&#9670;&nbsp;</a></span>RGB()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void lossless_codec::RGB </td>
+          <td>(</td>
+          <td class="paramtype">Mat&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Mat&#160;</td>
+          <td class="paramname"><em>u</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Mat&#160;</td>
+          <td class="paramname"><em>v</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Mat &amp;&#160;</td>
+          <td class="paramname"><em>ImagemRBG</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">y</td><td>address for the matrix y </td></tr>
+    <tr><td class="paramname">u</td><td>address for the matrix u </td></tr>
+    <tr><td class="paramname">v</td><td>address for the matrix v </td></tr>
+    <tr><td class="paramname">ImagemRBG</td><td>final image matrix </td></tr>
   </table>
   </dd>
 </dl>
@@ -354,7 +481,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>golombDesc</b> (Mat p
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="lossless__codec_8h_source.html">lossless_codec.h</a></li>
-<li>parteC.cpp</li>
+<li>ex1_parteC.cpp</li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

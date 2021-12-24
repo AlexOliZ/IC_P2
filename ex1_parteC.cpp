@@ -1,5 +1,5 @@
-// g++ parteC.cpp ./bit_stream/bit_stream.cpp ./Golomb/golomb.cpp -o parteC `pkg-config --cflags --libs opencv`
-// ./parteC <input image> <output filename> (por ex ./parteC lena.ppm copy.ppm)
+// g++ ex1_parteC.cpp ./bit_stream/bit_stream.cpp ./Golomb/golomb.cpp -o ex1 `pkg-config --cflags --libs opencv`
+// ./ex1_parteC <input image> <output filename> (por ex ./parteC lena.ppm copy.ppm)
 #include <string>
 #include "./bit_stream/bit_stream.h"
 #include "./Golomb/golomb.h"
@@ -262,9 +262,9 @@ int main(int argc,char *argv[]) {
     //printf("2 pixel -> antes -> %d\n", input_image.at<Vec3b>(0,1)[2]);
     //printf("3 pixel -> antes -> %d\n", input_image.at<Vec3b>(0,2)[2]);
     lossless.YUV(input_image,y,u,v);
-    //imshow("y",y);
-    //imshow("u",u);
-    //imshow("v",v);
+    imshow("y component",y);
+    imshow("u component",u);
+    imshow("v component",v);
     //lossless.RGB(y,u,v, output_image);
    // printf("1 pixel -> depiois -> %d\n", output_image.at<Vec3b>(0,0)[2]);
    // printf("2 pixel -> depiois -> %d\n", output_image.at<Vec3b>(0,1)[2]);
@@ -398,7 +398,7 @@ int main(int argc,char *argv[]) {
     
     //imwrite(output_name,output_image); //write image
 
-    imshow("Copied image",output_image);
+    imshow("Final image",output_image);
     waitKey();
 
 }

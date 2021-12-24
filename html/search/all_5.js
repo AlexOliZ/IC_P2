@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['valorpixeldec_9',['ValorPixelDec',['../classlossless__codec.html#a8bc8d7b9fd6a7787855b24c2268f82c9',1,'lossless_codec']]]
+  ['rgb_12',['RGB',['../classlossless__codec.html#ae20cc15e38f52ebff6a5f5799a8a8c54',1,'lossless_codec::RGB()'],['../classlossy__coding.html#ad6ed56d04c55611782bbebc67f4592bc',1,'lossy_coding::RGB()']]]
 ];

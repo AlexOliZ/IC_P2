@@ -1,6 +1,6 @@
 var classpredictor =
 [
-    [ "predictor", "classpredictor.html#a941df172254db3b9e8a2d35e4a96ad29", null ],
+    [ "predictor", "classpredictor.html#a12864d3c4e232d3cd1f193e15dd0d2fc", null ],
     [ "predict", "classpredictor.html#a88927e32be74300d1ae9850b393bb498", null ],
     [ "reconstruct", "classpredictor.html#a7a98298034e97f33b34ce11630155b9d", null ],
     [ "residual", "classpredictor.html#ae6be54e2508c06dbdb8dea68ccc65da2", null ],

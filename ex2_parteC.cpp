@@ -82,9 +82,7 @@ void lossy_coding::RGB (Mat y, Mat u, Mat v, Mat &ImagemRBG){
             ImagemRBG.at<Vec3b>(i,j)[2]= B;
             ImagemRBG.at<Vec3b>(i,j)[1]= G;
         }
-    }
-
-   
+    }   
 }
 
 
@@ -305,7 +303,7 @@ int main(int argc,char *argv[]) {
     double mean = ((erroV.size().height*erroV.size().width)*10);
     double alpha = mean/(mean+1.0);
     int m = (int) ceil(-1/log2(alpha));
-/*
+
     printf("1 erro -> antes -> %d\n", erroY.at<uchar>(0,0));
     printf("2 erro -> antes -> %d\n", erroY.at<uchar>(0,1));
     printf("3 erro -> antes -> %d\n", erroY.at<uchar>(0,2));
@@ -319,7 +317,7 @@ int main(int argc,char *argv[]) {
     printf("1 erro -> depiois -> %d\n", DescY.at<uchar>(0,0));
     printf("2 erro -> depiois -> %d\n", DescY.at<uchar>(0,1));
     printf("3 erro -> depiois -> %d\n", DescY.at<uchar>(0,2));
-   */
+   
 
     //para termos o valor previsto do pixel para cada componente
     Mat erroAuxY (y.size().height,y.size().width,CV_8UC1); 
@@ -343,7 +341,7 @@ int main(int argc,char *argv[]) {
     for (int i=0;i<(ValorY.size().height)-1;++i){ //row
         for(int j=0;j<(ValorY.size().width);++j){ //columns
             //ler para o code
-            int code= erroY.at<uchar>(i,j); //vem do descodificador de golomb
+            int code= DescY.at<uchar>(i,j); //vem do descodificador de golomb
             ValorY.at<uchar>(i,j) = lossy.ValorPixelDec(code, prevY.at<uchar>(i,j),quantization);
         }
     }
@@ -352,7 +350,7 @@ int main(int argc,char *argv[]) {
     for (int i=0;i<(ValorV.size().height)-1;++i){ //row
         for(int j=0;j<(ValorV.size().width);++j){ //columns
             //ler para o code
-            int code= erroV.at<uchar>(i,j);; //vem do descodificador de golomb
+            int code= DescV.at<uchar>(i,j);; //vem do descodificador de golomb
             ValorV.at<uchar>(i,j)  = lossy.ValorPixelDec(code, prevV.at<uchar>(i,j),quantization);
         }
     }
@@ -360,7 +358,7 @@ int main(int argc,char *argv[]) {
     for (int i=0;i<(ValorU.size().height)-1;++i){ //row
         for(int j=0;j<(ValorU.size().width);++j){ //columns
             //ler para o code
-            int code= erroU.at<uchar>(i,j);; //vem do descodificador de golomb
+            int code= DescU.at<uchar>(i,j);; //vem do descodificador de golomb
             ValorU.at<uchar>(i,j) = lossy.ValorPixelDec(code, prevU.at<uchar>(i,j),quantization);
         }
     }
@@ -402,7 +400,7 @@ int main(int argc,char *argv[]) {
     
     //imwrite(output_name,output_image); //write image
 
-    imshow("Copied image",output_image);
+    imshow("Final image",output_image);
     waitKey();
 
 }

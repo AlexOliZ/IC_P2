@@ -8,6 +8,8 @@
 \item 
 void \mbox{\hyperlink{classlossless__codec_a7eb968583835230c0bf68c08b2582605}{Y\+UV}} (Mat image, Mat \&y, Mat \&u, Mat \&v)
 \item 
+void \mbox{\hyperlink{classlossless__codec_ae20cc15e38f52ebff6a5f5799a8a8c54}{R\+GB}} (Mat y, Mat u, Mat v, Mat \&Imagem\+R\+BG)
+\item 
 int \mbox{\hyperlink{classlossless__codec_aded9fb935d117772d7b6267052c02032}{erro\+Enc}} (int valor\+Pixel, int valor\+Previsto)
 \item 
 int \mbox{\hyperlink{classlossless__codec_a8bc8d7b9fd6a7787855b24c2268f82c9}{Valor\+Pixel\+Dec}} (int erro, int valor\+Previsto)
@@ -16,10 +18,9 @@ int \mbox{\hyperlink{classlossless__codec_a0493a5ddacfd0a8e720c87050fdcf726}{pre
 \item 
 void \mbox{\hyperlink{classlossless__codec_a23d31600dc9fc0e1be22906c75b9624e}{preditor\+\_\+\+J\+P\+E\+G\+\_\+\+LS}} (Mat matriz, Mat \&er\+Mat, Mat \&prev)
 \item 
-void \mbox{\hyperlink{classlossless__codec_a4cae23509d94b18cac0d387e64d691b8}{golomb\+Enc}} (int erro, int m)
+void \mbox{\hyperlink{classlossless__codec_aa7b4b8e42da2b52a49d333e0cf9ba44d}{golomb\+Enc}} (Mat erroY, Mat erroV, Mat erroU, int m, char $\ast$namefile)
 \item 
-\mbox{\Hypertarget{classlossless__codec_ad79d1eff15aa48acea8b339fd5a37f6a}\label{classlossless__codec_ad79d1eff15aa48acea8b339fd5a37f6a}} 
-void {\bfseries golomb\+Desc} (Mat prevY, Mat prevV, Mat prevU, Mat erroY, Mat erroV, Mat erroU, Mat \&ValorY, Mat \&ValorV, Mat \&ValorU)
+void \mbox{\hyperlink{classlossless__codec_aec8c51143b34ae2bde57d239e6a26c9f}{golomb\+Desc}} (Mat \&DescY, Mat \&DescV, Mat \&DescU, int m, char $\ast$namefile)
 \end{DoxyCompactItemize}
 
 
@@ -40,17 +41,42 @@ void {\bfseries golomb\+Desc} (Mat prevY, Mat prevV, Mat prevU, Mat erroY, Mat e
 \begin{DoxyReturn}{Returns}
 int -\/$>$ residual for each value of the predicted pixel 
 \end{DoxyReturn}
-\mbox{\Hypertarget{classlossless__codec_a4cae23509d94b18cac0d387e64d691b8}\label{classlossless__codec_a4cae23509d94b18cac0d387e64d691b8}} 
-\index{lossless\_codec@{lossless\_codec}!golombEnc@{golombEnc}}
-\index{golombEnc@{golombEnc}!lossless\_codec@{lossless\_codec}}
-\doxysubsubsection{\texorpdfstring{golombEnc()}{golombEnc()}}
-{\footnotesize\ttfamily void lossless\+\_\+codec\+::golomb\+Enc (\begin{DoxyParamCaption}\item[{int}]{erro,  }\item[{int}]{m }\end{DoxyParamCaption})}
+\mbox{\Hypertarget{classlossless__codec_aec8c51143b34ae2bde57d239e6a26c9f}\label{classlossless__codec_aec8c51143b34ae2bde57d239e6a26c9f}} 
+\index{lossless\_codec@{lossless\_codec}!golombDesc@{golombDesc}}
+\index{golombDesc@{golombDesc}!lossless\_codec@{lossless\_codec}}
+\doxysubsubsection{\texorpdfstring{golombDesc()}{golombDesc()}}
+{\footnotesize\ttfamily void lossless\+\_\+codec\+::golomb\+Desc (\begin{DoxyParamCaption}\item[{Mat \&}]{DescY,  }\item[{Mat \&}]{DescV,  }\item[{Mat \&}]{DescU,  }\item[{int}]{m,  }\item[{char $\ast$}]{namefile }\end{DoxyParamCaption})}
 
 
 \begin{DoxyParams}{Parameters}
-{\em erro} & residual \\
+{\em DescY} & decoded y matrix \\
+\hline
+{\em DescV} & decoded v matrix \\
+\hline
+{\em DescU} & decoded u matrix \\
 \hline
 {\em m} & golomg parameter m \\
+\hline
+{\em namefile} & name of the file to be read from golomb \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classlossless__codec_aa7b4b8e42da2b52a49d333e0cf9ba44d}\label{classlossless__codec_aa7b4b8e42da2b52a49d333e0cf9ba44d}} 
+\index{lossless\_codec@{lossless\_codec}!golombEnc@{golombEnc}}
+\index{golombEnc@{golombEnc}!lossless\_codec@{lossless\_codec}}
+\doxysubsubsection{\texorpdfstring{golombEnc()}{golombEnc()}}
+{\footnotesize\ttfamily void lossless\+\_\+codec\+::golomb\+Enc (\begin{DoxyParamCaption}\item[{Mat}]{erroY,  }\item[{Mat}]{erroV,  }\item[{Mat}]{erroU,  }\item[{int}]{m,  }\item[{char $\ast$}]{namefile }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em erroY} & residual of the y parameter to be encoded \\
+\hline
+{\em erroV} & residual of the v parameter to be encoded \\
+\hline
+{\em erroU} & residual of the u parameter to be encoded \\
+\hline
+{\em m} & golomg parameter m \\
+\hline
+{\em namefile} & name of the file to be write from golomb \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{classlossless__codec_a0493a5ddacfd0a8e720c87050fdcf726}\label{classlossless__codec_a0493a5ddacfd0a8e720c87050fdcf726}} 
@@ -84,6 +110,23 @@ int -\/$>$ the predicted value of the next pixel
 {\em er\+Mat} & matrix with the calculated error \\
 \hline
 {\em prev} & matrix with the calculated predictor \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classlossless__codec_ae20cc15e38f52ebff6a5f5799a8a8c54}\label{classlossless__codec_ae20cc15e38f52ebff6a5f5799a8a8c54}} 
+\index{lossless\_codec@{lossless\_codec}!RGB@{RGB}}
+\index{RGB@{RGB}!lossless\_codec@{lossless\_codec}}
+\doxysubsubsection{\texorpdfstring{RGB()}{RGB()}}
+{\footnotesize\ttfamily void lossless\+\_\+codec\+::\+R\+GB (\begin{DoxyParamCaption}\item[{Mat}]{y,  }\item[{Mat}]{u,  }\item[{Mat}]{v,  }\item[{Mat \&}]{Imagem\+R\+BG }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em y} & address for the matrix y \\
+\hline
+{\em u} & address for the matrix u \\
+\hline
+{\em v} & address for the matrix v \\
+\hline
+{\em Imagem\+R\+BG} & final image matrix \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{classlossless__codec_a8bc8d7b9fd6a7787855b24c2268f82c9}\label{classlossless__codec_a8bc8d7b9fd6a7787855b24c2268f82c9}} 
@@ -124,4 +167,4 @@ int -\/$>$ pixel value for each value of the predicted pixel
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
 lossless\+\_\+codec.\+h\item 
-parte\+C.\+cpp\end{DoxyCompactItemize}
+ex1\+\_\+parte\+C.\+cpp\end{DoxyCompactItemize}

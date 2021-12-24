@@ -8,7 +8,6 @@ using namespace cv;
 class lossless_codec{
     public:
         lossless_codec(string fname){
-            //m=m_val;
             filename = fname;
         };
         /**
@@ -20,6 +19,14 @@ class lossless_codec{
          * @param v address for the matrix v
          */
         void YUV(Mat image, Mat &y, Mat &u, Mat &v);
+        /**
+         * @brief 
+         * 
+         * @param y address for the matrix y
+         * @param u address for the matrix u
+         * @param v address for the matrix v
+         * @param ImagemRBG final image matrix
+         */
         void RGB (Mat y, Mat u, Mat v, Mat &ImagemRBG);
         /**
          * @brief 
@@ -57,18 +64,25 @@ class lossless_codec{
         /**
          * @brief 
          * 
-         * @param erroY residual
-         * @param erroV residual
-         * @param erroU residual
+         * @param erroY residual of the y parameter to be encoded 
+         * @param erroV residual of the v parameter to be encoded 
+         * @param erroU residual of the u parameter to be encoded 
          * @param m golomg parameter m
-         * @param namefile 
+         * @param namefile name of the file to be write from golomb
          */
         void golombEnc(Mat erroY,Mat erroV,Mat erroU, int m, char* namefile);
-
+        /**
+         * @brief 
+         * 
+         * @param DescY decoded y matrix
+         * @param DescV decoded v matrix
+         * @param DescU decoded u matrix
+         * @param m golomg parameter m
+         * @param namefile name of the file to be read from golomb
+         */
         void golombDesc(Mat &DescY, Mat &DescV, Mat &DescU,int m,char* namefile);
 
         private:
-            //int m;
             string filename;
 };
 //#endif

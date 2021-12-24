@@ -95,23 +95,21 @@ $(document).ready(function(){initNavTree('lossless__codec_8h_source.html',''); i
 <div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="classlossless__codec.html">    8</a></span>&#160;<span class="keyword">class </span><a class="code" href="classlossless__codec.html">lossless_codec</a>{</div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;        <a class="code" href="classlossless__codec.html">lossless_codec</a>(<span class="keywordtype">string</span> fname){</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;            <span class="comment">//m=m_val;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;            filename = fname;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        };</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <span class="keywordtype">void</span> YUV(Mat image, Mat &amp;y, Mat &amp;u, Mat &amp;v);</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="keywordtype">int</span> erroEnc (<span class="keywordtype">int</span> valorPixel, <span class="keywordtype">int</span> valorPrevisto);</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="keywordtype">int</span> ValorPixelDec (<span class="keywordtype">int</span> erro, <span class="keywordtype">int</span> valorPrevisto);</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="keywordtype">int</span> preditor (<span class="keywordtype">int</span> a, <span class="keywordtype">int</span> b, <span class="keywordtype">int</span> c);</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="keywordtype">void</span> preditor_JPEG_LS (Mat matriz,Mat &amp;erMat, Mat &amp;prev);</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <span class="keywordtype">void</span> golombEnc(<span class="keywordtype">int</span> erro,<span class="keywordtype">int</span> m);</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="keywordtype">void</span> golombDesc(Mat prevY, Mat prevV, Mat prevU, Mat erroY, Mat erroV, Mat erroU, Mat &amp;ValorY, Mat &amp;ValorV, Mat &amp;ValorU);</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            <span class="comment">//int m;</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            <span class="keywordtype">string</span> filename;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;};</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">//#endif</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;            filename = fname;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;        };</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        <span class="keywordtype">void</span> YUV(Mat image, Mat &amp;y, Mat &amp;u, Mat &amp;v);</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="keywordtype">void</span> RGB (Mat y, Mat u, Mat v, Mat &amp;ImagemRBG);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="keywordtype">int</span> erroEnc (<span class="keywordtype">int</span> valorPixel, <span class="keywordtype">int</span> valorPrevisto);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keywordtype">int</span> ValorPixelDec (<span class="keywordtype">int</span> erro, <span class="keywordtype">int</span> valorPrevisto);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="keywordtype">int</span> preditor (<span class="keywordtype">int</span> a, <span class="keywordtype">int</span> b, <span class="keywordtype">int</span> c);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <span class="keywordtype">void</span> preditor_JPEG_LS (Mat matriz,Mat &amp;erMat, Mat &amp;prev);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        <span class="keywordtype">void</span> golombEnc(Mat erroY,Mat erroV,Mat erroU, <span class="keywordtype">int</span> m, <span class="keywordtype">char</span>* namefile);</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        <span class="keywordtype">void</span> golombDesc(Mat &amp;DescY, Mat &amp;DescV, Mat &amp;DescU,<span class="keywordtype">int</span> m,<span class="keywordtype">char</span>* namefile);</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;            <span class="keywordtype">string</span> filename;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;};</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment">//#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="aclasslossless__codec_html"><div class="ttname"><a href="classlossless__codec.html">lossless_codec</a></div><div class="ttdef"><b>Definition:</b> lossless_codec.h:8</div></div>

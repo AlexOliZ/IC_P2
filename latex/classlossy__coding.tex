@@ -1,0 +1,171 @@
+\hypertarget{classlossy__coding}{}\doxysection{lossy\+\_\+coding Class Reference}
+\label{classlossy__coding}\index{lossy\_coding@{lossy\_coding}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classlossy__coding_a35e5fc312ec450df15d6a6cd0a0534d1}\label{classlossy__coding_a35e5fc312ec450df15d6a6cd0a0534d1}} 
+{\bfseries lossy\+\_\+coding} (string fname)
+\item 
+void \mbox{\hyperlink{classlossy__coding_af2b28272f7635552f05381f8ad1abd39}{Y\+UV}} (Mat image, Mat \&y, Mat \&u, Mat \&v)
+\item 
+void \mbox{\hyperlink{classlossy__coding_ad6ed56d04c55611782bbebc67f4592bc}{R\+GB}} (Mat y, Mat u, Mat v, Mat \&Imagem\+R\+BG)
+\item 
+int \mbox{\hyperlink{classlossy__coding_aac208f3c5b594be10581373a665d82d1}{erro\+Enc}} (int valor\+Pixel, int valor\+Previsto, int quantization)
+\item 
+int \mbox{\hyperlink{classlossy__coding_a2f905e170923fd853bc9768a708b3861}{Valor\+Pixel\+Dec}} (int erro, int valor\+Previsto, int quantization)
+\item 
+int \mbox{\hyperlink{classlossy__coding_aa18d7c537d73d95d42a487a934b67ebb}{preditor}} (int a, int b, int c)
+\item 
+void \mbox{\hyperlink{classlossy__coding_a3af7edc37a3057fbbe83b1de2a8ea1bd}{preditor\+\_\+\+J\+P\+E\+G\+\_\+\+LS}} (Mat matriz, Mat \&er\+Mat, Mat \&prev, int quantization)
+\item 
+void \mbox{\hyperlink{classlossy__coding_a9ffa8d231c30ace8b96527dbc4258903}{golomb\+Enc}} (Mat erroY, Mat erroV, Mat erroU, int m, char $\ast$namefile)
+\item 
+void \mbox{\hyperlink{classlossy__coding_ae372e30ccf9bbd512f5914e36c28549d}{golomb\+Desc}} (Mat \&DescY, Mat \&DescV, Mat \&DescU, int m, char $\ast$namefile)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classlossy__coding_aac208f3c5b594be10581373a665d82d1}\label{classlossy__coding_aac208f3c5b594be10581373a665d82d1}} 
+\index{lossy\_coding@{lossy\_coding}!erroEnc@{erroEnc}}
+\index{erroEnc@{erroEnc}!lossy\_coding@{lossy\_coding}}
+\doxysubsubsection{\texorpdfstring{erroEnc()}{erroEnc()}}
+{\footnotesize\ttfamily int lossy\+\_\+coding\+::erro\+Enc (\begin{DoxyParamCaption}\item[{int}]{valor\+Pixel,  }\item[{int}]{valor\+Previsto,  }\item[{int}]{quantization }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em valor\+Pixel} & pixel value \\
+\hline
+{\em valor\+Previsto} & expected pixel value \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int -\/$>$ residual for each value of the predicted pixel 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classlossy__coding_ae372e30ccf9bbd512f5914e36c28549d}\label{classlossy__coding_ae372e30ccf9bbd512f5914e36c28549d}} 
+\index{lossy\_coding@{lossy\_coding}!golombDesc@{golombDesc}}
+\index{golombDesc@{golombDesc}!lossy\_coding@{lossy\_coding}}
+\doxysubsubsection{\texorpdfstring{golombDesc()}{golombDesc()}}
+{\footnotesize\ttfamily void lossy\+\_\+coding\+::golomb\+Desc (\begin{DoxyParamCaption}\item[{Mat \&}]{DescY,  }\item[{Mat \&}]{DescV,  }\item[{Mat \&}]{DescU,  }\item[{int}]{m,  }\item[{char $\ast$}]{namefile }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em DescY} & decoded y matrix \\
+\hline
+{\em DescV} & decoded v matrix \\
+\hline
+{\em DescU} & decoded u matrix \\
+\hline
+{\em m} & golomg parameter m \\
+\hline
+{\em namefile} & name of the file to be read from golomb \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classlossy__coding_a9ffa8d231c30ace8b96527dbc4258903}\label{classlossy__coding_a9ffa8d231c30ace8b96527dbc4258903}} 
+\index{lossy\_coding@{lossy\_coding}!golombEnc@{golombEnc}}
+\index{golombEnc@{golombEnc}!lossy\_coding@{lossy\_coding}}
+\doxysubsubsection{\texorpdfstring{golombEnc()}{golombEnc()}}
+{\footnotesize\ttfamily void lossy\+\_\+coding\+::golomb\+Enc (\begin{DoxyParamCaption}\item[{Mat}]{erroY,  }\item[{Mat}]{erroV,  }\item[{Mat}]{erroU,  }\item[{int}]{m,  }\item[{char $\ast$}]{namefile }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em erroY} & residual of the y parameter to be encoded \\
+\hline
+{\em erroV} & residual of the v parameter to be encoded \\
+\hline
+{\em erroU} & residual of the u parameter to be encoded \\
+\hline
+{\em m} & golomg parameter m \\
+\hline
+{\em namefile} & name of the file to be write from golomb \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classlossy__coding_aa18d7c537d73d95d42a487a934b67ebb}\label{classlossy__coding_aa18d7c537d73d95d42a487a934b67ebb}} 
+\index{lossy\_coding@{lossy\_coding}!preditor@{preditor}}
+\index{preditor@{preditor}!lossy\_coding@{lossy\_coding}}
+\doxysubsubsection{\texorpdfstring{preditor()}{preditor()}}
+{\footnotesize\ttfamily int lossy\+\_\+coding\+::preditor (\begin{DoxyParamCaption}\item[{int}]{a,  }\item[{int}]{b,  }\item[{int}]{c }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & parameter a to calculate the expected pixel value \\
+\hline
+{\em b} & parameter b to calculate the expected pixel value \\
+\hline
+{\em c} & parameter c to calculate the expected pixel value \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int -\/$>$ the predicted value of the next pixel 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classlossy__coding_a3af7edc37a3057fbbe83b1de2a8ea1bd}\label{classlossy__coding_a3af7edc37a3057fbbe83b1de2a8ea1bd}} 
+\index{lossy\_coding@{lossy\_coding}!preditor\_JPEG\_LS@{preditor\_JPEG\_LS}}
+\index{preditor\_JPEG\_LS@{preditor\_JPEG\_LS}!lossy\_coding@{lossy\_coding}}
+\doxysubsubsection{\texorpdfstring{preditor\_JPEG\_LS()}{preditor\_JPEG\_LS()}}
+{\footnotesize\ttfamily void lossy\+\_\+coding\+::preditor\+\_\+\+J\+P\+E\+G\+\_\+\+LS (\begin{DoxyParamCaption}\item[{Mat}]{matriz,  }\item[{Mat \&}]{er\+Mat,  }\item[{Mat \&}]{prev,  }\item[{int}]{quantization }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em matriz} & matrix to calculate the calculated error \\
+\hline
+{\em er\+Mat} & matrix with the calculated error \\
+\hline
+{\em prev} & matrix with the calculated predictor \\
+\hline
+{\em quantization} & quantization parameter set as program argument \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classlossy__coding_ad6ed56d04c55611782bbebc67f4592bc}\label{classlossy__coding_ad6ed56d04c55611782bbebc67f4592bc}} 
+\index{lossy\_coding@{lossy\_coding}!RGB@{RGB}}
+\index{RGB@{RGB}!lossy\_coding@{lossy\_coding}}
+\doxysubsubsection{\texorpdfstring{RGB()}{RGB()}}
+{\footnotesize\ttfamily void lossy\+\_\+coding\+::\+R\+GB (\begin{DoxyParamCaption}\item[{Mat}]{y,  }\item[{Mat}]{u,  }\item[{Mat}]{v,  }\item[{Mat \&}]{Imagem\+R\+BG }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em valor\+Pixel} & pixel value \\
+\hline
+{\em valor\+Previsto} & expected pixel value \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int -\/$>$ residual for each value of the predicted pixel 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classlossy__coding_a2f905e170923fd853bc9768a708b3861}\label{classlossy__coding_a2f905e170923fd853bc9768a708b3861}} 
+\index{lossy\_coding@{lossy\_coding}!ValorPixelDec@{ValorPixelDec}}
+\index{ValorPixelDec@{ValorPixelDec}!lossy\_coding@{lossy\_coding}}
+\doxysubsubsection{\texorpdfstring{ValorPixelDec()}{ValorPixelDec()}}
+{\footnotesize\ttfamily int lossy\+\_\+coding\+::\+Valor\+Pixel\+Dec (\begin{DoxyParamCaption}\item[{int}]{erro,  }\item[{int}]{valor\+Previsto,  }\item[{int}]{quantization }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em erro} & residual \\
+\hline
+{\em valor\+Previsto} & expected pixel value \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int -\/$>$ pixel value for each value of the predicted pixel 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classlossy__coding_af2b28272f7635552f05381f8ad1abd39}\label{classlossy__coding_af2b28272f7635552f05381f8ad1abd39}} 
+\index{lossy\_coding@{lossy\_coding}!YUV@{YUV}}
+\index{YUV@{YUV}!lossy\_coding@{lossy\_coding}}
+\doxysubsubsection{\texorpdfstring{YUV()}{YUV()}}
+{\footnotesize\ttfamily void lossy\+\_\+coding\+::\+Y\+UV (\begin{DoxyParamCaption}\item[{Mat}]{image,  }\item[{Mat \&}]{y,  }\item[{Mat \&}]{u,  }\item[{Mat \&}]{v }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em image} & original image matrix \\
+\hline
+{\em y} & address for the matrix y \\
+\hline
+{\em u} & address for the matrix u \\
+\hline
+{\em v} & address for the matrix v \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+lossy\+\_\+coding.\+h\item 
+ex2\+\_\+parte\+C.\+cpp\end{DoxyCompactItemize}
