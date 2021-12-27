@@ -87,7 +87,6 @@ using namespace std;
             pointer_read = 7;
         }
         val_byte = ((byte >> pointer_read) & 0x01); 
-        //cout << (int)val_byte << endl;
         pointer_read--;
         return val_byte;
     }
