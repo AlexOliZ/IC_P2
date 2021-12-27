@@ -1,6 +1,6 @@
 #include "bit_stream.h"
 #include <string>
-
+// g++ bit_stream/main.cpp bit_stream/bit_stream.cpp
 int main(int argc ,char *argv[])
 {
     string file = "test_file.bin";
@@ -16,23 +16,23 @@ int main(int argc ,char *argv[])
     //outputfile.write((char*)&bit,1);
     //outputfile.close();
 
+    bitstream.writeBit(0);
     bitstream.writeBit(1);
+    bitstream.writeBit(1);
+    bitstream.writeBit(1); 
     bitstream.writeBit(0);
     bitstream.writeBit(0);
     bitstream.writeBit(0);
     bitstream.writeBit(1);
-    bitstream.writeBit(1);
-    bitstream.writeBit(1);
-    bitstream.writeBit(0);
 
+    bitstream.writeBit(0);
     bitstream.writeBit(1);
+    bitstream.writeBit(1);
+    bitstream.writeBit(1); 
     bitstream.writeBit(0);
     bitstream.writeBit(0);
     bitstream.writeBit(0);
     bitstream.writeBit(1);
-    bitstream.writeBit(1);
-    bitstream.writeBit(1);
-    bitstream.writeBit(0);
     /*
     bitstream.writeBit(1);
     bitstream.writeBit(0);
