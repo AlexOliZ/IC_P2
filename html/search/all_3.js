@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['lossless_5fcodec_4',['lossless_codec',['../classlossless__codec.html',1,'']]],
-  ['lossless_5fpredictive_5',['lossless_predictive',['../classlossless__predictive.html',1,'']]]
+  ['lossless_5fcodec_5',['lossless_codec',['../classlossless__codec.html',1,'']]],
+  ['lossless_5fpredictive_6',['lossless_predictive',['../classlossless__predictive.html',1,'']]],
+  ['lossy_5fcoding_7',['lossy_coding',['../classlossy__coding.html',1,'']]],
+  ['lossy_5fpredictive_8',['lossy_predictive',['../classlossy__predictive.html',1,'']]]
 ];
