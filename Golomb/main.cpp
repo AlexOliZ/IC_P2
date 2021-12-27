@@ -25,6 +25,7 @@ int main(void)
             }
         }   
         cout<< endl;
+        cout << endl;
         //cout << "size: " << floor((g.get_unarySize()+g.get_remSize())) << endl;
         //cout << "unary: " << floor((g.get_unarySize())) << endl;
         //cout << "rem: " << floor((g.get_remSize()))<< endl;
@@ -46,7 +47,6 @@ int main(void)
     
     golomb golomb_encoder(m,(char*)file.data());
     for(int i=0 ; i<43 ; i++){
-        cout << endl;
         golomb_encoder.signed_stream_encode(test[i]);
     }
     
