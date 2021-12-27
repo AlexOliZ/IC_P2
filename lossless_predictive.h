@@ -6,25 +6,32 @@
 #include "Golomb/golomb.h"
 #include "bit_stream/bit_stream.h"
 #include <sndfile.h>
+#include <map>
 
 
 using namespace std;
 
 class lossless_predictive {
     public:
-        lossless_predictive(char* fname){
-            //m=m_val;
-            m=0;
+        lossless_predictive(char* fname,bool hist){
+            calc_hist = hist;
+            m = 0;
             filename = fname;
+            entropy = 0;
         };
 
         SF_INFO predictive_encode(char* outfile);
         void predictive_decode(char* infile,SF_INFO num);
         void setM(uint m);
+        double getEntropy();
         
     private:
+        bool calc_hist;
         int m;
         char* filename;
+        map <double, int> histogram_residual;
+        double entropy;
+
 };
 
 #endif
