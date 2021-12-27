@@ -47,7 +47,6 @@ int main(void)
     golomb golomb_encoder(m,(char*)file.data());
     for(int i=0 ; i<43 ; i++){
         cout << endl;
-        cout << "I: " << i << endl;
         golomb_encoder.signed_stream_encode(test[i]);
     }
     
