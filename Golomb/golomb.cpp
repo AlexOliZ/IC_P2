@@ -21,14 +21,14 @@ char* golomb::encode(uint n)
     char* code = (char*)malloc(((int)((b+1+this->unary_size+1)/8) +1));
     
     if(r<k){      
-        this->rem_size=b;
+        this->rem_size=b-1;
         for(j=0 ; 8*j<this->rem_size ; j++)
             for(i=0 ; i+8*j<this->rem_size ; i++)
             {
                 code[j] |= r &(0x01<<(i));
             }                    
     }else{
-        this->rem_size=b+1;
+        this->rem_size=b;
         r += k;
         for(j=0 ; 8*j<this->rem_size ; j++)
             for(i=0 ; i+8*j<this->rem_size ; i++)
