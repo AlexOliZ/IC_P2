@@ -40,21 +40,21 @@ using namespace std;
     void bit_stream::write_byte()
     {
         if(pointer_write < 7){
-            outputfile.write((char*)&byte,1);
+            outputfile.write((char*)&wbyte,1);
             pointer_write = 0;
         }
     }
 
     void bit_stream::writeBit(uint8_t val)
     {
-        byte |= (val & 0x01) << pointer_write;
+        wbyte |= (val & 0x01) << pointer_write;
         if (pointer_write > 0) {
             pointer_write--;                    
             return;       
         }           
-        outputfile.write((char*)&byte,1);
+        outputfile.write((char*)&wbyte,1);
         pointer_write = 7;
-        byte = 0;
+        wbyte = 0;
     }
     
     void bit_stream::writeBits(int val, uint n)
@@ -83,10 +83,10 @@ using namespace std;
         uint8_t val_byte=0;
         int i,j;
         if (pointer_read < 0) {
-            inputfile.read((char*)&byte, 1); 
+            inputfile.read((char*)&rbyte, 1); 
             pointer_read = 7;
         }
-        val_byte = ((byte >> pointer_read) & 0x01); 
+        val_byte = ((rbyte >> pointer_read) & 0x01); 
         pointer_read--;
         return val_byte;
     }
@@ -95,10 +95,10 @@ using namespace std;
     {
         if(pointer_read < 0)
         {
-            inputfile.read((char*)&byte,1);
+            inputfile.read((char*)&rbyte,1);
             pointer_read = 7;
         }
-        *val = ((byte >> pointer_read) & 0x01);
+        *val = ((rbyte >> pointer_read) & 0x01);
         pointer_read --;
     }
     
