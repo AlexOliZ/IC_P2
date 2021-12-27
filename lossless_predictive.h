@@ -8,7 +8,6 @@
 #include <sndfile.h>
 #include <map>
 
-
 using namespace std;
 
 class lossless_predictive {

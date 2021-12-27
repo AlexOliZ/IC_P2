@@ -10,12 +10,12 @@ int predictor::predict()
     } else if (this->num_inputs == 2) {
         return 2*this->buffer[this->pointer] - this->buffer[this->pointer-1];
     } 
-    return 3*this->buffer[this->pointer] - 3*this->buffer[pointer-1] + this->buffer[pointer-2];
+    return 3*this->buffer[this->pointer] - 3*this->buffer[(pointer+1)%3] + this->buffer[(pointer+2)%3];
 }
 
 int predictor::residual(int sample)
 {
-    int val = predict(); // buffer[pointer]
+    int val = predict();
     if(!this->lossy){
         updateBuffer(sample);
     }

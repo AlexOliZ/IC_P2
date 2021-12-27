@@ -27,29 +27,32 @@ SF_INFO lossless_predictive::predictive_encode(char* outfile){
     buf = (int *) malloc(num_items*sizeof(int));
     num = sf_read_int(inFile,buf,num_items);
 
-    //cout << num << endl;
-    //cout << channels << endl;
+ 
     sf_close(inFile);
 
-    for(i=0 ; i<num_items ; i++)
+    for(i=0 ; i<num_items ; i++){
+        buf[i] = predictor_encoder.residual(buf[i]);
         average += buf[i];
-
-    this->m=(int)ceil(-1/log2(average/(average+1.0)));
+    }
+    //average = average/num_items;
+    
+    this->m=abs((int)ceil(-1/log2(average/(average+1.0))));
     cout << "M: " << this->m << endl;
-
+    cout << "size: " << (64*num_items) << endl;
     golomb golomb_encoder(this->m,outfile);
     
     for(i=0 ; i<num_items ; i++)
     {
-        predictor_val = predictor_encoder.residual(buf[i]);
+        //predictor_val = predictor_encoder.residual(buf[i]);
         if(this->calc_hist){
-            if (this->histogram_residual.find(predictor_val)!= this->histogram_residual.end()){ //if the element exists
-            this->histogram_residual[predictor_val]++; //increase the number of elements
+            if (this->histogram_residual.find(buf[i])!= this->histogram_residual.end()){ //if the element exists
+            this->histogram_residual[buf[i]]++; //increase the number of elements
             }else{
-                this->histogram_residual[predictor_val]=1;
+                this->histogram_residual[buf[i]]=1;
             }
         }
-        golomb_encoder.signed_stream_encode(predictor_val);
+        //cout << buf[i] << endl;
+        golomb_encoder.signed_stream_encode(buf[i]);
     }
     golomb_encoder.close_stream_write();
     printf("Read %d items\n",num_items);
@@ -61,6 +64,10 @@ SF_INFO lossless_predictive::predictive_encode(char* outfile){
             this->entropy -= (log(pak)/log(16)) *pak;
         }
     }
+    //for(std::map<double,int>::iterator it = histogram_residual.begin(); it != histogram_residual.end(); ++it) {
+    //    cout << (int)it->first << ' ' << it->second << endl;
+    //}
+    //cout << "zero: " << histogram_residual[0] << endl;
     return inFileInfo;
 }
 
@@ -97,7 +104,7 @@ void lossless_predictive::predictive_decode(char* infile,SF_INFO info)
 int main(int argc, char* argv[])
 {
     
-    string file = "./wavfiles/sample01.wav";
+    string file = "./wavfiles/sample03.wav";
     string binfile = "testfile.bin";
     lossless_predictive lossless((char*)file.data(),true);
     SF_INFO info = lossless.predictive_encode((char*)binfile.data());

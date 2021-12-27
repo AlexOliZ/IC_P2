@@ -12,7 +12,7 @@ int main(void)
     char*code;
     golomb g(m);
     int out =0;
-    /*
+    
     for(n=-max_n ; n<max_n ; n++){
         cout << "encode val -> " << n << endl;
         code = g.signed_encode(n);
@@ -33,12 +33,12 @@ int main(void)
         cout << "decode val: "<< out <<endl;
         //g.free_code();
     }
-    */
+    
     //for(i=0 ; i<8 ; i++)
     //    cout<< ((code[1]>>(i)) &0x01);
     //cout<< endl; 
 
-    /*
+    
     string file = "test_file.bin";
     int test[] = {17629184,6,15,70,60,50,0,-10,-20,-7,0,0,0,5,6,6,8,6,3,10,0,0,-10,-100,100,200,500,10,50,60,70,-100,-800,1000,100000,-100000,1000000,200000,500000,-100000,-1095958528,17629184,-118685696};
     //int test[] = {-1095958528,-1074790400,-1079377920,-1119551488};
@@ -61,7 +61,7 @@ int main(void)
         cout << "decode: "<< out << endl;
     }
     golomb_decoder.close_stream_read();
-    */
+    /*
     string file = "testfile.bin";
     m = 24666370;
     golomb golomb_decoder(m,(char*)file.data()); 
@@ -71,7 +71,7 @@ int main(void)
     cout << "REM: " << golomb_decoder.get_remSize() << endl;
     cout << "UN_SIZE: " << golomb_decoder.get_unarySize() << endl;
     golomb_decoder.close_stream_read();
-    
+    */
 
     return 0;
 }
