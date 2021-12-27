@@ -11,7 +11,7 @@ using namespace std;
 */
     bool bit_stream::end_of_file()
     {   
-        return inputfile.eof();
+        return inputfile.peek()!=EOF;
     }
 
     void bit_stream::open_file_write()
@@ -43,6 +43,7 @@ using namespace std;
             outputfile.write((char*)&wbyte,1);
             pointer_write = 0;
         }
+        outputfile.close();
     }
 
     void bit_stream::writeBit(uint8_t val)
