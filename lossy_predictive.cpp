@@ -8,6 +8,7 @@ void lossy_predictive::lossypredictive_encode(char* outfile,int qtbits){
     char* code;
     int *buf,i,num_items,num,channels;
     int average = 0;
+    int quant_value;
     predictor predictor_encoder(true);
     double pak = 0;
 
@@ -26,14 +27,16 @@ void lossy_predictive::lossypredictive_encode(char* outfile,int qtbits){
     sf_close(inFile);
         
     for(i=0 ; i<num_items ; i++){
-        buf[i] = predictor_encoder.residual(buf[i]);
+        quant_value = quantize(buf[i],qtbits);
+        predictor_encoder.updateBufferConst(quant_value);
+        buf[i] = quant_value;
         average += buf[i]>=0?2*buf[i]:-2*buf[i]-1;
     }
     m=(int)ceil(-1/log2(average/(average+1.0)));
 
     golomb golomb_encoder(m,outfile);
 
-    int quant_value;
+    
     for(i=0 ; i<num ; i++)
     {
         //int residual = predictor_encoder.residual(buf[i]);
@@ -44,9 +47,7 @@ void lossy_predictive::lossypredictive_encode(char* outfile,int qtbits){
                 this->histogram_residual[buf[i]]=1;
             }
         }
-        quant_value = quantize(buf[i],qtbits);
-        predictor_encoder.updateBufferConst(quant_value);
-        golomb_encoder.signed_stream_encode(quant_value);
+        golomb_encoder.signed_stream_encode(buf[i]);
     }
     golomb_encoder.close_stream_write();
     printf("Read %d items\n",num);
