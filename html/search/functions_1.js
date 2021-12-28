@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['golombdesc_23',['golombDesc',['../classlossless__codec.html#aec8c51143b34ae2bde57d239e6a26c9f',1,'lossless_codec::golombDesc()'],['../classlossy__coding.html#ae372e30ccf9bbd512f5914e36c28549d',1,'lossy_coding::golombDesc()']]],
-  ['golombenc_24',['golombEnc',['../classlossless__codec.html#aa7b4b8e42da2b52a49d333e0cf9ba44d',1,'lossless_codec::golombEnc()'],['../classlossy__coding.html#a9ffa8d231c30ace8b96527dbc4258903',1,'lossy_coding::golombEnc()']]]
+  ['close_5ffile_5fread_47',['close_file_read',['../classbit__stream.html#ad38cb4bd4e79388a7ab611f777f44779',1,'bit_stream']]],
+  ['close_5ffile_5fwrite_48',['close_file_write',['../classbit__stream.html#aaedb26a2922c9dd17ca05b2835aa201b',1,'bit_stream']]],
+  ['close_5fstream_5fread_49',['close_stream_read',['../classgolomb.html#a172d41e4e4cf43effb99278ebe0409ae',1,'golomb']]],
+  ['close_5fstream_5fwrite_50',['close_stream_write',['../classgolomb.html#a09b2d5b3dd10fb908290b63e6b11e52d',1,'golomb']]]
 ];

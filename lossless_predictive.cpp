@@ -10,7 +10,7 @@ static int* check_validity;
 SF_INFO lossless_predictive::predictive_encode(char* outfile){
 
     int *buf,i,predictor_val,num_items,num,channels;
-    int average=0;
+    uint average=0;
     predictor predictor_encoder(false);
     double pak=0;
 
@@ -29,16 +29,19 @@ SF_INFO lossless_predictive::predictive_encode(char* outfile){
 
  
     sf_close(inFile);
-
+    cout << "sizeof " << sizeof(SF_INFO) << endl;
     for(i=0 ; i<num_items ; i++){
         buf[i] = predictor_encoder.residual(buf[i]);
-        average += buf[i];
+        average += buf[i]>=0?2*buf[i]:-2*buf[i]-1;
     }
     //average = average/num_items;
-    
-    this->m=abs((int)ceil(-1/log2(average/(average+1.0))));
+    cout << "average: " << average << endl;
+    this->m=(uint)ceil(-1/log2(average/(average+1.0)));
     cout << "M: " << this->m << endl;
     cout << "size: " << (64*num_items) << endl;
+
+    
+
     golomb golomb_encoder(this->m,outfile);
     
     for(i=0 ; i<num_items ; i++)
@@ -103,12 +106,12 @@ void lossless_predictive::predictive_decode(char* infile,SF_INFO info)
 
 int main(int argc, char* argv[])
 {
-    
-    string file = "./wavfiles/sample03.wav";
+    string file = "./wavfiles/sample01.wav";
     string binfile = "testfile.bin";
     lossless_predictive lossless((char*)file.data(),true);
     SF_INFO info = lossless.predictive_encode((char*)binfile.data());
     lossless.predictive_decode((char*)binfile.data(),info);
     cout << "entropy=" <<lossless.getEntropy() << endl;
+    cout << "min_size: " << (int)(info.frames*info.channels*ceil(lossless.getEntropy())) << endl;
     return 0;
 }

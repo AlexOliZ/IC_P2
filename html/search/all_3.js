@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['lossless_5fcodec_5',['lossless_codec',['../classlossless__codec.html',1,'']]],
-  ['lossless_5fpredictive_6',['lossless_predictive',['../classlossless__predictive.html',1,'']]],
-  ['lossy_5fcoding_7',['lossy_coding',['../classlossy__coding.html',1,'']]],
-  ['lossy_5fpredictive_8',['lossy_predictive',['../classlossy__predictive.html',1,'']]]
+  ['encode_6',['encode',['../classgolomb.html#a4e0df9f915237a812338121ad72d08b4',1,'golomb']]],
+  ['end_5fof_5ffile_7',['end_of_file',['../classbit__stream.html#aa1a3f1b1bcd7d123233cb123df2d160c',1,'bit_stream::end_of_file()'],['../classgolomb.html#a2ca586a5768c4d92f3e3ba28d8a66530',1,'golomb::end_of_file()']]],
+  ['erroenc_8',['erroEnc',['../classlossless__codec.html#aded9fb935d117772d7b6267052c02032',1,'lossless_codec::erroEnc()'],['../classlossy__coding.html#aac208f3c5b594be10581373a665d82d1',1,'lossy_coding::erroEnc()']]]
 ];

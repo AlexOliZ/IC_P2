@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['valorpixeldec_13',['ValorPixelDec',['../classlossless__codec.html#a8bc8d7b9fd6a7787855b24c2268f82c9',1,'lossless_codec::ValorPixelDec()'],['../classlossy__coding.html#a2f905e170923fd853bc9768a708b3861',1,'lossy_coding::ValorPixelDec()']]]
+  ['open_5ffile_5fread_19',['open_file_read',['../classbit__stream.html#a7de2a95ad88ac05347296c51268accaf',1,'bit_stream']]],
+  ['open_5ffile_5fwrite_20',['open_file_write',['../classbit__stream.html#a5e9b1a1a9ac6940acddac1bb3dc626dc',1,'bit_stream']]]
 ];

@@ -25,24 +25,26 @@ void lossy_predictive::lossypredictive_encode(char* outfile,int qtbits){
 
     sf_close(inFile);
         
-    for(i=0 ; i<num ; i++){
-        average += buf[i];
+    for(i=0 ; i<num_items ; i++){
+        buf[i] = predictor_encoder.residual(buf[i]);
+        average += buf[i]>=0?2*buf[i]:-2*buf[i]-1;
     }
     m=(int)ceil(-1/log2(average/(average+1.0)));
 
     golomb golomb_encoder(m,outfile);
 
+    int quant_value;
     for(i=0 ; i<num ; i++)
     {
-        int residual = predictor_encoder.residual(buf[i]);
+        //int residual = predictor_encoder.residual(buf[i]);
         if(this->calc_hist){
-            if (this->histogram_residual.find(residual)!= this->histogram_residual.end()){ //if the element exists
-            this->histogram_residual[residual]++; //increase the number of elements
+            if (this->histogram_residual.find(buf[i])!= this->histogram_residual.end()){ //if the element exists
+            this->histogram_residual[buf[i]]++; //increase the number of elements
             }else{
-                this->histogram_residual[residual]=1;
+                this->histogram_residual[buf[i]]=1;
             }
         }
-        int quant_value = quantize(residual,qtbits);
+        quant_value = quantize(buf[i],qtbits);
         predictor_encoder.updateBufferConst(quant_value);
         golomb_encoder.signed_stream_encode(quant_value);
     }

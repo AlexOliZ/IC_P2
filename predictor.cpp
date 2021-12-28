@@ -15,10 +15,11 @@ int predictor::predict()
 
 int predictor::residual(int sample)
 {
-    int val = predict();
     if(!this->lossy){
         updateBuffer(sample);
     }
+    int val = predict();
+    
     return sample-val;   
 }
 

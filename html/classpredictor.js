@@ -1,10 +1,10 @@
 var classpredictor =
 [
     [ "predictor", "classpredictor.html#a12864d3c4e232d3cd1f193e15dd0d2fc", null ],
-    [ "predict", "classpredictor.html#a88927e32be74300d1ae9850b393bb498", null ],
-    [ "reconstruct", "classpredictor.html#a7a98298034e97f33b34ce11630155b9d", null ],
-    [ "residual", "classpredictor.html#ae6be54e2508c06dbdb8dea68ccc65da2", null ],
+    [ "predict", "classpredictor.html#aed3175d8987c82f23ee46d234a6266d6", null ],
+    [ "reconstruct", "classpredictor.html#ad54eed825e03bcf72cf9540e9975b2bc", null ],
+    [ "residual", "classpredictor.html#a6a2e970231a879adb82b4466ca31b0a0", null ],
     [ "showBuffer", "classpredictor.html#a5262899cdba06f6ca88da7a0179530c8", null ],
-    [ "updateBuffer", "classpredictor.html#a4327c0a64851d36d7c640cc37e178088", null ],
-    [ "updateBufferConst", "classpredictor.html#afbff12a627c0f52c226d62e7596609e4", null ]
+    [ "updateBuffer", "classpredictor.html#a127e69073a419c57d9127e8253d0986e", null ],
+    [ "updateBufferConst", "classpredictor.html#aa596c1a9a18838fd30570302c67b367e", null ]
 ];

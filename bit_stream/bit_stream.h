@@ -65,13 +65,13 @@ class bit_stream {
         
         /**
          * @brief 
-         * closes the ofstream.
+         * closes the ifstream.
         */
         void close_file_read();
         
         /**
          * @brief 
-         * checks if ofstream reached the end of the file.
+         * checks if ifstream reached the end of the file.
         */
         bool end_of_file();
         
@@ -82,7 +82,7 @@ class bit_stream {
         void write_byte();
 
         /**
-         * @brief 
+         * @brief function used to write 1 bit.
          * because we can only write 1 byte at a time the value will be writen.
          * after 8 bits have been inserted in the bit_stream.
          * @param  val bit that will be writen.
@@ -90,40 +90,40 @@ class bit_stream {
         void writeBit(uint8_t val);
         
         /**
-         * @brief 
+         * @brief function used to write N bits.
          * @param val bits that will be writen.
          * @param n number of bits that will be writen, maximum of 64 bits. 
         */
         void writeBits(int val, uint n);
         
         /**
-         * @brief 
+         * @brief function used to write N bits using a char*.
          * @param val bits that will be writen.
          * @param n number of bits that will be writen. 
         */
         void writeBits(char* val, uint n);
         
         /**
-         * @brief 
+         * @brief function used to read 1 bit.
          * @return bit read from the file.
         */
         uint8_t readBit();
         
         /**
-         * @brief
+         * @brief function used to read a bit using a pointer.
          * @param bit variable that will save the value read from the file.
         */
         void readBit(uint8_t* bit);
         
         /**
-         * @brief 
+         * @brief function used to read N bits.
          * @param n number of bits that will be read from the file. 
          * @return N bits read from the file.
         */
         char* readBits(uint n);
         
         /**
-         * @brief 
+         * @brief function used to read N bits using a char*.
          * @param bits pointer that will save the bits read from the file.
          * @param n number of bits that will be read from the file. 
         */

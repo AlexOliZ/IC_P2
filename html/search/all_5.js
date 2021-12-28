@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['rgb_12',['RGB',['../classlossless__codec.html#ae20cc15e38f52ebff6a5f5799a8a8c54',1,'lossless_codec::RGB()'],['../classlossy__coding.html#ad6ed56d04c55611782bbebc67f4592bc',1,'lossy_coding::RGB()']]]
+  ['lossless_5fcodec_15',['lossless_codec',['../classlossless__codec.html',1,'']]],
+  ['lossless_5fpredictive_16',['lossless_predictive',['../classlossless__predictive.html',1,'']]],
+  ['lossy_5fcoding_17',['lossy_coding',['../classlossy__coding.html',1,'']]],
+  ['lossy_5fpredictive_18',['lossy_predictive',['../classlossy__predictive.html',1,'']]]
 ];
