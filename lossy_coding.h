@@ -82,6 +82,20 @@ class  lossy_coding{
          * @param namefile name of the file to be read from golomb
          */
         void golombDesc(Mat &DescY, Mat &DescV, Mat &DescU,int m,char* namefile);
+        /**
+         * @brief 
+         * 
+         * @param aux final matrix of the DCT transformation
+         * @param mat matrix to transform
+         */
+        void DCT(Mat &aux,Mat mat);
+        /**
+         * @brief 
+         * 
+         * @param aux matrix recovered by IDCT (final matrix)
+         * @param mat matrix recover
+         */
+        void IDCT(Mat &aux,Mat mat);
         private:
             string filename;
 };

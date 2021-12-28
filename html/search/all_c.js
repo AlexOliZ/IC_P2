@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['yuv_38',['YUV',['../classlossless__codec.html#a7eb968583835230c0bf68c08b2582605',1,'lossless_codec::YUV()'],['../classlossy__coding.html#af2b28272f7635552f05381f8ad1abd39',1,'lossy_coding::YUV()']]]
+  ['write_5fbyte_37',['write_byte',['../classbit__stream.html#adb038dc6203c95253703829784dfcbf3',1,'bit_stream']]],
+  ['writebit_38',['writeBit',['../classbit__stream.html#ae2c72fa673a5a675d717ee0931a8bade',1,'bit_stream']]],
+  ['writebits_39',['writeBits',['../classbit__stream.html#a68e18b56d06429dd7bbc1aa6da284636',1,'bit_stream::writeBits(int val, uint n)'],['../classbit__stream.html#af2d415fa22c67b61643eb8614b538253',1,'bit_stream::writeBits(char *val, uint n)']]]
 ];

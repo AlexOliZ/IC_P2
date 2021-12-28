@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['write_5fbyte_35',['write_byte',['../classbit__stream.html#adb038dc6203c95253703829784dfcbf3',1,'bit_stream']]],
-  ['writebit_36',['writeBit',['../classbit__stream.html#ae2c72fa673a5a675d717ee0931a8bade',1,'bit_stream']]],
-  ['writebits_37',['writeBits',['../classbit__stream.html#a68e18b56d06429dd7bbc1aa6da284636',1,'bit_stream::writeBits(int val, uint n)'],['../classbit__stream.html#af2d415fa22c67b61643eb8614b538253',1,'bit_stream::writeBits(char *val, uint n)']]]
+  ['valorpixeldec_36',['ValorPixelDec',['../classlossless__codec.html#a8bc8d7b9fd6a7787855b24c2268f82c9',1,'lossless_codec::ValorPixelDec()'],['../classlossy__coding.html#a2f905e170923fd853bc9768a708b3861',1,'lossy_coding::ValorPixelDec()']]]
 ];

@@ -1,10 +1,6 @@
 var searchData=
 [
-  ['set_5fm_27',['set_m',['../classgolomb.html#aaa698e9f6b74f815001e6e8fcb416fc7',1,'golomb']]],
-  ['signed_5fdecode_28',['signed_decode',['../classgolomb.html#a432ce6c95f9c15002a99466343fe34a0',1,'golomb']]],
-  ['signed_5fencode_29',['signed_encode',['../classgolomb.html#acfc8ca737e70ebd068afd4d885def6af',1,'golomb']]],
-  ['signed_5fstream_5fdecode_30',['signed_stream_decode',['../classgolomb.html#a997f84414e2fa8cfd0d43206302affa0',1,'golomb']]],
-  ['signed_5fstream_5fencode_31',['signed_stream_encode',['../classgolomb.html#aec3e512bdc4bce3655be95bf8ca4aa96',1,'golomb']]],
-  ['stream_5fdecode_32',['stream_decode',['../classgolomb.html#a8f3da61695a6edd35a12599df191bc00',1,'golomb']]],
-  ['stream_5fencode_33',['stream_encode',['../classgolomb.html#af48e0025598cc94fca098ed344f31853',1,'golomb']]]
+  ['readbit_26',['readBit',['../classbit__stream.html#a3e48260a1d3f9f36f19caf694f9bba58',1,'bit_stream::readBit()'],['../classbit__stream.html#a6a059b2438fc33a2d7486386aea1ee43',1,'bit_stream::readBit(uint8_t *bit)']]],
+  ['readbits_27',['readBits',['../classbit__stream.html#a6c3fc92da84a6588433587ce5443dbe0',1,'bit_stream::readBits(uint n)'],['../classbit__stream.html#a6724c209788e452ff852aa6548ec85a4',1,'bit_stream::readBits(char *bits, uint n)']]],
+  ['rgb_28',['RGB',['../classlossless__codec.html#ae20cc15e38f52ebff6a5f5799a8a8c54',1,'lossless_codec::RGB()'],['../classlossy__coding.html#ad6ed56d04c55611782bbebc67f4592bc',1,'lossy_coding::RGB()']]]
 ];

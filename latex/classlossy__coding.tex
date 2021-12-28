@@ -21,10 +21,27 @@ void \mbox{\hyperlink{classlossy__coding_a3af7edc37a3057fbbe83b1de2a8ea1bd}{pred
 void \mbox{\hyperlink{classlossy__coding_a9ffa8d231c30ace8b96527dbc4258903}{golomb\+Enc}} (Mat erroY, Mat erroV, Mat erroU, int m, char $\ast$namefile)
 \item 
 void \mbox{\hyperlink{classlossy__coding_ae372e30ccf9bbd512f5914e36c28549d}{golomb\+Desc}} (Mat \&DescY, Mat \&DescV, Mat \&DescU, int m, char $\ast$namefile)
+\item 
+void \mbox{\hyperlink{classlossy__coding_a8a692348d2df39c9c7a9d6b3aef4cd1a}{D\+CT}} (Mat \&aux, Mat mat)
+\item 
+void \mbox{\hyperlink{classlossy__coding_ae9c914c6f5a773b71cd2d898329fee2a}{I\+D\+CT}} (Mat \&aux, Mat mat)
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classlossy__coding_a8a692348d2df39c9c7a9d6b3aef4cd1a}\label{classlossy__coding_a8a692348d2df39c9c7a9d6b3aef4cd1a}} 
+\index{lossy\_coding@{lossy\_coding}!DCT@{DCT}}
+\index{DCT@{DCT}!lossy\_coding@{lossy\_coding}}
+\doxysubsubsection{\texorpdfstring{DCT()}{DCT()}}
+{\footnotesize\ttfamily void lossy\+\_\+coding\+::\+D\+CT (\begin{DoxyParamCaption}\item[{Mat \&}]{aux,  }\item[{Mat}]{mat }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em aux} & final matrix of the D\+CT transformation \\
+\hline
+{\em mat} & matrix to transform \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{classlossy__coding_aac208f3c5b594be10581373a665d82d1}\label{classlossy__coding_aac208f3c5b594be10581373a665d82d1}} 
 \index{lossy\_coding@{lossy\_coding}!erroEnc@{erroEnc}}
 \index{erroEnc@{erroEnc}!lossy\_coding@{lossy\_coding}}
@@ -77,6 +94,19 @@ int -\/$>$ residual for each value of the predicted pixel
 {\em m} & golomg parameter m \\
 \hline
 {\em namefile} & name of the file to be write from golomb \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classlossy__coding_ae9c914c6f5a773b71cd2d898329fee2a}\label{classlossy__coding_ae9c914c6f5a773b71cd2d898329fee2a}} 
+\index{lossy\_coding@{lossy\_coding}!IDCT@{IDCT}}
+\index{IDCT@{IDCT}!lossy\_coding@{lossy\_coding}}
+\doxysubsubsection{\texorpdfstring{IDCT()}{IDCT()}}
+{\footnotesize\ttfamily void lossy\+\_\+coding\+::\+I\+D\+CT (\begin{DoxyParamCaption}\item[{Mat \&}]{aux,  }\item[{Mat}]{mat }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em aux} & matrix recovered by I\+D\+CT (final matrix) \\
+\hline
+{\em mat} & matrix recover \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{classlossy__coding_aa18d7c537d73d95d42a487a934b67ebb}\label{classlossy__coding_aa18d7c537d73d95d42a487a934b67ebb}} 
@@ -168,4 +198,5 @@ int -\/$>$ pixel value for each value of the predicted pixel
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
 lossy\+\_\+coding.\+h\item 
-ex2\+\_\+parte\+C.\+cpp\end{DoxyCompactItemize}
+ex2\+\_\+parte\+C.\+cpp\item 
+ex2b\+\_\+parte\+C.\+cpp\end{DoxyCompactItemize}

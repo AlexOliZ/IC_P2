@@ -3,57 +3,229 @@
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classgolomb_abbfc53b1967661481a8dc6f0d7169ac1}\label{classgolomb_abbfc53b1967661481a8dc6f0d7169ac1}} 
-{\bfseries golomb} (uint val)
+\mbox{\hyperlink{classgolomb_abbfc53b1967661481a8dc6f0d7169ac1}{golomb}} (uint val)
 \item 
-\mbox{\Hypertarget{classgolomb_acd56a9cb8969008ceb00cc371cd5063a}\label{classgolomb_acd56a9cb8969008ceb00cc371cd5063a}} 
-{\bfseries golomb} (uint val, char $\ast$fname)
+\mbox{\hyperlink{classgolomb_acd56a9cb8969008ceb00cc371cd5063a}{golomb}} (uint val, char $\ast$fname)
 \item 
-\mbox{\Hypertarget{classgolomb_a0f12fcb487deaa5d824e11375e3f2f0c}\label{classgolomb_a0f12fcb487deaa5d824e11375e3f2f0c}} 
-int {\bfseries get\+\_\+m} ()
+int \mbox{\hyperlink{classgolomb_a0f12fcb487deaa5d824e11375e3f2f0c}{get\+\_\+m}} ()
 \item 
 \mbox{\Hypertarget{classgolomb_aaa698e9f6b74f815001e6e8fcb416fc7}\label{classgolomb_aaa698e9f6b74f815001e6e8fcb416fc7}} 
-void {\bfseries set\+\_\+m} (int new\+\_\+m)
+void \mbox{\hyperlink{classgolomb_aaa698e9f6b74f815001e6e8fcb416fc7}{set\+\_\+m}} (int new\+\_\+m)
+\begin{DoxyCompactList}\small\item\em Function used to change the value of M. \end{DoxyCompactList}\item 
+uint \mbox{\hyperlink{classgolomb_a08fe2daa692ee2fc43cf562efd5e4ac3}{get\+\_\+unary\+Size}} ()
 \item 
-\mbox{\Hypertarget{classgolomb_a08fe2daa692ee2fc43cf562efd5e4ac3}\label{classgolomb_a08fe2daa692ee2fc43cf562efd5e4ac3}} 
-uint {\bfseries get\+\_\+unary\+Size} ()
+uint \mbox{\hyperlink{classgolomb_ab001bf1155b8f2b022f804ada003ac8f}{get\+\_\+rem\+Size}} ()
 \item 
-\mbox{\Hypertarget{classgolomb_ab001bf1155b8f2b022f804ada003ac8f}\label{classgolomb_ab001bf1155b8f2b022f804ada003ac8f}} 
-uint {\bfseries get\+\_\+rem\+Size} ()
+char $\ast$ \mbox{\hyperlink{classgolomb_a4e0df9f915237a812338121ad72d08b4}{encode}} (uint n)
 \item 
-\mbox{\Hypertarget{classgolomb_a4e0df9f915237a812338121ad72d08b4}\label{classgolomb_a4e0df9f915237a812338121ad72d08b4}} 
-char $\ast$ {\bfseries encode} (uint n)
+char $\ast$ \mbox{\hyperlink{classgolomb_acfc8ca737e70ebd068afd4d885def6af}{signed\+\_\+encode}} (int n)
 \item 
-\mbox{\Hypertarget{classgolomb_acfc8ca737e70ebd068afd4d885def6af}\label{classgolomb_acfc8ca737e70ebd068afd4d885def6af}} 
-char $\ast$ {\bfseries signed\+\_\+encode} (int n)
+uint \mbox{\hyperlink{classgolomb_aa0ea7dd46d4e604b68ae8c91735660fb}{decode}} (char $\ast$code, uint remainder, uint unary\+\_\+size)
 \item 
-\mbox{\Hypertarget{classgolomb_aa0ea7dd46d4e604b68ae8c91735660fb}\label{classgolomb_aa0ea7dd46d4e604b68ae8c91735660fb}} 
-uint {\bfseries decode} (char $\ast$code, uint remainder, uint unary\+\_\+size)
+int \mbox{\hyperlink{classgolomb_a432ce6c95f9c15002a99466343fe34a0}{signed\+\_\+decode}} (char $\ast$code, uint remainder\+\_\+size, uint unary\+\_\+size)
 \item 
-\mbox{\Hypertarget{classgolomb_a432ce6c95f9c15002a99466343fe34a0}\label{classgolomb_a432ce6c95f9c15002a99466343fe34a0}} 
-int {\bfseries signed\+\_\+decode} (char $\ast$code, uint remainder\+\_\+size, uint unary\+\_\+size)
-\item 
-\mbox{\Hypertarget{classgolomb_af48e0025598cc94fca098ed344f31853}\label{classgolomb_af48e0025598cc94fca098ed344f31853}} 
-void {\bfseries stream\+\_\+encode} (uint n)
-\item 
-\mbox{\Hypertarget{classgolomb_aec3e512bdc4bce3655be95bf8ca4aa96}\label{classgolomb_aec3e512bdc4bce3655be95bf8ca4aa96}} 
-void {\bfseries signed\+\_\+stream\+\_\+encode} (int n)
-\item 
-\mbox{\Hypertarget{classgolomb_a8f3da61695a6edd35a12599df191bc00}\label{classgolomb_a8f3da61695a6edd35a12599df191bc00}} 
-uint {\bfseries stream\+\_\+decode} ()
-\item 
-\mbox{\Hypertarget{classgolomb_a997f84414e2fa8cfd0d43206302affa0}\label{classgolomb_a997f84414e2fa8cfd0d43206302affa0}} 
-int {\bfseries signed\+\_\+stream\+\_\+decode} ()
-\item 
+void \mbox{\hyperlink{classgolomb_af48e0025598cc94fca098ed344f31853}{stream\+\_\+encode}} (uint n)
+\begin{DoxyCompactList}\small\item\em the code will be writen in the file provided in the constructor using the \mbox{\hyperlink{classbit__stream}{bit\+\_\+stream}}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgolomb_aec3e512bdc4bce3655be95bf8ca4aa96}{signed\+\_\+stream\+\_\+encode}} (int n)
+\begin{DoxyCompactList}\small\item\em the code will be writen in the file provided in the constructor using the \mbox{\hyperlink{classbit__stream}{bit\+\_\+stream}}. \end{DoxyCompactList}\item 
+uint \mbox{\hyperlink{classgolomb_a8f3da61695a6edd35a12599df191bc00}{stream\+\_\+decode}} ()
+\begin{DoxyCompactList}\small\item\em the code will be read from file provided in the constructor using the \mbox{\hyperlink{classbit__stream}{bit\+\_\+stream}}. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classgolomb_a997f84414e2fa8cfd0d43206302affa0}{signed\+\_\+stream\+\_\+decode}} ()
+\begin{DoxyCompactList}\small\item\em the code will be read from file provided in the constructor using the \mbox{\hyperlink{classbit__stream}{bit\+\_\+stream}}. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classgolomb_a09b2d5b3dd10fb908290b63e6b11e52d}\label{classgolomb_a09b2d5b3dd10fb908290b63e6b11e52d}} 
-void {\bfseries close\+\_\+stream\+\_\+write} ()
-\item 
+void \mbox{\hyperlink{classgolomb_a09b2d5b3dd10fb908290b63e6b11e52d}{close\+\_\+stream\+\_\+write}} ()
+\begin{DoxyCompactList}\small\item\em closes the ofstrem. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classgolomb_a172d41e4e4cf43effb99278ebe0409ae}\label{classgolomb_a172d41e4e4cf43effb99278ebe0409ae}} 
-void {\bfseries close\+\_\+stream\+\_\+read} ()
-\item 
-\mbox{\Hypertarget{classgolomb_a2ca586a5768c4d92f3e3ba28d8a66530}\label{classgolomb_a2ca586a5768c4d92f3e3ba28d8a66530}} 
-bool {\bfseries end\+\_\+of\+\_\+file} ()
+void \mbox{\hyperlink{classgolomb_a172d41e4e4cf43effb99278ebe0409ae}{close\+\_\+stream\+\_\+read}} ()
+\begin{DoxyCompactList}\small\item\em closes the ifstrem. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classgolomb_a2ca586a5768c4d92f3e3ba28d8a66530}{end\+\_\+of\+\_\+file}} ()
 \end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classgolomb_abbfc53b1967661481a8dc6f0d7169ac1}\label{classgolomb_abbfc53b1967661481a8dc6f0d7169ac1}} 
+\index{golomb@{golomb}!golomb@{golomb}}
+\index{golomb@{golomb}!golomb@{golomb}}
+\doxysubsubsection{\texorpdfstring{golomb()}{golomb()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily golomb\+::golomb (\begin{DoxyParamCaption}\item[{uint}]{val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em val} & value of M. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classgolomb_acd56a9cb8969008ceb00cc371cd5063a}\label{classgolomb_acd56a9cb8969008ceb00cc371cd5063a}} 
+\index{golomb@{golomb}!golomb@{golomb}}
+\index{golomb@{golomb}!golomb@{golomb}}
+\doxysubsubsection{\texorpdfstring{golomb()}{golomb()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily golomb\+::golomb (\begin{DoxyParamCaption}\item[{uint}]{val,  }\item[{char $\ast$}]{fname }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em val} & value of M. \\
+\hline
+{\em fname} & name of the file to encode and decode. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classgolomb_aa0ea7dd46d4e604b68ae8c91735660fb}\label{classgolomb_aa0ea7dd46d4e604b68ae8c91735660fb}} 
+\index{golomb@{golomb}!decode@{decode}}
+\index{decode@{decode}!golomb@{golomb}}
+\doxysubsubsection{\texorpdfstring{decode()}{decode()}}
+{\footnotesize\ttfamily uint golomb\+::decode (\begin{DoxyParamCaption}\item[{char $\ast$}]{code,  }\item[{uint}]{remainder,  }\item[{uint}]{unary\+\_\+size }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em code} & golomb code that will be decoded. \\
+\hline
+{\em remainder} & reminader size. \\
+\hline
+{\em unary\+\_\+size} & unary size. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+value decoded. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgolomb_a4e0df9f915237a812338121ad72d08b4}\label{classgolomb_a4e0df9f915237a812338121ad72d08b4}} 
+\index{golomb@{golomb}!encode@{encode}}
+\index{encode@{encode}!golomb@{golomb}}
+\doxysubsubsection{\texorpdfstring{encode()}{encode()}}
+{\footnotesize\ttfamily char $\ast$ golomb\+::encode (\begin{DoxyParamCaption}\item[{uint}]{n }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & value to encode. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+golomb code. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgolomb_a2ca586a5768c4d92f3e3ba28d8a66530}\label{classgolomb_a2ca586a5768c4d92f3e3ba28d8a66530}} 
+\index{golomb@{golomb}!end\_of\_file@{end\_of\_file}}
+\index{end\_of\_file@{end\_of\_file}!golomb@{golomb}}
+\doxysubsubsection{\texorpdfstring{end\_of\_file()}{end\_of\_file()}}
+{\footnotesize\ttfamily bool golomb\+::end\+\_\+of\+\_\+file (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+checks if the \mbox{\hyperlink{classbit__stream}{bit\+\_\+stream}} reached the end of the file. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgolomb_a0f12fcb487deaa5d824e11375e3f2f0c}\label{classgolomb_a0f12fcb487deaa5d824e11375e3f2f0c}} 
+\index{golomb@{golomb}!get\_m@{get\_m}}
+\index{get\_m@{get\_m}!golomb@{golomb}}
+\doxysubsubsection{\texorpdfstring{get\_m()}{get\_m()}}
+{\footnotesize\ttfamily int golomb\+::get\+\_\+m (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+M used by the golomb encoding/decoding algorithm. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgolomb_ab001bf1155b8f2b022f804ada003ac8f}\label{classgolomb_ab001bf1155b8f2b022f804ada003ac8f}} 
+\index{golomb@{golomb}!get\_remSize@{get\_remSize}}
+\index{get\_remSize@{get\_remSize}!golomb@{golomb}}
+\doxysubsubsection{\texorpdfstring{get\_remSize()}{get\_remSize()}}
+{\footnotesize\ttfamily uint golomb\+::get\+\_\+rem\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+remainder size of the last code. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgolomb_a08fe2daa692ee2fc43cf562efd5e4ac3}\label{classgolomb_a08fe2daa692ee2fc43cf562efd5e4ac3}} 
+\index{golomb@{golomb}!get\_unarySize@{get\_unarySize}}
+\index{get\_unarySize@{get\_unarySize}!golomb@{golomb}}
+\doxysubsubsection{\texorpdfstring{get\_unarySize()}{get\_unarySize()}}
+{\footnotesize\ttfamily uint golomb\+::get\+\_\+unary\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+unary size of the last code. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgolomb_a432ce6c95f9c15002a99466343fe34a0}\label{classgolomb_a432ce6c95f9c15002a99466343fe34a0}} 
+\index{golomb@{golomb}!signed\_decode@{signed\_decode}}
+\index{signed\_decode@{signed\_decode}!golomb@{golomb}}
+\doxysubsubsection{\texorpdfstring{signed\_decode()}{signed\_decode()}}
+{\footnotesize\ttfamily int golomb\+::signed\+\_\+decode (\begin{DoxyParamCaption}\item[{char $\ast$}]{code,  }\item[{uint}]{remainder\+\_\+size,  }\item[{uint}]{unary\+\_\+size }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em code} & golomb code of signed value that will be decoded. \\
+\hline
+{\em remainder} & reminader size. \\
+\hline
+{\em unary\+\_\+size} & unary size. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+value decoded. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgolomb_acfc8ca737e70ebd068afd4d885def6af}\label{classgolomb_acfc8ca737e70ebd068afd4d885def6af}} 
+\index{golomb@{golomb}!signed\_encode@{signed\_encode}}
+\index{signed\_encode@{signed\_encode}!golomb@{golomb}}
+\doxysubsubsection{\texorpdfstring{signed\_encode()}{signed\_encode()}}
+{\footnotesize\ttfamily char $\ast$ golomb\+::signed\+\_\+encode (\begin{DoxyParamCaption}\item[{int}]{n }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & signed value to encode. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+golomb code. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgolomb_a997f84414e2fa8cfd0d43206302affa0}\label{classgolomb_a997f84414e2fa8cfd0d43206302affa0}} 
+\index{golomb@{golomb}!signed\_stream\_decode@{signed\_stream\_decode}}
+\index{signed\_stream\_decode@{signed\_stream\_decode}!golomb@{golomb}}
+\doxysubsubsection{\texorpdfstring{signed\_stream\_decode()}{signed\_stream\_decode()}}
+{\footnotesize\ttfamily int golomb\+::signed\+\_\+stream\+\_\+decode (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+the code will be read from file provided in the constructor using the \mbox{\hyperlink{classbit__stream}{bit\+\_\+stream}}. 
+
+\begin{DoxyReturn}{Returns}
+signed value decoded. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgolomb_aec3e512bdc4bce3655be95bf8ca4aa96}\label{classgolomb_aec3e512bdc4bce3655be95bf8ca4aa96}} 
+\index{golomb@{golomb}!signed\_stream\_encode@{signed\_stream\_encode}}
+\index{signed\_stream\_encode@{signed\_stream\_encode}!golomb@{golomb}}
+\doxysubsubsection{\texorpdfstring{signed\_stream\_encode()}{signed\_stream\_encode()}}
+{\footnotesize\ttfamily void golomb\+::signed\+\_\+stream\+\_\+encode (\begin{DoxyParamCaption}\item[{int}]{n }\end{DoxyParamCaption})}
+
+
+
+the code will be writen in the file provided in the constructor using the \mbox{\hyperlink{classbit__stream}{bit\+\_\+stream}}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & signed value to encode. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classgolomb_a8f3da61695a6edd35a12599df191bc00}\label{classgolomb_a8f3da61695a6edd35a12599df191bc00}} 
+\index{golomb@{golomb}!stream\_decode@{stream\_decode}}
+\index{stream\_decode@{stream\_decode}!golomb@{golomb}}
+\doxysubsubsection{\texorpdfstring{stream\_decode()}{stream\_decode()}}
+{\footnotesize\ttfamily uint golomb\+::stream\+\_\+decode (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+the code will be read from file provided in the constructor using the \mbox{\hyperlink{classbit__stream}{bit\+\_\+stream}}. 
+
+\begin{DoxyReturn}{Returns}
+value decoded. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgolomb_af48e0025598cc94fca098ed344f31853}\label{classgolomb_af48e0025598cc94fca098ed344f31853}} 
+\index{golomb@{golomb}!stream\_encode@{stream\_encode}}
+\index{stream\_encode@{stream\_encode}!golomb@{golomb}}
+\doxysubsubsection{\texorpdfstring{stream\_encode()}{stream\_encode()}}
+{\footnotesize\ttfamily void golomb\+::stream\+\_\+encode (\begin{DoxyParamCaption}\item[{uint}]{n }\end{DoxyParamCaption})}
+
+
+
+the code will be writen in the file provided in the constructor using the \mbox{\hyperlink{classbit__stream}{bit\+\_\+stream}}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & value to encode. \\
+\hline
+\end{DoxyParams}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

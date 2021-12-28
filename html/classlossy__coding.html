@@ -110,8 +110,47 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a9ffa8d231c30ace8b96527dbc4258903"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae372e30ccf9bbd512f5914e36c28549d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlossy__coding.html#ae372e30ccf9bbd512f5914e36c28549d">golombDesc</a> (Mat &amp;DescY, Mat &amp;DescV, Mat &amp;DescU, int m, char *namefile)</td></tr>
 <tr class="separator:ae372e30ccf9bbd512f5914e36c28549d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a692348d2df39c9c7a9d6b3aef4cd1a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlossy__coding.html#a8a692348d2df39c9c7a9d6b3aef4cd1a">DCT</a> (Mat &amp;aux, Mat mat)</td></tr>
+<tr class="separator:a8a692348d2df39c9c7a9d6b3aef4cd1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9c914c6f5a773b71cd2d898329fee2a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlossy__coding.html#ae9c914c6f5a773b71cd2d898329fee2a">IDCT</a> (Mat &amp;aux, Mat mat)</td></tr>
+<tr class="separator:ae9c914c6f5a773b71cd2d898329fee2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a8a692348d2df39c9c7a9d6b3aef4cd1a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a692348d2df39c9c7a9d6b3aef4cd1a">&#9670;&nbsp;</a></span>DCT()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void lossy_coding::DCT </td>
+          <td>(</td>
+          <td class="paramtype">Mat &amp;&#160;</td>
+          <td class="paramname"><em>aux</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Mat&#160;</td>
+          <td class="paramname"><em>mat</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">aux</td><td>final matrix of the DCT transformation </td></tr>
+    <tr><td class="paramname">mat</td><td>matrix to transform </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="aac208f3c5b594be10581373a665d82d1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aac208f3c5b594be10581373a665d82d1">&#9670;&nbsp;</a></span>erroEnc()</h2>
 
@@ -260,6 +299,41 @@ Public Member Functions</h2></td></tr>
     <tr><td class="paramname">erroU</td><td>residual of the u parameter to be encoded </td></tr>
     <tr><td class="paramname">m</td><td>golomg parameter m </td></tr>
     <tr><td class="paramname">namefile</td><td>name of the file to be write from golomb </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ae9c914c6f5a773b71cd2d898329fee2a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9c914c6f5a773b71cd2d898329fee2a">&#9670;&nbsp;</a></span>IDCT()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void lossy_coding::IDCT </td>
+          <td>(</td>
+          <td class="paramtype">Mat &amp;&#160;</td>
+          <td class="paramname"><em>aux</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Mat&#160;</td>
+          <td class="paramname"><em>mat</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">aux</td><td>matrix recovered by IDCT (final matrix) </td></tr>
+    <tr><td class="paramname">mat</td><td>matrix recover </td></tr>
   </table>
   </dd>
 </dl>
@@ -500,6 +574,7 @@ Public Member Functions</h2></td></tr>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="lossy__coding_8h_source.html">lossy_coding.h</a></li>
 <li>ex2_parteC.cpp</li>
+<li>ex2b_parteC.cpp</li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

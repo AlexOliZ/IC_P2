@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['open_5ffile_5fread_19',['open_file_read',['../classbit__stream.html#a7de2a95ad88ac05347296c51268accaf',1,'bit_stream']]],
-  ['open_5ffile_5fwrite_20',['open_file_write',['../classbit__stream.html#a5e9b1a1a9ac6940acddac1bb3dc626dc',1,'bit_stream']]]
+  ['lossless_5fcodec_17',['lossless_codec',['../classlossless__codec.html',1,'']]],
+  ['lossless_5fpredictive_18',['lossless_predictive',['../classlossless__predictive.html',1,'']]],
+  ['lossy_5fcoding_19',['lossy_coding',['../classlossy__coding.html',1,'']]],
+  ['lossy_5fpredictive_20',['lossy_predictive',['../classlossy__predictive.html',1,'']]]
 ];
