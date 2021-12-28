@@ -6,9 +6,8 @@ using namespace std;
 void lossy_predictive::lossypredictive_encode(char* outfile,int qtbits){
 
     char* code;
-    int *buf,i,num_items,num,channels;
+    int *buf,i,num_items,num,channels,quant_value,residual;
     int average = 0;
-    int quant_value;
     predictor predictor_encoder(true);
     double pak = 0;
 
@@ -27,7 +26,8 @@ void lossy_predictive::lossypredictive_encode(char* outfile,int qtbits){
     sf_close(inFile);
         
     for(i=0 ; i<num_items ; i++){
-        quant_value = quantize(buf[i],qtbits);
+        residual = predictor_encoder.residual(buf[i]);
+        quant_value = quantize(residual,qtbits);
         predictor_encoder.updateBufferConst(quant_value);
         buf[i] = quant_value;
         average += buf[i]>=0?2*buf[i]:-2*buf[i]-1;
@@ -39,7 +39,6 @@ void lossy_predictive::lossypredictive_encode(char* outfile,int qtbits){
     
     for(i=0 ; i<num ; i++)
     {
-        //int residual = predictor_encoder.residual(buf[i]);
         if(this->calc_hist){
             if (this->histogram_residual.find(buf[i])!= this->histogram_residual.end()){ //if the element exists
             this->histogram_residual[buf[i]]++; //increase the number of elements
@@ -76,7 +75,7 @@ void lossy_predictive::lossypredictive_decode(char* infile)
     int channels,num_items, *code;
     int count = 0;
     predictor predictor_decoder(true);
-    golomb golomb_decoder(m,infile);
+    golomb golomb_decoder(this->m,infile);
 
     SF_INFO inFileInfo;
     SNDFILE* inFile;
@@ -89,8 +88,9 @@ void lossy_predictive::lossypredictive_decode(char* infile)
     sf_close(inFile);
 
     code = (int*)malloc(sizeof(int)*num_items);
-    count = 0;
-    while(!golomb_decoder.end_of_file() && count < num_items){
+
+    while(count < num_items){
+
         code[count] = predictor_decoder.reconstruct(golomb_decoder.signed_stream_decode());
         count++;
     }
@@ -107,9 +107,19 @@ int main(int argc, char* argv[])
     
     string file = "./wavfiles/sample01.wav";
     string binfile = "testfile.bin";
-   
-    lossy_predictive lossy((char*)file.data(),true);
-    lossy.lossypredictive_encode((char*)binfile.data(),2);
+    if(argc != 3){
+        cout << "Incorrect argument list, use is: ./lossyaudio <nbitsqnt> <hist?>"<<endl;
+    }
+    int quant_bits = atoi(argv[1]);
+    bool calculate_hist;
+    if(argv[2] == "false"){
+        calculate_hist = false;
+    }
+    else{
+        calculate_hist = true;
+    }
+    lossy_predictive lossy((char*)file.data(),calculate_hist);
+    lossy.lossypredictive_encode((char*)binfile.data(),quant_bits);
     lossy.lossypredictive_decode((char*)binfile.data());
     cout << "entropy=" << lossy.getEntropy() << endl;
     return 0;
