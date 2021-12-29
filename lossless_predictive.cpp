@@ -1,16 +1,17 @@
 #include "lossless_predictive.h"
 #include <filesystem>
-//s#include "./bit_stream/bit_stream.h"
+#include <chrono>
 
-
+using namespace std::chrono;
+  
 //g++ lossless_predictive.cpp Golomb/golomb.cpp predictor.cpp bit_stream/bit_stream.cpp -lsndfile
 
 using namespace std;
 static int* check_validity;
 
 SF_INFO lossless_predictive::predictive_encode(char* outfile){
-
-    int i,predictor_val,num_items,channels;
+    auto start = high_resolution_clock::now();
+    int i,predictor_val,num_items,channels,count=0;
     short *buf;
     predictor predictor_encoder(false);
     double pak=0;
@@ -28,16 +29,17 @@ SF_INFO lossless_predictive::predictive_encode(char* outfile){
     buf = (short *) malloc(num_items*sizeof(short));
     sf_read_short(inFile,buf,num_items);
     sf_close(inFile);
-    int count = 0;
-    
-    for(i=0 ; i<num_items ; i++){
-        if(this->calc_hist){
+    if(this->calc_hist){
+        for(i=0 ; i<num_items ; i++){
             if (this->histogram_original.find(buf[i])!= this->histogram_original.end()){ //if the element exists
-            this->histogram_original[buf[i]]++; //increase the number of elements
+                this->histogram_original[buf[i]]++; //increase the number of elements
             }else{
                 this->histogram_original[buf[i]]=1;
             }
         }
+    }
+    for(i=0 ; i<num_items ; i++){
+        
         buf[i] = (short)predictor_encoder.residual((int)buf[i]);
         m += buf[i]>=0 ? 2*buf[i] : -2*buf[i]-1;
     }
@@ -50,26 +52,30 @@ SF_INFO lossless_predictive::predictive_encode(char* outfile){
     
     m=m/(count);
     m = (uint)ceil(-1/log2(m/(m+1.0)));
-
-
-    golomb golomb_encoder(this->m,outfile);
     
-    for(i=0 ; i<num_items ; i++)
-    {
-        //predictor_val = predictor_encoder.residual(buf[i]);
-        if(this->calc_hist){
+    if(this->calc_hist){
+        for(i=0 ; i<num_items ; i++)
+        {
             if (this->histogram_residual.find(buf[i])!= this->histogram_residual.end()){ //if the element exists
-            this->histogram_residual[buf[i]]++; //increase the number of elements
+                this->histogram_residual[buf[i]]++; //increase the number of elements
             }else{
                 this->histogram_residual[buf[i]]=1;
             }
         }
-        //cout << buf[i] << endl;
+    }
+
+    golomb golomb_encoder(this->m,outfile);
+    for(i=0 ; i<num_items ; i++)
+    {
         golomb_encoder.signed_stream_encode(buf[i]);
     }
     golomb_encoder.close_stream_write();
     printf("Read %d items\n",num_items);
     free(buf);
+
+    auto duration = duration_cast<microseconds>(high_resolution_clock::now() - start);
+    cout << "compression duration: "<< (double)duration.count()/1000000 << endl;
+    
     if(this->calc_hist){
         for(std::map<int,int>::iterator it = this->histogram_original.begin(); it != this->histogram_original.end(); ++it) {
             pak = (double)it->second/num_items;
@@ -82,10 +88,7 @@ SF_INFO lossless_predictive::predictive_encode(char* outfile){
                 this->entropy_residual -= (log(pak)/log(16)) *pak;
         }
     }  
-    //for(std::map<double,int>::iterator it = histogram_residual.begin(); it != histogram_residual.end(); ++it) {
-    //    cout << (int)it->first << ' ' << it->second << endl;
-    //}
-    //cout << "zero: " << histogram_residual[0] << endl;
+    
     return inFileInfo;
 }
 
@@ -116,6 +119,7 @@ double lossless_predictive::getEntropyOriginal(){
 }
 void lossless_predictive::predictive_decode(char* infile,SF_INFO info)
 {
+    auto start = high_resolution_clock::now();
     predictor predictor_decoder(false);
     golomb golomb_decoder(this->m,infile);
     int num_items;
@@ -133,12 +137,15 @@ void lossless_predictive::predictive_decode(char* infile,SF_INFO info)
         }
     }
     golomb_decoder.close_stream_read();
+    
 
     const char* outfilename = "lossless.wav";
     SNDFILE* outFile = sf_open (outfilename, SFM_WRITE, &info);
     sf_write_short (outFile, code, num_items) ;
     sf_close(outFile) ;
     free(code);
+    auto duration = duration_cast<microseconds>(high_resolution_clock::now() - start);
+    cout << "decompression duration: "<< (double)duration.count()/1000000 << endl;
 }
 
 int main(int argc, char* argv[])
@@ -147,9 +154,18 @@ int main(int argc, char* argv[])
     if(argc != 3){
         cout << "Incorrect argument list, use is: ./lossyaudio <nomeficheiro> <hist?>"<<endl;
     }
+    
     std::string filename = argv[1];
     const char* path = "./wavfiles/";
     filename = path + filename;
+
+    bool calculate_hist;
+    if(atoi(argv[3]) == 0){
+        calculate_hist = false;
+    }else{
+        calculate_hist = true;
+    }
+    
     /* para limpar o ficheiro */
     std::ofstream ofs;
     ofs.open(binfile, std::ofstream::out | std::ofstream::trunc);
@@ -166,6 +182,7 @@ int main(int argc, char* argv[])
     lossless_predictive lossless((char*)filename.data(),calculate_hist);
     SF_INFO info = lossless.predictive_encode((char*)binfile.data());
     lossless.predictive_decode((char*)binfile.data(),info);
+    
     cout << "Residual Entropy=" << lossless.getEntropyResidual() << endl;
     cout << "Original Entropy=" << lossless.getEntropyOriginal() << endl;
     cout << "compression="<< (double)std::filesystem::file_size(binfile)/std::filesystem::file_size(filename) <<endl;

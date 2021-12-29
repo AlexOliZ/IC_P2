@@ -75,6 +75,7 @@ class lossy_predictive {
         int qtbits;
         char* filename;
         map <int, int> histogram_residual;
+        map <int, int> histogram_original;
         double entropy;
 };
 

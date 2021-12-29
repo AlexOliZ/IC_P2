@@ -75,7 +75,6 @@ class lossless_predictive {
         map <int, int> histogram_residual;
         double entropy_residual;
         double entropy_original;
-
 };
 
 #endif
