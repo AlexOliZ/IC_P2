@@ -82,12 +82,12 @@ void lossy_predictive::dispHistogram(){
     switch(this->qtbits){
         case 16:
             {
-                hist_w = 600; hist_h = 600; 
+                hist_w = 620; hist_h = 620; 
                 Mat histImage(hist_h, hist_w, CV_8UC1, Scalar(255, 255, 255)); 
                 c = 0;
                 count = 0;
                 for(std::map<int,int>::iterator it = histogram_residual.begin(); it != histogram_residual.end(); ++it) {
-                    if(count % 95 == 0){
+                    if(count % 35 == 0){
                         line(histImage, Point(c, hist_h), Point(c, hist_h-it->second),Scalar(0,0,0), 2,8,0);
                         c++;
                     }     
@@ -99,17 +99,17 @@ void lossy_predictive::dispHistogram(){
             }
         case 8:
             { 
-                hist_w = 520; hist_h = 600; 
+                hist_w = 510; hist_h = 600; 
                 Mat histImage(hist_h, hist_w, CV_8UC1, Scalar(255, 255, 255)); 
                 c = 0;
                 count = 0;
                 for(std::map<int,int>::iterator it = histogram_residual.begin(); it != histogram_residual.end(); ++it) {
-                    for(int k=0;k < 2; k++){
-                        line(histImage, Point(c, hist_h), Point(c, hist_h-(it->second/280)),Scalar(0,0,0), 2,8,0);
+                    for(int k=0;k < 3; k++){
+                        line(histImage, Point(c, hist_h), Point(c, hist_h-(it->second/500)),Scalar(0,0,0), 2,8,0);
                         c++;
                     } 
                     count++;
-                }
+                }         
                 // display histogram
                 imshow("Histogram 8bits", histImage);
                 waitKey(0);
@@ -123,7 +123,7 @@ void lossy_predictive::dispHistogram(){
                 count = 0;
                 for(std::map<int,int>::iterator it = histogram_residual.begin(); it != histogram_residual.end(); ++it) {
                     for(int k=0;k < 40; k++){
-                        line(histImage, Point(c, hist_h), Point(c, hist_h-(it->second/3400)),Scalar(0,0,0), 1,8,0);
+                        line(histImage, Point(c, hist_h), Point(c, hist_h-(it->second/1500)),Scalar(0,0,0), 1,8,0);
                         c++;
                     }                         
                     count++;
@@ -175,8 +175,6 @@ void lossy_predictive::lossypredictive_decode(char* infile)
 
 int main(int argc, char* argv[])
 {
-    
-    string file = "./wavfiles/sample01.wav";
     string binfile = "lossy_file.bin";
     if(argc != 4){
         cout << "Incorrect argument list, use is: ./lossyaudio <nomeficheiro> <nbitsqnt> <hist?>"<<endl;
