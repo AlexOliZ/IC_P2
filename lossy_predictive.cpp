@@ -1,10 +1,13 @@
 #include "lossy_predictive.h"
 #include <filesystem>
+#include <chrono>
+
+using namespace std::chrono;
 //g++ lossy_predictive.cpp Golomb/golomb.cpp predictor.cpp bit_stream/bit_stream.cpp -lsndfile
 
 using namespace std;
 void lossy_predictive::lossypredictive_encode(char* outfile){
-
+    auto start = high_resolution_clock::now();
     char* code;
     short *buf;
     int i,num_items,channels,quant_value,residual,count=0;
@@ -22,9 +25,18 @@ void lossy_predictive::lossypredictive_encode(char* outfile){
 
     buf = (short *) malloc(num_items*sizeof(short));
     sf_read_short(inFile,buf,num_items);
-
     sf_close(inFile);
-        
+
+    if(calc_hist){
+        for(i=0 ; i<num_items ; i++){
+            if (this->histogram_original.find(buf[i])!= this->histogram_original.end()){ //if the element exists
+                this->histogram_original[buf[i]]++; //increase the number of elements
+            }else{
+                this->histogram_original[buf[i]]=1;
+            }
+        } 
+    } 
+
     for(i=0 ; i<num_items ; i++){
         residual = (short)predictor_encoder.residual((int)buf[i]);
         quant_value = quantize((int)residual,qtbits);
@@ -32,6 +44,7 @@ void lossy_predictive::lossypredictive_encode(char* outfile){
         buf[i] = (short)quant_value;
         m += buf[i]>=0?2*buf[i]:-2*buf[i]-1;
     }
+
     int average = m/num_items;
     for(i=0 ; i<num_items ; i++){
         if((buf[i]>=0 ? 2*buf[i] : -2*buf[i]-1) < average)
@@ -42,22 +55,31 @@ void lossy_predictive::lossypredictive_encode(char* outfile){
     //m = m*16;
     m = (uint)ceil(-1/log2(m/(m+1.0)));
     cout << "M: " << m << endl;
-    golomb golomb_encoder(m,outfile);
-
-    for(i=0 ; i<num_items ; i++)
-    {
-        if(this->calc_hist){
+    
+    if(this->calc_hist){
+        for(i=0 ; i<num_items ; i++)
+        {
             if (this->histogram_residual.find(buf[i])!= this->histogram_residual.end()){ //if the element exists
-            this->histogram_residual[buf[i]]++; //increase the number of elements
+                this->histogram_residual[buf[i]]++; //increase the number of elements
             }else{
                 this->histogram_residual[buf[i]]=1;
             }
         }
+    }
+    
+    golomb golomb_encoder(m,outfile);
+    for(i=0 ; i<num_items ; i++)
+    {
         golomb_encoder.signed_stream_encode((int)buf[i]);
     }
+    
     golomb_encoder.close_stream_write();
     printf("Read %d items\n",num_items);
     free(buf);
+    
+    auto duration = duration_cast<microseconds>(high_resolution_clock::now() - start);
+    cout << "compression duration: "<< (double)duration.count()/1000000 << endl;
+
     if(this->calc_hist){
         for(std::map<int,int>::iterator it = this->histogram_residual.begin(); it != this->histogram_residual.end(); ++it) {
         pak = (double)it->second/num_items;
@@ -142,6 +164,7 @@ void lossy_predictive::dispHistogram(){
 
 void lossy_predictive::lossypredictive_decode(char* infile)
 {
+    auto start = high_resolution_clock::now();
     int channels,num_items;
     short *code;
     int count = 0;
@@ -161,7 +184,6 @@ void lossy_predictive::lossypredictive_decode(char* infile)
     code = (short*)malloc(sizeof(short)*num_items);
 
     while(count < num_items){
-
         code[count] = predictor_decoder.reconstruct(golomb_decoder.signed_stream_decode());
         count++;
     }
@@ -171,6 +193,8 @@ void lossy_predictive::lossypredictive_decode(char* infile)
     SNDFILE* outFile = sf_open (outfilename, SFM_WRITE, &inFileInfo);
     sf_write_short(outFile, code, num_items) ;
     sf_close(outFile) ;
+    auto duration = duration_cast<microseconds>(high_resolution_clock::now() - start);
+    cout << "decompression duration: "<< (double)duration.count()/1000000 << endl;
 }
 
 int main(int argc, char* argv[])
@@ -188,10 +212,9 @@ int main(int argc, char* argv[])
     const char* path = "./wavfiles/";
     filename = path + filename;
 
-    if(argv[3] == "false"){
+    if(atoi(argv[3]) == 0){
         calculate_hist = false;
-    }
-    else{
+    }else{
         calculate_hist = true;
     }
     
@@ -205,5 +228,6 @@ int main(int argc, char* argv[])
     cout << "compression="<< (double)std::filesystem::file_size(binfile)/std::filesystem::file_size(filename) <<endl;
     lossy.dispHistogram();
     cout << "entropy=" << lossy.getEntropy() << endl;
+    
     return 0;
 }
