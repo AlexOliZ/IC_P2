@@ -95,20 +95,28 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><b>lossless_codec</b> (string fname)</td></tr>
 <tr class="separator:a00127b187275c722071a73d187092c93"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7eb968583835230c0bf68c08b2582605"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlossless__codec.html#a7eb968583835230c0bf68c08b2582605">YUV</a> (Mat image, Mat &amp;y, Mat &amp;u, Mat &amp;v)</td></tr>
+<tr class="memdesc:a7eb968583835230c0bf68c08b2582605"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert rgb images to yuv.  <a href="classlossless__codec.html#a7eb968583835230c0bf68c08b2582605">More...</a><br /></td></tr>
 <tr class="separator:a7eb968583835230c0bf68c08b2582605"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae20cc15e38f52ebff6a5f5799a8a8c54"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlossless__codec.html#ae20cc15e38f52ebff6a5f5799a8a8c54">RGB</a> (Mat y, Mat u, Mat v, Mat &amp;ImagemRBG)</td></tr>
+<tr class="memdesc:ae20cc15e38f52ebff6a5f5799a8a8c54"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert yuv images to rgb.  <a href="classlossless__codec.html#ae20cc15e38f52ebff6a5f5799a8a8c54">More...</a><br /></td></tr>
 <tr class="separator:ae20cc15e38f52ebff6a5f5799a8a8c54"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aded9fb935d117772d7b6267052c02032"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlossless__codec.html#aded9fb935d117772d7b6267052c02032">erroEnc</a> (int valorPixel, int valorPrevisto)</td></tr>
+<tr class="memdesc:aded9fb935d117772d7b6267052c02032"><td class="mdescLeft">&#160;</td><td class="mdescRight">calculation of the residual to code.  <a href="classlossless__codec.html#aded9fb935d117772d7b6267052c02032">More...</a><br /></td></tr>
 <tr class="separator:aded9fb935d117772d7b6267052c02032"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8bc8d7b9fd6a7787855b24c2268f82c9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlossless__codec.html#a8bc8d7b9fd6a7787855b24c2268f82c9">ValorPixelDec</a> (int erro, int valorPrevisto)</td></tr>
+<tr class="memdesc:a8bc8d7b9fd6a7787855b24c2268f82c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">calculation of the decoded pixel value.  <a href="classlossless__codec.html#a8bc8d7b9fd6a7787855b24c2268f82c9">More...</a><br /></td></tr>
 <tr class="separator:a8bc8d7b9fd6a7787855b24c2268f82c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0493a5ddacfd0a8e720c87050fdcf726"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlossless__codec.html#a0493a5ddacfd0a8e720c87050fdcf726">preditor</a> (int a, int b, int c)</td></tr>
+<tr class="memdesc:a0493a5ddacfd0a8e720c87050fdcf726"><td class="mdescLeft">&#160;</td><td class="mdescRight">predictor the pixel value.  <a href="classlossless__codec.html#a0493a5ddacfd0a8e720c87050fdcf726">More...</a><br /></td></tr>
 <tr class="separator:a0493a5ddacfd0a8e720c87050fdcf726"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a23d31600dc9fc0e1be22906c75b9624e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlossless__codec.html#a23d31600dc9fc0e1be22906c75b9624e">preditor_JPEG_LS</a> (Mat matriz, Mat &amp;erMat, Mat &amp;prev)</td></tr>
+<tr class="memdesc:a23d31600dc9fc0e1be22906c75b9624e"><td class="mdescLeft">&#160;</td><td class="mdescRight">calculating a,b and c to predict the pixel value.  <a href="classlossless__codec.html#a23d31600dc9fc0e1be22906c75b9624e">More...</a><br /></td></tr>
 <tr class="separator:a23d31600dc9fc0e1be22906c75b9624e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa7b4b8e42da2b52a49d333e0cf9ba44d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlossless__codec.html#aa7b4b8e42da2b52a49d333e0cf9ba44d">golombEnc</a> (Mat erroY, Mat erroV, Mat erroU, int m, char *namefile)</td></tr>
+<tr class="memdesc:aa7b4b8e42da2b52a49d333e0cf9ba44d"><td class="mdescLeft">&#160;</td><td class="mdescRight">encode and write to a file the residual using Golomb and bitstream.  <a href="classlossless__codec.html#aa7b4b8e42da2b52a49d333e0cf9ba44d">More...</a><br /></td></tr>
 <tr class="separator:aa7b4b8e42da2b52a49d333e0cf9ba44d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aec8c51143b34ae2bde57d239e6a26c9f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlossless__codec.html#aec8c51143b34ae2bde57d239e6a26c9f">golombDesc</a> (Mat &amp;DescY, Mat &amp;DescV, Mat &amp;DescU, int m, char *namefile)</td></tr>
+<tr class="memdesc:aec8c51143b34ae2bde57d239e6a26c9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">dencode and write to a file the residual using Golomb and bitstream.  <a href="classlossless__codec.html#aec8c51143b34ae2bde57d239e6a26c9f">More...</a><br /></td></tr>
 <tr class="separator:aec8c51143b34ae2bde57d239e6a26c9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -137,14 +145,16 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>calculation of the residual to code. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">valorPixel</td><td>pixel value </td></tr>
-    <tr><td class="paramname">valorPrevisto</td><td>expected pixel value </td></tr>
+    <tr><td class="paramname">valorPixel</td><td>pixel value. </td></tr>
+    <tr><td class="paramname">valorPrevisto</td><td>expected pixel value. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>int -&gt; residual for each value of the predicted pixel </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>int -&gt; residual for each value of the predicted pixel. </dd></dl>
 
 </div>
 </div>
@@ -191,13 +201,15 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>dencode and write to a file the residual using Golomb and bitstream. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">DescY</td><td>decoded y matrix </td></tr>
-    <tr><td class="paramname">DescV</td><td>decoded v matrix </td></tr>
-    <tr><td class="paramname">DescU</td><td>decoded u matrix </td></tr>
-    <tr><td class="paramname">m</td><td>golomg parameter m </td></tr>
-    <tr><td class="paramname">namefile</td><td>name of the file to be read from golomb </td></tr>
+    <tr><td class="paramname">DescY</td><td>decoded y matrix. </td></tr>
+    <tr><td class="paramname">DescV</td><td>decoded v matrix. </td></tr>
+    <tr><td class="paramname">DescU</td><td>decoded u matrix. </td></tr>
+    <tr><td class="paramname">m</td><td>golomg parameter m. </td></tr>
+    <tr><td class="paramname">namefile</td><td>name of the file to be read from golomb. </td></tr>
   </table>
   </dd>
 </dl>
@@ -247,13 +259,15 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>encode and write to a file the residual using Golomb and bitstream. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">erroY</td><td>residual of the y parameter to be encoded </td></tr>
-    <tr><td class="paramname">erroV</td><td>residual of the v parameter to be encoded </td></tr>
-    <tr><td class="paramname">erroU</td><td>residual of the u parameter to be encoded </td></tr>
-    <tr><td class="paramname">m</td><td>golomg parameter m </td></tr>
-    <tr><td class="paramname">namefile</td><td>name of the file to be write from golomb </td></tr>
+    <tr><td class="paramname">erroY</td><td>residual of the y parameter to be encoded. </td></tr>
+    <tr><td class="paramname">erroV</td><td>residual of the v parameter to be encoded. </td></tr>
+    <tr><td class="paramname">erroU</td><td>residual of the u parameter to be encoded. </td></tr>
+    <tr><td class="paramname">m</td><td>golomg parameter m. </td></tr>
+    <tr><td class="paramname">namefile</td><td>name of the file to be write from golomb. </td></tr>
   </table>
   </dd>
 </dl>
@@ -291,15 +305,17 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>predictor the pixel value. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">a</td><td>parameter a to calculate the expected pixel value </td></tr>
-    <tr><td class="paramname">b</td><td>parameter b to calculate the expected pixel value </td></tr>
-    <tr><td class="paramname">c</td><td>parameter c to calculate the expected pixel value </td></tr>
+    <tr><td class="paramname">a</td><td>parameter a to calculate the expected pixel value. </td></tr>
+    <tr><td class="paramname">b</td><td>parameter b to calculate the expected pixel value. </td></tr>
+    <tr><td class="paramname">c</td><td>parameter c to calculate the expected pixel value. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>int -&gt; the predicted value of the next pixel </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>int -&gt; the predicted value of the next pixel. </dd></dl>
 
 </div>
 </div>
@@ -334,11 +350,13 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>calculating a,b and c to predict the pixel value. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">matriz</td><td>matrix to calculate the calculated error </td></tr>
-    <tr><td class="paramname">erMat</td><td>matrix with the calculated error </td></tr>
-    <tr><td class="paramname">prev</td><td>matrix with the calculated predictor </td></tr>
+    <tr><td class="paramname">matriz</td><td>matrix to calculate the calculated error. </td></tr>
+    <tr><td class="paramname">erMat</td><td>matrix with the calculated error. </td></tr>
+    <tr><td class="paramname">prev</td><td>matrix with the calculated predictor. </td></tr>
   </table>
   </dd>
 </dl>
@@ -382,12 +400,14 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>convert yuv images to rgb. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">y</td><td>address for the matrix y </td></tr>
-    <tr><td class="paramname">u</td><td>address for the matrix u </td></tr>
-    <tr><td class="paramname">v</td><td>address for the matrix v </td></tr>
-    <tr><td class="paramname">ImagemRBG</td><td>final image matrix </td></tr>
+    <tr><td class="paramname">y</td><td>address for the matrix y. </td></tr>
+    <tr><td class="paramname">u</td><td>address for the matrix u. </td></tr>
+    <tr><td class="paramname">v</td><td>address for the matrix v. </td></tr>
+    <tr><td class="paramname">ImagemRBG</td><td>final image matrix. </td></tr>
   </table>
   </dd>
 </dl>
@@ -419,14 +439,16 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>calculation of the decoded pixel value. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">erro</td><td>residual </td></tr>
-    <tr><td class="paramname">valorPrevisto</td><td>expected pixel value </td></tr>
+    <tr><td class="paramname">erro</td><td>residual. </td></tr>
+    <tr><td class="paramname">valorPrevisto</td><td>expected pixel value. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>int -&gt; pixel value for each value of the predicted pixel </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>int -&gt; pixel value for each value of the predicted pixel. </dd></dl>
 
 </div>
 </div>
@@ -467,12 +489,14 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>convert rgb images to yuv. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">image</td><td>original image matrix </td></tr>
-    <tr><td class="paramname">y</td><td>address for the matrix y </td></tr>
-    <tr><td class="paramname">u</td><td>address for the matrix u </td></tr>
-    <tr><td class="paramname">v</td><td>address for the matrix v </td></tr>
+    <tr><td class="paramname">image</td><td>original image matrix. </td></tr>
+    <tr><td class="paramname">y</td><td>address for the matrix y. </td></tr>
+    <tr><td class="paramname">u</td><td>address for the matrix u. </td></tr>
+    <tr><td class="paramname">v</td><td>address for the matrix v. </td></tr>
   </table>
   </dd>
 </dl>

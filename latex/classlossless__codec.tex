@@ -7,21 +7,21 @@
 {\bfseries lossless\+\_\+codec} (string fname)
 \item 
 void \mbox{\hyperlink{classlossless__codec_a7eb968583835230c0bf68c08b2582605}{Y\+UV}} (Mat image, Mat \&y, Mat \&u, Mat \&v)
-\item 
+\begin{DoxyCompactList}\small\item\em convert rgb images to yuv. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classlossless__codec_ae20cc15e38f52ebff6a5f5799a8a8c54}{R\+GB}} (Mat y, Mat u, Mat v, Mat \&Imagem\+R\+BG)
-\item 
+\begin{DoxyCompactList}\small\item\em convert yuv images to rgb. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{classlossless__codec_aded9fb935d117772d7b6267052c02032}{erro\+Enc}} (int valor\+Pixel, int valor\+Previsto)
-\item 
+\begin{DoxyCompactList}\small\item\em calculation of the residual to code. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{classlossless__codec_a8bc8d7b9fd6a7787855b24c2268f82c9}{Valor\+Pixel\+Dec}} (int erro, int valor\+Previsto)
-\item 
+\begin{DoxyCompactList}\small\item\em calculation of the decoded pixel value. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{classlossless__codec_a0493a5ddacfd0a8e720c87050fdcf726}{preditor}} (int a, int b, int c)
-\item 
+\begin{DoxyCompactList}\small\item\em predictor the pixel value. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classlossless__codec_a23d31600dc9fc0e1be22906c75b9624e}{preditor\+\_\+\+J\+P\+E\+G\+\_\+\+LS}} (Mat matriz, Mat \&er\+Mat, Mat \&prev)
-\item 
+\begin{DoxyCompactList}\small\item\em calculating a,b and c to predict the pixel value. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classlossless__codec_aa7b4b8e42da2b52a49d333e0cf9ba44d}{golomb\+Enc}} (Mat erroY, Mat erroV, Mat erroU, int m, char $\ast$namefile)
-\item 
+\begin{DoxyCompactList}\small\item\em encode and write to a file the residual using Golomb and bitstream. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classlossless__codec_aec8c51143b34ae2bde57d239e6a26c9f}{golomb\+Desc}} (Mat \&DescY, Mat \&DescV, Mat \&DescU, int m, char $\ast$namefile)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em dencode and write to a file the residual using Golomb and bitstream. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Member Function Documentation}
@@ -32,14 +32,18 @@ void \mbox{\hyperlink{classlossless__codec_aec8c51143b34ae2bde57d239e6a26c9f}{go
 {\footnotesize\ttfamily int lossless\+\_\+codec\+::erro\+Enc (\begin{DoxyParamCaption}\item[{int}]{valor\+Pixel,  }\item[{int}]{valor\+Previsto }\end{DoxyParamCaption})}
 
 
+
+calculation of the residual to code. 
+
+
 \begin{DoxyParams}{Parameters}
-{\em valor\+Pixel} & pixel value \\
+{\em valor\+Pixel} & pixel value. \\
 \hline
-{\em valor\+Previsto} & expected pixel value \\
+{\em valor\+Previsto} & expected pixel value. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-int -\/$>$ residual for each value of the predicted pixel 
+int -\/$>$ residual for each value of the predicted pixel. 
 \end{DoxyReturn}
 \mbox{\Hypertarget{classlossless__codec_aec8c51143b34ae2bde57d239e6a26c9f}\label{classlossless__codec_aec8c51143b34ae2bde57d239e6a26c9f}} 
 \index{lossless\_codec@{lossless\_codec}!golombDesc@{golombDesc}}
@@ -48,16 +52,20 @@ int -\/$>$ residual for each value of the predicted pixel
 {\footnotesize\ttfamily void lossless\+\_\+codec\+::golomb\+Desc (\begin{DoxyParamCaption}\item[{Mat \&}]{DescY,  }\item[{Mat \&}]{DescV,  }\item[{Mat \&}]{DescU,  }\item[{int}]{m,  }\item[{char $\ast$}]{namefile }\end{DoxyParamCaption})}
 
 
+
+dencode and write to a file the residual using Golomb and bitstream. 
+
+
 \begin{DoxyParams}{Parameters}
-{\em DescY} & decoded y matrix \\
+{\em DescY} & decoded y matrix. \\
 \hline
-{\em DescV} & decoded v matrix \\
+{\em DescV} & decoded v matrix. \\
 \hline
-{\em DescU} & decoded u matrix \\
+{\em DescU} & decoded u matrix. \\
 \hline
-{\em m} & golomg parameter m \\
+{\em m} & golomg parameter m. \\
 \hline
-{\em namefile} & name of the file to be read from golomb \\
+{\em namefile} & name of the file to be read from golomb. \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{classlossless__codec_aa7b4b8e42da2b52a49d333e0cf9ba44d}\label{classlossless__codec_aa7b4b8e42da2b52a49d333e0cf9ba44d}} 
@@ -67,16 +75,20 @@ int -\/$>$ residual for each value of the predicted pixel
 {\footnotesize\ttfamily void lossless\+\_\+codec\+::golomb\+Enc (\begin{DoxyParamCaption}\item[{Mat}]{erroY,  }\item[{Mat}]{erroV,  }\item[{Mat}]{erroU,  }\item[{int}]{m,  }\item[{char $\ast$}]{namefile }\end{DoxyParamCaption})}
 
 
+
+encode and write to a file the residual using Golomb and bitstream. 
+
+
 \begin{DoxyParams}{Parameters}
-{\em erroY} & residual of the y parameter to be encoded \\
+{\em erroY} & residual of the y parameter to be encoded. \\
 \hline
-{\em erroV} & residual of the v parameter to be encoded \\
+{\em erroV} & residual of the v parameter to be encoded. \\
 \hline
-{\em erroU} & residual of the u parameter to be encoded \\
+{\em erroU} & residual of the u parameter to be encoded. \\
 \hline
-{\em m} & golomg parameter m \\
+{\em m} & golomg parameter m. \\
 \hline
-{\em namefile} & name of the file to be write from golomb \\
+{\em namefile} & name of the file to be write from golomb. \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{classlossless__codec_a0493a5ddacfd0a8e720c87050fdcf726}\label{classlossless__codec_a0493a5ddacfd0a8e720c87050fdcf726}} 
@@ -86,16 +98,20 @@ int -\/$>$ residual for each value of the predicted pixel
 {\footnotesize\ttfamily int lossless\+\_\+codec\+::preditor (\begin{DoxyParamCaption}\item[{int}]{a,  }\item[{int}]{b,  }\item[{int}]{c }\end{DoxyParamCaption})}
 
 
+
+predictor the pixel value. 
+
+
 \begin{DoxyParams}{Parameters}
-{\em a} & parameter a to calculate the expected pixel value \\
+{\em a} & parameter a to calculate the expected pixel value. \\
 \hline
-{\em b} & parameter b to calculate the expected pixel value \\
+{\em b} & parameter b to calculate the expected pixel value. \\
 \hline
-{\em c} & parameter c to calculate the expected pixel value \\
+{\em c} & parameter c to calculate the expected pixel value. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-int -\/$>$ the predicted value of the next pixel 
+int -\/$>$ the predicted value of the next pixel. 
 \end{DoxyReturn}
 \mbox{\Hypertarget{classlossless__codec_a23d31600dc9fc0e1be22906c75b9624e}\label{classlossless__codec_a23d31600dc9fc0e1be22906c75b9624e}} 
 \index{lossless\_codec@{lossless\_codec}!preditor\_JPEG\_LS@{preditor\_JPEG\_LS}}
@@ -104,12 +120,16 @@ int -\/$>$ the predicted value of the next pixel
 {\footnotesize\ttfamily void lossless\+\_\+codec\+::preditor\+\_\+\+J\+P\+E\+G\+\_\+\+LS (\begin{DoxyParamCaption}\item[{Mat}]{matriz,  }\item[{Mat \&}]{er\+Mat,  }\item[{Mat \&}]{prev }\end{DoxyParamCaption})}
 
 
+
+calculating a,b and c to predict the pixel value. 
+
+
 \begin{DoxyParams}{Parameters}
-{\em matriz} & matrix to calculate the calculated error \\
+{\em matriz} & matrix to calculate the calculated error. \\
 \hline
-{\em er\+Mat} & matrix with the calculated error \\
+{\em er\+Mat} & matrix with the calculated error. \\
 \hline
-{\em prev} & matrix with the calculated predictor \\
+{\em prev} & matrix with the calculated predictor. \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{classlossless__codec_ae20cc15e38f52ebff6a5f5799a8a8c54}\label{classlossless__codec_ae20cc15e38f52ebff6a5f5799a8a8c54}} 
@@ -119,14 +139,18 @@ int -\/$>$ the predicted value of the next pixel
 {\footnotesize\ttfamily void lossless\+\_\+codec\+::\+R\+GB (\begin{DoxyParamCaption}\item[{Mat}]{y,  }\item[{Mat}]{u,  }\item[{Mat}]{v,  }\item[{Mat \&}]{Imagem\+R\+BG }\end{DoxyParamCaption})}
 
 
+
+convert yuv images to rgb. 
+
+
 \begin{DoxyParams}{Parameters}
-{\em y} & address for the matrix y \\
+{\em y} & address for the matrix y. \\
 \hline
-{\em u} & address for the matrix u \\
+{\em u} & address for the matrix u. \\
 \hline
-{\em v} & address for the matrix v \\
+{\em v} & address for the matrix v. \\
 \hline
-{\em Imagem\+R\+BG} & final image matrix \\
+{\em Imagem\+R\+BG} & final image matrix. \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{classlossless__codec_a8bc8d7b9fd6a7787855b24c2268f82c9}\label{classlossless__codec_a8bc8d7b9fd6a7787855b24c2268f82c9}} 
@@ -136,14 +160,18 @@ int -\/$>$ the predicted value of the next pixel
 {\footnotesize\ttfamily int lossless\+\_\+codec\+::\+Valor\+Pixel\+Dec (\begin{DoxyParamCaption}\item[{int}]{erro,  }\item[{int}]{valor\+Previsto }\end{DoxyParamCaption})}
 
 
+
+calculation of the decoded pixel value. 
+
+
 \begin{DoxyParams}{Parameters}
-{\em erro} & residual \\
+{\em erro} & residual. \\
 \hline
-{\em valor\+Previsto} & expected pixel value \\
+{\em valor\+Previsto} & expected pixel value. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-int -\/$>$ pixel value for each value of the predicted pixel 
+int -\/$>$ pixel value for each value of the predicted pixel. 
 \end{DoxyReturn}
 \mbox{\Hypertarget{classlossless__codec_a7eb968583835230c0bf68c08b2582605}\label{classlossless__codec_a7eb968583835230c0bf68c08b2582605}} 
 \index{lossless\_codec@{lossless\_codec}!YUV@{YUV}}
@@ -152,14 +180,18 @@ int -\/$>$ pixel value for each value of the predicted pixel
 {\footnotesize\ttfamily void lossless\+\_\+codec\+::\+Y\+UV (\begin{DoxyParamCaption}\item[{Mat}]{image,  }\item[{Mat \&}]{y,  }\item[{Mat \&}]{u,  }\item[{Mat \&}]{v }\end{DoxyParamCaption})}
 
 
+
+convert rgb images to yuv. 
+
+
 \begin{DoxyParams}{Parameters}
-{\em image} & original image matrix \\
+{\em image} & original image matrix. \\
 \hline
-{\em y} & address for the matrix y \\
+{\em y} & address for the matrix y. \\
 \hline
-{\em u} & address for the matrix u \\
+{\em u} & address for the matrix u. \\
 \hline
-{\em v} & address for the matrix v \\
+{\em v} & address for the matrix v. \\
 \hline
 \end{DoxyParams}
 

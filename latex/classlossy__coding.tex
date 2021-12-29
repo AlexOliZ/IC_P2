@@ -7,25 +7,25 @@
 {\bfseries lossy\+\_\+coding} (string fname)
 \item 
 void \mbox{\hyperlink{classlossy__coding_af2b28272f7635552f05381f8ad1abd39}{Y\+UV}} (Mat image, Mat \&y, Mat \&u, Mat \&v)
-\item 
+\begin{DoxyCompactList}\small\item\em convert rgb images to yuv. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classlossy__coding_ad6ed56d04c55611782bbebc67f4592bc}{R\+GB}} (Mat y, Mat u, Mat v, Mat \&Imagem\+R\+BG)
-\item 
+\begin{DoxyCompactList}\small\item\em convert yuv images to rgb. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{classlossy__coding_aac208f3c5b594be10581373a665d82d1}{erro\+Enc}} (int valor\+Pixel, int valor\+Previsto, int quantization)
-\item 
+\begin{DoxyCompactList}\small\item\em calculation of the residual to code. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{classlossy__coding_a2f905e170923fd853bc9768a708b3861}{Valor\+Pixel\+Dec}} (int erro, int valor\+Previsto, int quantization)
-\item 
+\begin{DoxyCompactList}\small\item\em calculation of the decoded pixel value. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{classlossy__coding_aa18d7c537d73d95d42a487a934b67ebb}{preditor}} (int a, int b, int c)
-\item 
+\begin{DoxyCompactList}\small\item\em predictor the pixel value. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classlossy__coding_a3af7edc37a3057fbbe83b1de2a8ea1bd}{preditor\+\_\+\+J\+P\+E\+G\+\_\+\+LS}} (Mat matriz, Mat \&er\+Mat, Mat \&prev, int quantization)
-\item 
+\begin{DoxyCompactList}\small\item\em calculating a,b and c to predict the pixel value. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classlossy__coding_a9ffa8d231c30ace8b96527dbc4258903}{golomb\+Enc}} (Mat erroY, Mat erroV, Mat erroU, int m, char $\ast$namefile)
-\item 
+\begin{DoxyCompactList}\small\item\em encode and write to a file the residual using Golomb and bitstream. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classlossy__coding_ae372e30ccf9bbd512f5914e36c28549d}{golomb\+Desc}} (Mat \&DescY, Mat \&DescV, Mat \&DescU, int m, char $\ast$namefile)
-\item 
+\begin{DoxyCompactList}\small\item\em dencode and write to a file the residual using Golomb and bitstream. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classlossy__coding_a8a692348d2df39c9c7a9d6b3aef4cd1a}{D\+CT}} (Mat \&aux, Mat mat)
-\item 
+\begin{DoxyCompactList}\small\item\em introduce D\+CT from J\+P\+EG. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classlossy__coding_ae9c914c6f5a773b71cd2d898329fee2a}{I\+D\+CT}} (Mat \&aux, Mat mat)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em recovery of transformed data, J\+P\+EG D\+CT inverse transformation (I\+D\+CT). \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Member Function Documentation}
@@ -36,10 +36,14 @@ void \mbox{\hyperlink{classlossy__coding_ae9c914c6f5a773b71cd2d898329fee2a}{I\+D
 {\footnotesize\ttfamily void lossy\+\_\+coding\+::\+D\+CT (\begin{DoxyParamCaption}\item[{Mat \&}]{aux,  }\item[{Mat}]{mat }\end{DoxyParamCaption})}
 
 
+
+introduce D\+CT from J\+P\+EG. 
+
+
 \begin{DoxyParams}{Parameters}
-{\em aux} & final matrix of the D\+CT transformation \\
+{\em aux} & final matrix of the D\+CT transformation. \\
 \hline
-{\em mat} & matrix to transform \\
+{\em mat} & matrix to transform. \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{classlossy__coding_aac208f3c5b594be10581373a665d82d1}\label{classlossy__coding_aac208f3c5b594be10581373a665d82d1}} 
@@ -49,16 +53,20 @@ void \mbox{\hyperlink{classlossy__coding_ae9c914c6f5a773b71cd2d898329fee2a}{I\+D
 {\footnotesize\ttfamily int lossy\+\_\+coding\+::erro\+Enc (\begin{DoxyParamCaption}\item[{int}]{valor\+Pixel,  }\item[{int}]{valor\+Previsto,  }\item[{int}]{quantization }\end{DoxyParamCaption})}
 
 
+
+calculation of the residual to code. 
+
+
 \begin{DoxyParams}{Parameters}
-{\em valor\+Pixel} & pixel value \\
+{\em valor\+Pixel} & pixel value. \\
 \hline
-{\em valor\+Previsto} & expected pixel value \\
+{\em valor\+Previsto} & expected pixel value. \\
 \hline
-{\em quantization} & quantization parameter set as program argument \\
+{\em quantization} & quantization parameter set as program argument. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-int -\/$>$ residual for each value of the predicted pixel 
+int -\/$>$ residual for each value of the predicted pixel. 
 \end{DoxyReturn}
 \mbox{\Hypertarget{classlossy__coding_ae372e30ccf9bbd512f5914e36c28549d}\label{classlossy__coding_ae372e30ccf9bbd512f5914e36c28549d}} 
 \index{lossy\_coding@{lossy\_coding}!golombDesc@{golombDesc}}
@@ -67,16 +75,20 @@ int -\/$>$ residual for each value of the predicted pixel
 {\footnotesize\ttfamily void lossy\+\_\+coding\+::golomb\+Desc (\begin{DoxyParamCaption}\item[{Mat \&}]{DescY,  }\item[{Mat \&}]{DescV,  }\item[{Mat \&}]{DescU,  }\item[{int}]{m,  }\item[{char $\ast$}]{namefile }\end{DoxyParamCaption})}
 
 
+
+dencode and write to a file the residual using Golomb and bitstream. 
+
+
 \begin{DoxyParams}{Parameters}
-{\em DescY} & decoded y matrix \\
+{\em DescY} & decoded y matrix. \\
 \hline
-{\em DescV} & decoded v matrix \\
+{\em DescV} & decoded v matrix. \\
 \hline
-{\em DescU} & decoded u matrix \\
+{\em DescU} & decoded u matrix. \\
 \hline
-{\em m} & golomg parameter m \\
+{\em m} & golomg parameter m. \\
 \hline
-{\em namefile} & name of the file to be read from golomb \\
+{\em namefile} & name of the file to be read from golomb. \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{classlossy__coding_a9ffa8d231c30ace8b96527dbc4258903}\label{classlossy__coding_a9ffa8d231c30ace8b96527dbc4258903}} 
@@ -86,16 +98,20 @@ int -\/$>$ residual for each value of the predicted pixel
 {\footnotesize\ttfamily void lossy\+\_\+coding\+::golomb\+Enc (\begin{DoxyParamCaption}\item[{Mat}]{erroY,  }\item[{Mat}]{erroV,  }\item[{Mat}]{erroU,  }\item[{int}]{m,  }\item[{char $\ast$}]{namefile }\end{DoxyParamCaption})}
 
 
+
+encode and write to a file the residual using Golomb and bitstream. 
+
+
 \begin{DoxyParams}{Parameters}
-{\em erroY} & residual of the y parameter to be encoded \\
+{\em erroY} & residual of the y parameter to be encoded. \\
 \hline
-{\em erroV} & residual of the v parameter to be encoded \\
+{\em erroV} & residual of the v parameter to be encoded. \\
 \hline
-{\em erroU} & residual of the u parameter to be encoded \\
+{\em erroU} & residual of the u parameter to be encoded. \\
 \hline
-{\em m} & golomg parameter m \\
+{\em m} & golomg parameter m. \\
 \hline
-{\em namefile} & name of the file to be write from golomb \\
+{\em namefile} & name of the file to be write from golomb. \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{classlossy__coding_ae9c914c6f5a773b71cd2d898329fee2a}\label{classlossy__coding_ae9c914c6f5a773b71cd2d898329fee2a}} 
@@ -105,10 +121,14 @@ int -\/$>$ residual for each value of the predicted pixel
 {\footnotesize\ttfamily void lossy\+\_\+coding\+::\+I\+D\+CT (\begin{DoxyParamCaption}\item[{Mat \&}]{aux,  }\item[{Mat}]{mat }\end{DoxyParamCaption})}
 
 
+
+recovery of transformed data, J\+P\+EG D\+CT inverse transformation (I\+D\+CT). 
+
+
 \begin{DoxyParams}{Parameters}
-{\em aux} & matrix recovered by I\+D\+CT (final matrix) \\
+{\em aux} & matrix recovered by I\+D\+CT (final matrix). \\
 \hline
-{\em mat} & matrix recover \\
+{\em mat} & matrix recover. \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{classlossy__coding_aa18d7c537d73d95d42a487a934b67ebb}\label{classlossy__coding_aa18d7c537d73d95d42a487a934b67ebb}} 
@@ -118,16 +138,20 @@ int -\/$>$ residual for each value of the predicted pixel
 {\footnotesize\ttfamily int lossy\+\_\+coding\+::preditor (\begin{DoxyParamCaption}\item[{int}]{a,  }\item[{int}]{b,  }\item[{int}]{c }\end{DoxyParamCaption})}
 
 
+
+predictor the pixel value. 
+
+
 \begin{DoxyParams}{Parameters}
-{\em a} & parameter a to calculate the expected pixel value \\
+{\em a} & parameter a to calculate the expected pixel value. \\
 \hline
-{\em b} & parameter b to calculate the expected pixel value \\
+{\em b} & parameter b to calculate the expected pixel value. \\
 \hline
-{\em c} & parameter c to calculate the expected pixel value \\
+{\em c} & parameter c to calculate the expected pixel value. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-int -\/$>$ the predicted value of the next pixel 
+int -\/$>$ the predicted value of the next pixel. 
 \end{DoxyReturn}
 \mbox{\Hypertarget{classlossy__coding_a3af7edc37a3057fbbe83b1de2a8ea1bd}\label{classlossy__coding_a3af7edc37a3057fbbe83b1de2a8ea1bd}} 
 \index{lossy\_coding@{lossy\_coding}!preditor\_JPEG\_LS@{preditor\_JPEG\_LS}}
@@ -136,14 +160,18 @@ int -\/$>$ the predicted value of the next pixel
 {\footnotesize\ttfamily void lossy\+\_\+coding\+::preditor\+\_\+\+J\+P\+E\+G\+\_\+\+LS (\begin{DoxyParamCaption}\item[{Mat}]{matriz,  }\item[{Mat \&}]{er\+Mat,  }\item[{Mat \&}]{prev,  }\item[{int}]{quantization }\end{DoxyParamCaption})}
 
 
+
+calculating a,b and c to predict the pixel value. 
+
+
 \begin{DoxyParams}{Parameters}
-{\em matriz} & matrix to calculate the calculated error \\
+{\em matriz} & matrix to calculate the calculated error. \\
 \hline
-{\em er\+Mat} & matrix with the calculated error \\
+{\em er\+Mat} & matrix with the calculated error. \\
 \hline
-{\em prev} & matrix with the calculated predictor \\
+{\em prev} & matrix with the calculated predictor. \\
 \hline
-{\em quantization} & quantization parameter set as program argument \\
+{\em quantization} & quantization parameter set as program argument. \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{classlossy__coding_ad6ed56d04c55611782bbebc67f4592bc}\label{classlossy__coding_ad6ed56d04c55611782bbebc67f4592bc}} 
@@ -153,14 +181,18 @@ int -\/$>$ the predicted value of the next pixel
 {\footnotesize\ttfamily void lossy\+\_\+coding\+::\+R\+GB (\begin{DoxyParamCaption}\item[{Mat}]{y,  }\item[{Mat}]{u,  }\item[{Mat}]{v,  }\item[{Mat \&}]{Imagem\+R\+BG }\end{DoxyParamCaption})}
 
 
+
+convert yuv images to rgb. 
+
+
 \begin{DoxyParams}{Parameters}
-{\em y} & address for the matrix y \\
+{\em y} & address for the matrix y. \\
 \hline
-{\em u} & address for the matrix u \\
+{\em u} & address for the matrix u. \\
 \hline
-{\em v} & address for the matrix v \\
+{\em v} & address for the matrix v. \\
 \hline
-{\em Imagem\+R\+BG} & final image matrix \\
+{\em Imagem\+R\+BG} & final image matrix. \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{classlossy__coding_a2f905e170923fd853bc9768a708b3861}\label{classlossy__coding_a2f905e170923fd853bc9768a708b3861}} 
@@ -170,16 +202,20 @@ int -\/$>$ the predicted value of the next pixel
 {\footnotesize\ttfamily int lossy\+\_\+coding\+::\+Valor\+Pixel\+Dec (\begin{DoxyParamCaption}\item[{int}]{erro,  }\item[{int}]{valor\+Previsto,  }\item[{int}]{quantization }\end{DoxyParamCaption})}
 
 
+
+calculation of the decoded pixel value. 
+
+
 \begin{DoxyParams}{Parameters}
-{\em erro} & residual \\
+{\em erro} & residual. \\
 \hline
-{\em valor\+Previsto} & expected pixel value \\
+{\em valor\+Previsto} & expected pixel value. \\
 \hline
-{\em quantization} & quantization parameter set as program argument \\
+{\em quantization} & quantization parameter set as program argument. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-int -\/$>$ pixel value for each value of the predicted pixel 
+int -\/$>$ pixel value for each value of the predicted pixel. 
 \end{DoxyReturn}
 \mbox{\Hypertarget{classlossy__coding_af2b28272f7635552f05381f8ad1abd39}\label{classlossy__coding_af2b28272f7635552f05381f8ad1abd39}} 
 \index{lossy\_coding@{lossy\_coding}!YUV@{YUV}}
@@ -188,14 +224,18 @@ int -\/$>$ pixel value for each value of the predicted pixel
 {\footnotesize\ttfamily void lossy\+\_\+coding\+::\+Y\+UV (\begin{DoxyParamCaption}\item[{Mat}]{image,  }\item[{Mat \&}]{y,  }\item[{Mat \&}]{u,  }\item[{Mat \&}]{v }\end{DoxyParamCaption})}
 
 
+
+convert rgb images to yuv. 
+
+
 \begin{DoxyParams}{Parameters}
-{\em image} & original image matrix \\
+{\em image} & original image matrix. \\
 \hline
-{\em y} & address for the matrix y \\
+{\em y} & address for the matrix y. \\
 \hline
-{\em u} & address for the matrix u \\
+{\em u} & address for the matrix u. \\
 \hline
-{\em v} & address for the matrix v \\
+{\em v} & address for the matrix v. \\
 \hline
 \end{DoxyParams}
 
