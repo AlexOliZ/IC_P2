@@ -7,7 +7,6 @@ using namespace std::chrono;
 //g++ lossless_predictive.cpp Golomb/golomb.cpp predictor.cpp bit_stream/bit_stream.cpp -lsndfile
 
 using namespace std;
-static int* check_validity;
 
 SF_INFO lossless_predictive::predictive_encode(char* outfile){
     auto start = high_resolution_clock::now();
@@ -29,7 +28,8 @@ SF_INFO lossless_predictive::predictive_encode(char* outfile){
     buf = (short *) malloc(num_items*sizeof(short));
     sf_read_short(inFile,buf,num_items);
     sf_close(inFile);
-    if(this->calc_hist){
+    
+    if(calc_hist){
         for(i=0 ; i<num_items ; i++){
             if (this->histogram_original.find(buf[i])!= this->histogram_original.end()){ //if the element exists
                 this->histogram_original[buf[i]]++; //increase the number of elements
@@ -38,8 +38,8 @@ SF_INFO lossless_predictive::predictive_encode(char* outfile){
             }
         }
     }
+
     for(i=0 ; i<num_items ; i++){
-        
         buf[i] = (short)predictor_encoder.residual((int)buf[i]);
         m += buf[i]>=0 ? 2*buf[i] : -2*buf[i]-1;
     }
@@ -49,7 +49,9 @@ SF_INFO lossless_predictive::predictive_encode(char* outfile){
         if((buf[i]>=0 ? 2*buf[i] : -2*buf[i]-1) < average)
             count++;
     }
-    
+
+    // para testar com a average
+    // m=m/num_items
     m=m/(count);
     m = (uint)ceil(-1/log2(m/(m+1.0)));
     
@@ -137,7 +139,6 @@ void lossless_predictive::predictive_decode(char* infile,SF_INFO info)
         }
     }
     golomb_decoder.close_stream_read();
-    
 
     const char* outfilename = "lossless.wav";
     SNDFILE* outFile = sf_open (outfilename, SFM_WRITE, &info);
@@ -153,6 +154,7 @@ int main(int argc, char* argv[])
     string binfile = "lossless_file.bin";
     if(argc != 3){
         cout << "Incorrect argument list, use is: ./lossyaudio <nomeficheiro> <hist?>"<<endl;
+        return;
     }
     
     std::string filename = argv[1];
@@ -160,7 +162,7 @@ int main(int argc, char* argv[])
     filename = path + filename;
 
     bool calculate_hist;
-    if(atoi(argv[3]) == 0){
+    if(atoi(argv[2]) == 0){
         calculate_hist = false;
     }else{
         calculate_hist = true;
@@ -171,14 +173,14 @@ int main(int argc, char* argv[])
     ofs.open(binfile, std::ofstream::out | std::ofstream::trunc);
     ofs.close();
 
-    lossless_predictive lossless((char*)filename.data(),true);
+    lossless_predictive lossless((char*)filename.data(),calculate_hist);
     SF_INFO info = lossless.predictive_encode((char*)binfile.data());
     lossless.predictive_decode((char*)binfile.data(),info);
     
     cout << "Residual Entropy=" << lossless.getEntropyResidual() << endl;
     cout << "Original Entropy=" << lossless.getEntropyOriginal() << endl;
     cout << "compression="<< (double)std::filesystem::file_size(binfile)/std::filesystem::file_size(filename) <<endl;
-    lossless.dispHistogram();
-    cout << "min_size: " << (int)(info.frames*info.channels*ceil(lossless.getEntropyOriginal())) << endl;
+    if(calculate_hist)
+        lossless.dispHistogram();
     return 0;
 }

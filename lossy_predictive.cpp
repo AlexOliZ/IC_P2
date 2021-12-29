@@ -6,6 +6,7 @@ using namespace std::chrono;
 //g++ lossy_predictive.cpp Golomb/golomb.cpp predictor.cpp bit_stream/bit_stream.cpp -lsndfile
 
 using namespace std;
+
 void lossy_predictive::lossypredictive_encode(char* outfile){
     auto start = high_resolution_clock::now();
     char* code;
@@ -23,6 +24,7 @@ void lossy_predictive::lossypredictive_encode(char* outfile){
 
     num_items = inFileInfo.frames*channels;
 
+    /* Allocate space for the data to be read, then read it. */
     buf = (short *) malloc(num_items*sizeof(short));
     sf_read_short(inFile,buf,num_items);
     sf_close(inFile);
@@ -51,10 +53,10 @@ void lossy_predictive::lossypredictive_encode(char* outfile){
             count++;
     }
     
-    m=m/(count);
-    //m = m*16;
+    // para testar com a average
+    // m=m/num_items
+    m=m/(num_items);
     m = (uint)ceil(-1/log2(m/(m+1.0)));
-    cout << "M: " << m << endl;
     
     if(this->calc_hist){
         for(i=0 ; i<num_items ; i++)
@@ -81,12 +83,17 @@ void lossy_predictive::lossypredictive_encode(char* outfile){
     cout << "compression duration: "<< (double)duration.count()/1000000 << endl;
 
     if(this->calc_hist){
-        for(std::map<int,int>::iterator it = this->histogram_residual.begin(); it != this->histogram_residual.end(); ++it) {
-        pak = (double)it->second/num_items;
-        if(pak > 0)
-            this->entropy -= (log(pak)/log(16)) *pak;
+        for(std::map<int,int>::iterator it = this->histogram_original.begin(); it != this->histogram_original.end(); ++it) {
+            pak = (double)it->second/num_items;
+            if(pak > 0)
+                this->entropy_original -= (log(pak)/log(16)) *pak;
         }
-    }
+        for(std::map<int,int>::iterator it = this->histogram_residual.begin(); it != this->histogram_residual.end(); ++it) {
+            pak = (double)it->second/num_items;
+            if(pak > 0)
+                this->entropy_residual -= (log(pak)/log(16)) *pak;
+        }
+    } 
 }
 
 int lossy_predictive::quantize(int sample,int nbits){
@@ -95,8 +102,11 @@ int lossy_predictive::quantize(int sample,int nbits){
     return qtsample; 
 }
 
-double lossy_predictive::getEntropy(){
-    return this->entropy;
+double lossy_predictive::getEntropyOriginal(){
+    return this->entropy_original;
+}
+double lossy_predictive::getEntropyResidual(){
+    return this->entropy_residual;
 }
 
 void lossy_predictive::dispHistogram(){
@@ -204,6 +214,7 @@ int main(int argc, char* argv[])
     string binfile = "lossy_file.bin";
     if(argc != 4){
         cout << "Incorrect argument list, use is: ./lossyaudio <nomeficheiro> <nbitsqnt> <hist?>"<<endl;
+        return;
     }
     int quant_bits = atoi(argv[2]);
     bool calculate_hist;
@@ -225,9 +236,14 @@ int main(int argc, char* argv[])
     lossy_predictive lossy((char*)filename.data(),calculate_hist,quant_bits);
     lossy.lossypredictive_encode((char*)binfile.data());
     lossy.lossypredictive_decode((char*)binfile.data());
+    
     cout << "compression="<< (double)std::filesystem::file_size(binfile)/std::filesystem::file_size(filename) <<endl;
-    lossy.dispHistogram();
-    cout << "entropy=" << lossy.getEntropy() << endl;
+    cout << "Residual Entropy=" << lossy.getEntropyResidual() << endl;
+    cout << "Original Entropy=" << lossy.getEntropyOriginal() << endl;
+    
+    if(calculate_hist)
+        lossy.dispHistogram();
+    
     
     return 0;
 }

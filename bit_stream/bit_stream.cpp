@@ -11,7 +11,7 @@ using namespace std;
 */
     bool bit_stream::end_of_file()
     {   
-        return inputfile.peek()!=EOF;
+        return inputfile.peek()==EOF;
     }
 
     void bit_stream::open_file_write()
@@ -84,11 +84,9 @@ using namespace std;
         uint8_t val_byte=0;
         if (pointer_read < 0) {
             inputfile.read((char*)&rbyte, 1); 
-            //cout << "byte: " << rbyte << endl;
             pointer_read = 7;
         }
         val_byte = ((rbyte >> pointer_read) & 0x01); 
-        //cout <<"bit: " <<  (int)((rbyte >> pointer_read) & 0x01) << endl;
         pointer_read--;
         return val_byte;
     }
