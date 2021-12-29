@@ -4,36 +4,27 @@
 
 int main(int argc ,char *argv[])
 {
-    string file = "test_file.bin";
-    bit_stream bitstream((char*)file.data());
-    //char* file = argv[1];
-    //bit_stream bitstream(file);
+    string file = "bitstream_file.bin";
+    bit_stream bitstream_write((char*)file.data(),false,true);
 
-    //ofstream outputfile ((char*)file.data(), ios::binary);
-    //uint bit = 1;
-    //outputfile.write((char*)&bit,1);
-    //outputfile.write((char*)&bit,1);
-    //outputfile.write((char*)&bit,1);
-    //outputfile.write((char*)&bit,1);
-    //outputfile.close();
+    bitstream_write.writeBit(0);
+    bitstream_write.writeBit(1);
+    bitstream_write.writeBit(1);
+    bitstream_write.writeBit(1); 
+    bitstream_write.writeBit(0);
+    bitstream_write.writeBit(0);
+    bitstream_write.writeBit(0);
+    bitstream_write.writeBit(1);
 
-    bitstream.writeBit(0);
-    bitstream.writeBit(1);
-    bitstream.writeBit(1);
-    bitstream.writeBit(1); 
-    bitstream.writeBit(0);
-    bitstream.writeBit(0);
-    bitstream.writeBit(0);
-    bitstream.writeBit(1);
-
-    bitstream.writeBit(0);
-    bitstream.writeBit(1);
-    bitstream.writeBit(1);
-    bitstream.writeBit(1); 
-    bitstream.writeBit(0);
-    bitstream.writeBit(0);
-    bitstream.writeBit(0);
-    bitstream.writeBit(1);
+    bitstream_write.writeBit(0);
+    bitstream_write.writeBit(1);
+    bitstream_write.writeBit(1);
+    bitstream_write.writeBit(1); 
+    bitstream_write.writeBit(0);
+    bitstream_write.writeBit(0);
+    bitstream_write.writeBit(0);
+    bitstream_write.writeBit(1);
+    
     /*
     bitstream.writeBit(1);
     bitstream.writeBit(0);
@@ -44,16 +35,23 @@ int main(int argc ,char *argv[])
     bitstream.writeBit(1);
     bitstream.writeBit(0);
     */
-    bitstream.writeBits('q',8);
-    
-    bitstream.close_file_write();
+
+    bitstream_write.writeBits('q',8);
+    bitstream_write.close_file_write();
     
     // ler char
     uint32_t* val=0;
     uint8_t aux = 0;
-    char* code = bitstream.readBits(24);
+    bit_stream bitstream_read((char*)file.data(),true,false);
+    char* code = bitstream_read.readBits(24);
+    
+    while(!bitstream_read.end_of_file())
+    {
+        cout << (int)bitstream_read.readBit();
+    }
+    cout << endl;
 
-    bitstream.close_file_read();
+    bitstream_read.close_file_read();
     for(int j=0 ; j<3 ; j++){
         for(int i=0 ; i<8 ; i++)
         {

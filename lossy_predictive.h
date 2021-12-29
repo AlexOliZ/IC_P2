@@ -27,7 +27,8 @@ class lossy_predictive {
             calc_hist = hist;
             filename = fname;
             m = 0;
-            entropy = 0;
+            entropy_original = 0;
+            entropy_residual = 0;
         };
         /**
          * @brief Reads the soundfile, calculates the residuals and then sends to the bitstream each sample coded in golomb coding.
@@ -57,12 +58,19 @@ class lossy_predictive {
          */
         int quantize(int sample,int nbits);
         /**
+         * @brief Returns the Entropy value of the original values
+         * 
+         * 
+         * @return Entropy calculated from the original file
+         */
+        double getEntropyOriginal();
+        /**
          * @brief Returns the Entropy value of the residual values
          * 
          * 
-         * @return Entropy calculated 
+         * @return Entropy calculated from the original file
          */
-        double getEntropy();
+        double getEntropyResidual();
         /**
          * @brief Function that displays the Histogram of the Residual values
          * 
@@ -76,7 +84,8 @@ class lossy_predictive {
         char* filename;
         map <int, int> histogram_residual;
         map <int, int> histogram_original;
-        double entropy;
+        double entropy_residual;
+        double entropy_original;
 };
 
 #endif
