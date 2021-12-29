@@ -1,4 +1,5 @@
 #include "lossless_predictive.h"
+#include <filesystem>
 //s#include "./bit_stream/bit_stream.h"
 
 
@@ -27,7 +28,8 @@ SF_INFO lossless_predictive::predictive_encode(char* outfile){
     buf = (short *) malloc(num_items*sizeof(short));
     sf_read_short(inFile,buf,num_items);
     sf_close(inFile);
-
+    int count = 0;
+    
     for(i=0 ; i<num_items ; i++){
         if(this->calc_hist){
             if (this->histogram_original.find(buf[i])!= this->histogram_original.end()){ //if the element exists
@@ -37,10 +39,16 @@ SF_INFO lossless_predictive::predictive_encode(char* outfile){
             }
         }
         buf[i] = (short)predictor_encoder.residual((int)buf[i]);
-        m += buf[i]>=0?2*buf[i]:-2*buf[i]-1;
+        m += buf[i]>=0 ? 2*buf[i] : -2*buf[i]-1;
     }
-    m = m/num_items;
-    m = m*16;
+    
+    int average = m/num_items;
+    for(i=0 ; i<num_items ; i++){
+        if((buf[i]>=0 ? 2*buf[i] : -2*buf[i]-1) < average)
+            count++;
+    }
+    
+    m=m/(count);
     m = (uint)ceil(-1/log2(m/(m+1.0)));
 
 
@@ -135,13 +143,24 @@ void lossless_predictive::predictive_decode(char* infile,SF_INFO info)
 
 int main(int argc, char* argv[])
 {
-    string file = "./wavfiles/sample01.wav";
-    string binfile = "lossless.bin";
-    lossless_predictive lossless((char*)file.data(),true);
+    string binfile = "lossless_file.bin";
+    if(argc != 2){
+        cout << "Incorrect argument list, use is: ./lossyaudio <nomeficheiro>"<<endl;
+    }
+    std::string filename = argv[1];
+    const char* path = "./wavfiles/";
+    filename = path + filename;
+    /* para limpar o ficheiro */
+    std::ofstream ofs;
+    ofs.open(binfile, std::ofstream::out | std::ofstream::trunc);
+    ofs.close();
+
+    lossless_predictive lossless((char*)filename.data(),true);
     SF_INFO info = lossless.predictive_encode((char*)binfile.data());
     lossless.predictive_decode((char*)binfile.data(),info);
     cout << "Residual Entropy=" << lossless.getEntropyResidual() << endl;
     cout << "Original Entropy=" << lossless.getEntropyOriginal() << endl;
+    cout << "compression="<< (double)std::filesystem::file_size(binfile)/std::filesystem::file_size(filename) <<endl;
     lossless.dispHistogram();
     cout << "min_size: " << (int)(info.frames*info.channels*ceil(lossless.getEntropyOriginal())) << endl;
     return 0;
