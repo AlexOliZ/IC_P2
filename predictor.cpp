@@ -8,9 +8,9 @@ int predictor::predict()
     } else if (this->num_inputs == 1) {
         return this->buffer[this->pointer];
     } else if (this->num_inputs == 2) {
-        return 2*this->buffer[this->pointer] - this->buffer[this->pointer-1];
+        return 2*this->buffer[this->pointer] - this->buffer[(pointer+1)%3];
     } 
-    return 3*this->buffer[this->pointer] - 3*this->buffer[(pointer+1)%3] + this->buffer[(pointer+2)%3];
+    return 3*this->buffer[this->pointer] - 3*this->buffer[(pointer+2)%3] + this->buffer[(pointer+1)%3];
 }
 
 int predictor::residual(int sample)

@@ -19,21 +19,25 @@ class lossless_predictive {
             calc_hist = hist;
             m = 0;
             filename = fname;
-            entropy = 0;
+            entropy_residual = 0;
+            entropy_original = 0;
         };
 
         SF_INFO predictive_encode(char* outfile);
         void predictive_decode(char* infile,SF_INFO num);
         void setM(uint m);
-        double getEntropy();
+        double getEntropyOriginal();
+        double getEntropyResidual();
         void dispHistogram();
         
     private:
         bool calc_hist;
         int m;
         char* filename;
-        map <double, int> histogram_residual;
-        double entropy;
+        map <int, int> histogram_original;
+        map <int, int> histogram_residual;
+        double entropy_residual;
+        double entropy_original;
 
 };
 

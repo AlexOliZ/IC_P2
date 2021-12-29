@@ -50,7 +50,7 @@ void lossy_predictive::lossypredictive_encode(char* outfile){
     printf("Read %d items\n",num);
     free(buf);
     if(this->calc_hist){
-        for(std::map<double,int>::iterator it = this->histogram_residual.begin(); it != this->histogram_residual.end(); ++it) {
+        for(std::map<int,int>::iterator it = this->histogram_residual.begin(); it != this->histogram_residual.end(); ++it) {
         pak = (double)it->second/num_items;
         if(pak > 0)
             this->entropy -= (log(pak)/log(16)) *pak;
@@ -77,7 +77,7 @@ void lossy_predictive::dispHistogram(){
                 Mat histImage(hist_h, hist_w, CV_8UC1, Scalar(255, 255, 255)); 
                 c = 0;
                 count = 0;
-                for(std::map<double,int>::iterator it = histogram_residual.begin(); it != histogram_residual.end(); ++it) {
+                for(std::map<int,int>::iterator it = histogram_residual.begin(); it != histogram_residual.end(); ++it) {
                     if(count % 50 == 0){
                         line(histImage, Point(c, hist_h), Point(c, hist_h-it->second),Scalar(0,0,0), 2,8,0);
                         c++;
@@ -94,7 +94,7 @@ void lossy_predictive::dispHistogram(){
                 Mat histImage(hist_h, hist_w, CV_8UC1, Scalar(255, 255, 255)); 
                 c = 0;
                 count = 0;
-                for(std::map<double,int>::iterator it = histogram_residual.begin(); it != histogram_residual.end(); ++it) {
+                for(std::map<int,int>::iterator it = histogram_residual.begin(); it != histogram_residual.end(); ++it) {
                     for(int k=0;k < 3; k++){
                         line(histImage, Point(c, hist_h), Point(c, hist_h-(it->second/280)),Scalar(0,0,0), 2,8,0);
                         c++;
@@ -112,7 +112,7 @@ void lossy_predictive::dispHistogram(){
                 Mat histImage(hist_h, hist_w, CV_8UC1, Scalar(255, 255, 255)); 
                 c = 0;
                 count = 0;
-                for(std::map<double,int>::iterator it = histogram_residual.begin(); it != histogram_residual.end(); ++it) {
+                for(std::map<int,int>::iterator it = histogram_residual.begin(); it != histogram_residual.end(); ++it) {
                     for(int k=0;k < 60; k++){
                         line(histImage, Point(c, hist_h), Point(c, hist_h-(it->second/3400)),Scalar(0,0,0), 1,8,0);
                         c++;
@@ -168,18 +168,23 @@ int main(int argc, char* argv[])
     
     string file = "./wavfiles/sample01.wav";
     string binfile = "testfile.bin";
-    if(argc != 3){
-        cout << "Incorrect argument list, use is: ./lossyaudio <nbitsqnt> <hist?>"<<endl;
+    if(argc != 4){
+        cout << "Incorrect argument list, use is: ./lossyaudio <nomeficheiro> <nbitsqnt> <hist?>"<<endl;
     }
-    int quant_bits = atoi(argv[1]);
+    int quant_bits = atoi(argv[2]);
     bool calculate_hist;
-    if(argv[2] == "false"){
+
+    std::string filename = argv[1];
+    const char* path = "./wavfiles/";
+    filename = path + filename;
+
+    if(argv[3] == "false"){
         calculate_hist = false;
     }
     else{
         calculate_hist = true;
     }
-    lossy_predictive lossy((char*)file.data(),calculate_hist,quant_bits);
+    lossy_predictive lossy((char*)filename.data(),calculate_hist,quant_bits);
     lossy.lossypredictive_encode((char*)binfile.data());
     lossy.lossypredictive_decode((char*)binfile.data());
     lossy.dispHistogram();

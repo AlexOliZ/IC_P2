@@ -31,6 +31,13 @@ SF_INFO lossless_predictive::predictive_encode(char* outfile){
     sf_close(inFile);
     cout << "sizeof " << sizeof(SF_INFO) << endl;
     for(i=0 ; i<num_items ; i++){
+        if(this->calc_hist){
+            if (this->histogram_original.find(buf[i])!= this->histogram_original.end()){ //if the element exists
+            this->histogram_original[buf[i]]++; //increase the number of elements
+            }else{
+                this->histogram_original[buf[i]]=1;
+            }
+        }
         buf[i] = predictor_encoder.residual(buf[i]);
         average += buf[i]>=0?2*buf[i]:-2*buf[i]-1;
     }
@@ -61,10 +68,15 @@ SF_INFO lossless_predictive::predictive_encode(char* outfile){
     printf("Read %d items\n",num_items);
     free(buf);
     if(this->calc_hist){
-        for(std::map<double,int>::iterator it = this->histogram_residual.begin(); it != this->histogram_residual.end(); ++it) {
-        pak = (double)it->second/num_items;
-        if(pak > 0)
-            this->entropy -= (log(pak)/log(16)) *pak;
+        for(std::map<int,int>::iterator it = this->histogram_original.begin(); it != this->histogram_original.end(); ++it) {
+            pak = (double)it->second/num_items;
+            if(pak > 0)
+                this->entropy_original -= (log(pak)/log(16)) *pak;
+        }
+        for(std::map<int,int>::iterator it = this->histogram_residual.begin(); it != this->histogram_residual.end(); ++it) {
+            pak = (double)it->second/num_items;
+            if(pak > 0)
+                this->entropy_residual -= (log(pak)/log(16)) *pak;
         }
     }  
     //for(std::map<double,int>::iterator it = histogram_residual.begin(); it != histogram_residual.end(); ++it) {
@@ -80,7 +92,7 @@ void lossless_predictive::dispHistogram(){
         Mat histImage(hist_h, hist_w, CV_8UC1, Scalar(255, 255, 255)); 
         int c = 0;
         int count = 0;
-        for(std::map<double,int>::iterator it = histogram_residual.begin(); it != histogram_residual.end(); ++it) {
+        for(std::map<int,int>::iterator it = histogram_residual.begin(); it != histogram_residual.end(); ++it) {
             if(count % 50 == 0){
                 line(histImage, Point(c, hist_h), Point(c, hist_h-it->second),Scalar(0,0,0), 2,8,0);
                 c++;
@@ -88,15 +100,17 @@ void lossless_predictive::dispHistogram(){
             count++;
         }
         // display histogram
-        imshow("Histogram", histImage);
+        imshow("Residual Histogram", histImage);
         waitKey(0);
     }
 }
 
-double lossless_predictive::getEntropy(){
-    return this->entropy;
+double lossless_predictive::getEntropyResidual(){
+    return this->entropy_residual;
 }
-
+double lossless_predictive::getEntropyOriginal(){
+    return this->entropy_original;
+}
 void lossless_predictive::predictive_decode(char* infile,SF_INFO info)
 {
     predictor predictor_decoder(false);
@@ -130,8 +144,9 @@ int main(int argc, char* argv[])
     lossless_predictive lossless((char*)file.data(),true);
     SF_INFO info = lossless.predictive_encode((char*)binfile.data());
     lossless.predictive_decode((char*)binfile.data(),info);
-    cout << "entropy=" <<lossless.getEntropy() << endl;
+    cout << "Residual Entropy=" << lossless.getEntropyResidual() << endl;
+    cout << "Original Entropy=" << lossless.getEntropyOriginal() << endl;
     lossless.dispHistogram();
-    cout << "min_size: " << (int)(info.frames*info.channels*ceil(lossless.getEntropy())) << endl;
+    cout << "min_size: " << (int)(info.frames*info.channels*ceil(lossless.getEntropyOriginal())) << endl;
     return 0;
 }
