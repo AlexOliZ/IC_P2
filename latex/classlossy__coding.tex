@@ -54,6 +54,8 @@ void \mbox{\hyperlink{classlossy__coding_ae9c914c6f5a773b71cd2d898329fee2a}{I\+D
 \hline
 {\em valor\+Previsto} & expected pixel value \\
 \hline
+{\em quantization} & quantization parameter set as program argument \\
+\hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 int -\/$>$ residual for each value of the predicted pixel 
@@ -152,14 +154,15 @@ int -\/$>$ the predicted value of the next pixel
 
 
 \begin{DoxyParams}{Parameters}
-{\em valor\+Pixel} & pixel value \\
+{\em y} & address for the matrix y \\
 \hline
-{\em valor\+Previsto} & expected pixel value \\
+{\em u} & address for the matrix u \\
+\hline
+{\em v} & address for the matrix v \\
+\hline
+{\em Imagem\+R\+BG} & final image matrix \\
 \hline
 \end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-int -\/$>$ residual for each value of the predicted pixel 
-\end{DoxyReturn}
 \mbox{\Hypertarget{classlossy__coding_a2f905e170923fd853bc9768a708b3861}\label{classlossy__coding_a2f905e170923fd853bc9768a708b3861}} 
 \index{lossy\_coding@{lossy\_coding}!ValorPixelDec@{ValorPixelDec}}
 \index{ValorPixelDec@{ValorPixelDec}!lossy\_coding@{lossy\_coding}}
@@ -171,6 +174,8 @@ int -\/$>$ residual for each value of the predicted pixel
 {\em erro} & residual \\
 \hline
 {\em valor\+Previsto} & expected pixel value \\
+\hline
+{\em quantization} & quantization parameter set as program argument \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}

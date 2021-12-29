@@ -186,6 +186,7 @@ Public Member Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">valorPixel</td><td>pixel value </td></tr>
     <tr><td class="paramname">valorPrevisto</td><td>expected pixel value </td></tr>
+    <tr><td class="paramname">quantization</td><td>quantization parameter set as program argument </td></tr>
   </table>
   </dd>
 </dl>
@@ -471,12 +472,13 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">valorPixel</td><td>pixel value </td></tr>
-    <tr><td class="paramname">valorPrevisto</td><td>expected pixel value </td></tr>
+    <tr><td class="paramname">y</td><td>address for the matrix y </td></tr>
+    <tr><td class="paramname">u</td><td>address for the matrix u </td></tr>
+    <tr><td class="paramname">v</td><td>address for the matrix v </td></tr>
+    <tr><td class="paramname">ImagemRBG</td><td>final image matrix </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>int -&gt; residual for each value of the predicted pixel </dd></dl>
 
 </div>
 </div>
@@ -515,6 +517,7 @@ Public Member Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">erro</td><td>residual </td></tr>
     <tr><td class="paramname">valorPrevisto</td><td>expected pixel value </td></tr>
+    <tr><td class="paramname">quantization</td><td>quantization parameter set as program argument </td></tr>
   </table>
   </dd>
 </dl>

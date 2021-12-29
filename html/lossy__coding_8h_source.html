@@ -99,19 +99,19 @@ $(document).ready(function(){initNavTree('lossy__coding_8h_source.html',''); ini
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;            filename = fname;</div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        };</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <span class="keywordtype">void</span> YUV(Mat image, Mat &amp;y, Mat &amp;u, Mat &amp;v);</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="keywordtype">void</span> RGB (Mat y, Mat u, Mat v, Mat &amp;ImagemRBG);</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="keywordtype">int</span> erroEnc (<span class="keywordtype">int</span> valorPixel, <span class="keywordtype">int</span> valorPrevisto, <span class="keywordtype">int</span> quantization);</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keywordtype">int</span> ValorPixelDec (<span class="keywordtype">int</span> erro, <span class="keywordtype">int</span> valorPrevisto, <span class="keywordtype">int</span> quantization);</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="keywordtype">int</span> preditor (<span class="keywordtype">int</span> a, <span class="keywordtype">int</span> b, <span class="keywordtype">int</span> c);</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="keywordtype">void</span> preditor_JPEG_LS (Mat matriz,Mat &amp;erMat, Mat &amp;prev, <span class="keywordtype">int</span> quantization);</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <span class="keywordtype">void</span> golombEnc(Mat erroY,Mat erroV,Mat erroU, <span class="keywordtype">int</span> m, <span class="keywordtype">char</span>* namefile);</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <span class="keywordtype">void</span> golombDesc(Mat &amp;DescY, Mat &amp;DescV, Mat &amp;DescU,<span class="keywordtype">int</span> m,<span class="keywordtype">char</span>* namefile);</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        <span class="keywordtype">void</span> DCT(Mat &amp;aux,Mat mat);</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        <span class="keywordtype">void</span> IDCT(Mat &amp;aux,Mat mat);</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            <span class="keywordtype">string</span> filename;</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;};</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="comment">//#endif</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <span class="keywordtype">void</span> RGB (Mat y, Mat u, Mat v, Mat &amp;ImagemRBG);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="keywordtype">int</span> erroEnc (<span class="keywordtype">int</span> valorPixel, <span class="keywordtype">int</span> valorPrevisto, <span class="keywordtype">int</span> quantization);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keywordtype">int</span> ValorPixelDec (<span class="keywordtype">int</span> erro, <span class="keywordtype">int</span> valorPrevisto, <span class="keywordtype">int</span> quantization);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <span class="keywordtype">int</span> preditor (<span class="keywordtype">int</span> a, <span class="keywordtype">int</span> b, <span class="keywordtype">int</span> c);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <span class="keywordtype">void</span> preditor_JPEG_LS (Mat matriz,Mat &amp;erMat, Mat &amp;prev, <span class="keywordtype">int</span> quantization);</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <span class="keywordtype">void</span> golombEnc(Mat erroY,Mat erroV,Mat erroU, <span class="keywordtype">int</span> m, <span class="keywordtype">char</span>* namefile);</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        <span class="keywordtype">void</span> golombDesc(Mat &amp;DescY, Mat &amp;DescV, Mat &amp;DescU,<span class="keywordtype">int</span> m,<span class="keywordtype">char</span>* namefile);</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        <span class="keywordtype">void</span> DCT(Mat &amp;aux,Mat mat);</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        <span class="keywordtype">void</span> IDCT(Mat &amp;aux,Mat mat);</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;            <span class="keywordtype">string</span> filename;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;};</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="comment">//#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="aclasslossy__coding_html"><div class="ttname"><a href="classlossy__coding.html">lossy_coding</a></div><div class="ttdef"><b>Definition:</b> lossy_coding.h:9</div></div>
