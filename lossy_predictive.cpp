@@ -1,9 +1,8 @@
 #include "lossy_predictive.h"
-
 //g++ lossy_predictive.cpp Golomb/golomb.cpp predictor.cpp bit_stream/bit_stream.cpp -lsndfile
 
 using namespace std;
-void lossy_predictive::lossypredictive_encode(char* outfile,int qtbits){
+void lossy_predictive::lossypredictive_encode(char* outfile){
 
     char* code;
     int *buf,i,num_items,num,channels,quant_value,residual;
@@ -27,7 +26,7 @@ void lossy_predictive::lossypredictive_encode(char* outfile,int qtbits){
         
     for(i=0 ; i<num_items ; i++){
         residual = predictor_encoder.residual(buf[i]);
-        quant_value = quantize(residual,qtbits);
+        quant_value = quantize(residual,this->qtbits);
         predictor_encoder.updateBufferConst(quant_value);
         buf[i] = quant_value;
         average += buf[i]>=0?2*buf[i]:-2*buf[i]-1;
@@ -35,7 +34,6 @@ void lossy_predictive::lossypredictive_encode(char* outfile,int qtbits){
     m=(int)ceil(-1/log2(average/(average+1.0)));
 
     golomb golomb_encoder(m,outfile);
-
     
     for(i=0 ; i<num ; i++)
     {
@@ -68,6 +66,69 @@ int lossy_predictive::quantize(int sample,int nbits){
 
 double lossy_predictive::getEntropy(){
     return this->entropy;
+}
+
+void lossy_predictive::dispHistogram(){
+    int hist_w,hist_h,c,count;
+    switch(this->qtbits){
+        case 16:
+            {
+                hist_w = 610; hist_h = 600; 
+                Mat histImage(hist_h, hist_w, CV_8UC1, Scalar(255, 255, 255)); 
+                c = 0;
+                count = 0;
+                for(std::map<double,int>::iterator it = histogram_residual.begin(); it != histogram_residual.end(); ++it) {
+                    if(count % 50 == 0){
+                        line(histImage, Point(c, hist_h), Point(c, hist_h-it->second),Scalar(0,0,0), 2,8,0);
+                        c++;
+                    }     
+                    count++;
+                }
+                imshow("Histogram 16bits", histImage);
+                waitKey(0);
+                break;
+            }
+        case 8:
+            { 
+                hist_w = 550; hist_h = 600; 
+                Mat histImage(hist_h, hist_w, CV_8UC1, Scalar(255, 255, 255)); 
+                c = 0;
+                count = 0;
+                for(std::map<double,int>::iterator it = histogram_residual.begin(); it != histogram_residual.end(); ++it) {
+                    for(int k=0;k < 3; k++){
+                        line(histImage, Point(c, hist_h), Point(c, hist_h-(it->second/280)),Scalar(0,0,0), 2,8,0);
+                        c++;
+                    } 
+                    count++;
+                }
+                // display histogram
+                imshow("Histogram 8bits", histImage);
+                waitKey(0);
+                break;
+            }   
+        case 4:
+            {
+                hist_w = 600; hist_h = 600; 
+                Mat histImage(hist_h, hist_w, CV_8UC1, Scalar(255, 255, 255)); 
+                c = 0;
+                count = 0;
+                for(std::map<double,int>::iterator it = histogram_residual.begin(); it != histogram_residual.end(); ++it) {
+                    for(int k=0;k < 60; k++){
+                        line(histImage, Point(c, hist_h), Point(c, hist_h-(it->second/3400)),Scalar(0,0,0), 1,8,0);
+                        c++;
+                    }                         
+                    count++;
+                }
+                // display histogram
+                imshow("Histogram 4bits", histImage);
+                waitKey(0);
+                break;            
+            }
+        default:
+            {
+                cout << "Wrong number of bits" << endl;
+            }
+    }
 }
 
 void lossy_predictive::lossypredictive_decode(char* infile)
@@ -118,9 +179,10 @@ int main(int argc, char* argv[])
     else{
         calculate_hist = true;
     }
-    lossy_predictive lossy((char*)file.data(),calculate_hist);
-    lossy.lossypredictive_encode((char*)binfile.data(),quant_bits);
+    lossy_predictive lossy((char*)file.data(),calculate_hist,quant_bits);
+    lossy.lossypredictive_encode((char*)binfile.data());
     lossy.lossypredictive_decode((char*)binfile.data());
+    lossy.dispHistogram();
     cout << "entropy=" << lossy.getEntropy() << endl;
     return 0;
 }

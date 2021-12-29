@@ -7,8 +7,11 @@
 #include "bit_stream/bit_stream.h"
 #include <sndfile.h>
 #include <map>
+#include "opencv2/imgproc.hpp"
+#include "opencv2/highgui.hpp"
 
 using namespace std;
+using namespace cv;
 
 class lossless_predictive {
     public:
@@ -23,6 +26,7 @@ class lossless_predictive {
         void predictive_decode(char* infile,SF_INFO num);
         void setM(uint m);
         double getEntropy();
+        void dispHistogram();
         
     private:
         bool calc_hist;
