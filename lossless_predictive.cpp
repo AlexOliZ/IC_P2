@@ -154,7 +154,7 @@ int main(int argc, char* argv[])
     string binfile = "lossless_file.bin";
     if(argc != 3){
         cout << "Incorrect argument list, use is: ./losslessaudio <nomeficheiro> <hist?>"<<endl;
-        return;
+        return 0;
     }
     
     std::string filename = argv[1];

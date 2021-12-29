@@ -214,7 +214,7 @@ int main(int argc, char* argv[])
     string binfile = "lossy_file.bin";
     if(argc != 4){
         cout << "Incorrect argument list, use is: ./lossyaudio <nomeficheiro> <nbitsqnt> <hist?>"<<endl;
-        return;
+        return 0;
     }
     int quant_bits = atoi(argv[2]);
     bool calculate_hist;
