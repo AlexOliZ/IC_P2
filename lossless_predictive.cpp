@@ -52,7 +52,7 @@ SF_INFO lossless_predictive::predictive_encode(char* outfile){
 
     // para testar com a average
     // m=m/num_items
-    m=m/(count);
+    m=m/count;
     m = (uint)ceil(-1/log2(m/(m+1.0)));
     
     if(this->calc_hist){
@@ -101,7 +101,7 @@ void lossless_predictive::dispHistogram(){
         int c = 0;
         int count = 0;
         for(std::map<int,int>::iterator it = histogram_residual.begin(); it != histogram_residual.end(); ++it) {
-            if(count % 35 == 0){
+            if(count % 95 == 0){
                 line(histImage, Point(c, hist_h), Point(c, hist_h-it->second),Scalar(0,0,0), 2,8,0);
                 c++;
             }     

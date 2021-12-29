@@ -55,7 +55,7 @@ void lossy_predictive::lossypredictive_encode(char* outfile){
     
     // para testar com a average
     // m=m/num_items
-    m=m/(num_items);
+    m=m/count;
     m = (uint)ceil(-1/log2(m/(m+1.0)));
     
     if(this->calc_hist){
