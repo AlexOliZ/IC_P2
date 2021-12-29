@@ -1,4 +1,5 @@
 #include "lossy_predictive.h"
+#include <filesystem>
 //g++ lossy_predictive.cpp Golomb/golomb.cpp predictor.cpp bit_stream/bit_stream.cpp -lsndfile
 
 using namespace std;
@@ -6,7 +7,7 @@ void lossy_predictive::lossypredictive_encode(char* outfile){
 
     char* code;
     short *buf;
-    int i,num_items,channels,quant_value,residual;
+    int i,num_items,channels,quant_value,residual,count=0;
     predictor predictor_encoder(true);
     double pak = 0;
 
@@ -31,10 +32,16 @@ void lossy_predictive::lossypredictive_encode(char* outfile){
         buf[i] = (short)quant_value;
         m += buf[i]>=0?2*buf[i]:-2*buf[i]-1;
     }
-    m = m/num_items;
-    m = m*16;
+    int average = m/num_items;
+    for(i=0 ; i<num_items ; i++){
+        if((buf[i]>=0 ? 2*buf[i] : -2*buf[i]-1) < average)
+            count++;
+    }
+    
+    m=m/(count);
+    //m = m*16;
     m = (uint)ceil(-1/log2(m/(m+1.0)));
-
+    cout << "M: " << m << endl;
     golomb golomb_encoder(m,outfile);
 
     for(i=0 ; i<num_items ; i++)
@@ -170,7 +177,7 @@ int main(int argc, char* argv[])
 {
     
     string file = "./wavfiles/sample01.wav";
-    string binfile = "lossy.bin";
+    string binfile = "lossy_file.bin";
     if(argc != 4){
         cout << "Incorrect argument list, use is: ./lossyaudio <nomeficheiro> <nbitsqnt> <hist?>"<<endl;
     }
@@ -187,9 +194,15 @@ int main(int argc, char* argv[])
     else{
         calculate_hist = true;
     }
+    
+    std::ofstream ofs;
+    ofs.open(binfile, std::ofstream::out | std::ofstream::trunc);
+    ofs.close();
+
     lossy_predictive lossy((char*)filename.data(),calculate_hist,quant_bits);
     lossy.lossypredictive_encode((char*)binfile.data());
     lossy.lossypredictive_decode((char*)binfile.data());
+    cout << "compression="<< (double)std::filesystem::file_size(binfile)/std::filesystem::file_size(filename) <<endl;
     lossy.dispHistogram();
     cout << "entropy=" << lossy.getEntropy() << endl;
     return 0;
