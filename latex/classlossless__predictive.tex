@@ -3,21 +3,129 @@
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
+\mbox{\hyperlink{classlossless__predictive_a5e3a8a6252d032440c6563de25924ef6}{lossless\+\_\+predictive}} (char $\ast$fname, bool hist)
+\begin{DoxyCompactList}\small\item\em Construct a new lossless predictive object. \end{DoxyCompactList}\item 
+S\+F\+\_\+\+I\+N\+FO \mbox{\hyperlink{classlossless__predictive_a911402a6bbc70dd2cb0d348613f2315b}{predictive\+\_\+encode}} (char $\ast$outfile)
+\begin{DoxyCompactList}\small\item\em Reads the soundfile, calculates the residuals and then sends to the bitstream each sample coded in golomb coding. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classlossless__predictive_a5bd678c8ba3d694dbbb17065dafb64a3}{predictive\+\_\+decode}} (char $\ast$infile, S\+F\+\_\+\+I\+N\+FO info)
+\begin{DoxyCompactList}\small\item\em Decodes the binary file throgh the bitstream and then recontructs, with the predictor, the original values In the end, writes in a new wav file the values retrieved in the previous step. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classlossless__predictive_a970bd30ac1e162e8d2992acdbd4ac6d7}{setM}} (uint m)
+\begin{DoxyCompactList}\small\item\em function used to change directly the m used in the golomb module \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classlossless__predictive_ae50cae0b3a0f6769f4bdd30a87782cd0}{get\+Entropy\+Original}} ()
+\begin{DoxyCompactList}\small\item\em Returns the Entropy value of the original values. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classlossless__predictive_aaa0728813b85f16e27412c1faae89406}{get\+Entropy\+Residual}} ()
+\begin{DoxyCompactList}\small\item\em Returns the Entropy value of the residual values. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classlossless__predictive_ac55273d25c7a3ec257e983793afffc4d}{disp\+Histogram}} ()
+\begin{DoxyCompactList}\small\item\em Function that displays the Histogram of the Residual values. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
 \mbox{\Hypertarget{classlossless__predictive_a5e3a8a6252d032440c6563de25924ef6}\label{classlossless__predictive_a5e3a8a6252d032440c6563de25924ef6}} 
-{\bfseries lossless\+\_\+predictive} (char $\ast$fname, bool hist)
-\item 
+\index{lossless\_predictive@{lossless\_predictive}!lossless\_predictive@{lossless\_predictive}}
+\index{lossless\_predictive@{lossless\_predictive}!lossless\_predictive@{lossless\_predictive}}
+\doxysubsubsection{\texorpdfstring{lossless\_predictive()}{lossless\_predictive()}}
+{\footnotesize\ttfamily lossless\+\_\+predictive\+::lossless\+\_\+predictive (\begin{DoxyParamCaption}\item[{char $\ast$}]{fname,  }\item[{bool}]{hist }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct a new lossless predictive object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fname} & soundfile to be read \\
+\hline
+{\em hist} & flag to determine whether histograms are calculated or not \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classlossless__predictive_ac55273d25c7a3ec257e983793afffc4d}\label{classlossless__predictive_ac55273d25c7a3ec257e983793afffc4d}} 
+\index{lossless\_predictive@{lossless\_predictive}!dispHistogram@{dispHistogram}}
+\index{dispHistogram@{dispHistogram}!lossless\_predictive@{lossless\_predictive}}
+\doxysubsubsection{\texorpdfstring{dispHistogram()}{dispHistogram()}}
+{\footnotesize\ttfamily void lossless\+\_\+predictive\+::disp\+Histogram (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Function that displays the Histogram of the Residual values. 
+
+\mbox{\Hypertarget{classlossless__predictive_ae50cae0b3a0f6769f4bdd30a87782cd0}\label{classlossless__predictive_ae50cae0b3a0f6769f4bdd30a87782cd0}} 
+\index{lossless\_predictive@{lossless\_predictive}!getEntropyOriginal@{getEntropyOriginal}}
+\index{getEntropyOriginal@{getEntropyOriginal}!lossless\_predictive@{lossless\_predictive}}
+\doxysubsubsection{\texorpdfstring{getEntropyOriginal()}{getEntropyOriginal()}}
+{\footnotesize\ttfamily double lossless\+\_\+predictive\+::get\+Entropy\+Original (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns the Entropy value of the original values. 
+
+\begin{DoxyReturn}{Returns}
+Entropy calculated 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classlossless__predictive_aaa0728813b85f16e27412c1faae89406}\label{classlossless__predictive_aaa0728813b85f16e27412c1faae89406}} 
+\index{lossless\_predictive@{lossless\_predictive}!getEntropyResidual@{getEntropyResidual}}
+\index{getEntropyResidual@{getEntropyResidual}!lossless\_predictive@{lossless\_predictive}}
+\doxysubsubsection{\texorpdfstring{getEntropyResidual()}{getEntropyResidual()}}
+{\footnotesize\ttfamily double lossless\+\_\+predictive\+::get\+Entropy\+Residual (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns the Entropy value of the residual values. 
+
+\begin{DoxyReturn}{Returns}
+Entropy calculated 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classlossless__predictive_a5bd678c8ba3d694dbbb17065dafb64a3}\label{classlossless__predictive_a5bd678c8ba3d694dbbb17065dafb64a3}} 
+\index{lossless\_predictive@{lossless\_predictive}!predictive\_decode@{predictive\_decode}}
+\index{predictive\_decode@{predictive\_decode}!lossless\_predictive@{lossless\_predictive}}
+\doxysubsubsection{\texorpdfstring{predictive\_decode()}{predictive\_decode()}}
+{\footnotesize\ttfamily void lossless\+\_\+predictive\+::predictive\+\_\+decode (\begin{DoxyParamCaption}\item[{char $\ast$}]{infile,  }\item[{S\+F\+\_\+\+I\+N\+FO}]{info }\end{DoxyParamCaption})}
+
+
+
+Decodes the binary file throgh the bitstream and then recontructs, with the predictor, the original values In the end, writes in a new wav file the values retrieved in the previous step. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em infile} & binary file containing the residuals coded in golomb coding \\
+\hline
+{\em info} & information related to the sound file \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{classlossless__predictive_a911402a6bbc70dd2cb0d348613f2315b}\label{classlossless__predictive_a911402a6bbc70dd2cb0d348613f2315b}} 
-S\+F\+\_\+\+I\+N\+FO {\bfseries predictive\+\_\+encode} (char $\ast$outfile)
-\item 
-\mbox{\Hypertarget{classlossless__predictive_a023ffee9112ecce8987ab369532bb2c7}\label{classlossless__predictive_a023ffee9112ecce8987ab369532bb2c7}} 
-void {\bfseries predictive\+\_\+decode} (char $\ast$infile, S\+F\+\_\+\+I\+N\+FO num)
-\item 
+\index{lossless\_predictive@{lossless\_predictive}!predictive\_encode@{predictive\_encode}}
+\index{predictive\_encode@{predictive\_encode}!lossless\_predictive@{lossless\_predictive}}
+\doxysubsubsection{\texorpdfstring{predictive\_encode()}{predictive\_encode()}}
+{\footnotesize\ttfamily S\+F\+\_\+\+I\+N\+FO lossless\+\_\+predictive\+::predictive\+\_\+encode (\begin{DoxyParamCaption}\item[{char $\ast$}]{outfile }\end{DoxyParamCaption})}
+
+
+
+Reads the soundfile, calculates the residuals and then sends to the bitstream each sample coded in golomb coding. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em outfile} & file to where the bitstream writes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+S\+F\+\_\+\+I\+N\+FO information related to the sound file 
+\end{DoxyReturn}
 \mbox{\Hypertarget{classlossless__predictive_a970bd30ac1e162e8d2992acdbd4ac6d7}\label{classlossless__predictive_a970bd30ac1e162e8d2992acdbd4ac6d7}} 
-void {\bfseries setM} (uint m)
-\item 
-\mbox{\Hypertarget{classlossless__predictive_aa9abd8d27c6b1cc6d032ec823124ffbe}\label{classlossless__predictive_aa9abd8d27c6b1cc6d032ec823124ffbe}} 
-double {\bfseries get\+Entropy} ()
-\end{DoxyCompactItemize}
+\index{lossless\_predictive@{lossless\_predictive}!setM@{setM}}
+\index{setM@{setM}!lossless\_predictive@{lossless\_predictive}}
+\doxysubsubsection{\texorpdfstring{setM()}{setM()}}
+{\footnotesize\ttfamily void lossless\+\_\+predictive\+::setM (\begin{DoxyParamCaption}\item[{uint}]{m }\end{DoxyParamCaption})}
+
+
+
+function used to change directly the m used in the golomb module 
+
+
+\begin{DoxyParams}{Parameters}
+{\em m} & the value that will be set to the variable m \\
+\hline
+\end{DoxyParams}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

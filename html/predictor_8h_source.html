@@ -94,30 +94,30 @@ $(document).ready(function(){initNavTree('predictor_8h_source.html',''); initRes
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
 <div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="classpredictor.html">    8</a></span>&#160;<span class="keyword">class </span><a class="code" href="classpredictor.html">predictor</a> {</div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;        <a class="code" href="classpredictor.html">predictor</a>(<span class="keywordtype">bool</span> lossy){</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;            this-&gt;lossy = lossy;</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;            this-&gt;num_inputs = 0;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;            this-&gt;pointer = 0;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;        };</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        <span class="keywordtype">int</span> predict();</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        <span class="keywordtype">int</span> residual(<span class="keywordtype">int</span> sample);</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        <span class="keywordtype">int</span> reconstruct(<span class="keywordtype">int</span> residual);</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        <span class="keywordtype">void</span> updateBufferConst(<span class="keywordtype">int</span> quant);</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <span class="keywordtype">void</span> showBuffer();</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        <span class="keywordtype">void</span>  updateBuffer(<span class="keywordtype">int</span> sample);</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <span class="keywordtype">bool</span> lossy;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="keywordtype">int</span> num_inputs;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keywordtype">short</span> pointer;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="keywordtype">short</span> buffer[3];</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;};</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="classpredictor.html#a12864d3c4e232d3cd1f193e15dd0d2fc">   15</a></span>&#160;        <a class="code" href="classpredictor.html#a12864d3c4e232d3cd1f193e15dd0d2fc">predictor</a>(<span class="keywordtype">bool</span> lossy){</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;            this-&gt;lossy = lossy;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;            this-&gt;num_inputs = 0;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;            this-&gt;pointer = 0;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        };</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="keywordtype">int</span> predict();</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <span class="keywordtype">int</span> residual(<span class="keywordtype">int</span> residual);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keywordtype">int</span> reconstruct(<span class="keywordtype">int</span> residual);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keywordtype">void</span> updateBufferConst(<span class="keywordtype">int</span> quant);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="keywordtype">void</span> showBuffer();</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <span class="keywordtype">void</span>  updateBuffer(<span class="keywordtype">int</span> sample);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <span class="keywordtype">bool</span> lossy;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <span class="keywordtype">int</span> num_inputs;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="keywordtype">short</span> pointer;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <span class="keywordtype">int</span> buffer[3];</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;};</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="aclasspredictor_html"><div class="ttname"><a href="classpredictor.html">predictor</a></div><div class="ttdef"><b>Definition:</b> predictor.h:8</div></div>
+<div class="ttc" id="aclasspredictor_html_a12864d3c4e232d3cd1f193e15dd0d2fc"><div class="ttname"><a href="classpredictor.html#a12864d3c4e232d3cd1f193e15dd0d2fc">predictor::predictor</a></div><div class="ttdeci">predictor(bool lossy)</div><div class="ttdoc">Construct a new predictor object.</div><div class="ttdef"><b>Definition:</b> predictor.h:15</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
