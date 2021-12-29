@@ -82,12 +82,13 @@ using namespace std;
     uint8_t bit_stream::readBit()
     {
         uint8_t val_byte=0;
-        int i,j;
         if (pointer_read < 0) {
             inputfile.read((char*)&rbyte, 1); 
+            //cout << "byte: " << rbyte << endl;
             pointer_read = 7;
         }
         val_byte = ((rbyte >> pointer_read) & 0x01); 
+        //cout <<"bit: " <<  (int)((rbyte >> pointer_read) & 0x01) << endl;
         pointer_read--;
         return val_byte;
     }
@@ -106,16 +107,18 @@ using namespace std;
     char* bit_stream::readBits(uint n)
     {
         int i,j;
-        char* value = (char*)malloc((uint)(n/8) + 1);
-        for(j=(n)/8; j>=0; j--){
+        char* bits = (char*)malloc((uint)(n/8) + 1);
+        for(j=n/8; j>=0; j--){
+            bits[j] = 0x00;
             for (i=7; i>=0; i--) {
-                if(i+8*j < n)
-                    value[j] |= (readBit()<<i);
+                if(i+8*j < n){
+                    bits[j] |= (readBit()<<i); 
+                }
             }
         }
-        return value;
+        return bits;
     }
-    
+
     void bit_stream::readBits(char* bits, uint n)
     {
         int i,j;
@@ -123,7 +126,7 @@ using namespace std;
             bits[j] = 0x00;
             for (i=7; i>=0; i--) {
                 if(i+8*j < n){
-                    bits[j] += (readBit()<<i); 
+                    bits[j] |= (readBit()<<i); 
                 }
             }
         }

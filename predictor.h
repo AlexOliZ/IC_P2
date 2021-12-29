@@ -24,7 +24,7 @@ class predictor {
         bool lossy;
         int num_inputs;
         short pointer;
-        short buffer[3];
+        int buffer[3];
 };
 
 #endif

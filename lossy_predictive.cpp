@@ -5,8 +5,8 @@ using namespace std;
 void lossy_predictive::lossypredictive_encode(char* outfile){
 
     char* code;
-    int *buf,i,num_items,num,channels,quant_value,residual;
-    int average = 0;
+    short *buf;
+    int i,num_items,channels,quant_value,residual;
     predictor predictor_encoder(true);
     double pak = 0;
 
@@ -19,23 +19,25 @@ void lossy_predictive::lossypredictive_encode(char* outfile){
 
     num_items = inFileInfo.frames*channels;
 
-    buf = (int *) malloc(num_items*sizeof(int));
-    num = sf_read_int(inFile,buf,num_items);
+    buf = (short *) malloc(num_items*sizeof(short));
+    sf_read_short(inFile,buf,num_items);
 
     sf_close(inFile);
         
     for(i=0 ; i<num_items ; i++){
-        residual = predictor_encoder.residual(buf[i]);
-        quant_value = quantize(residual,this->qtbits);
-        predictor_encoder.updateBufferConst(quant_value);
-        buf[i] = quant_value;
-        average += buf[i]>=0?2*buf[i]:-2*buf[i]-1;
+        residual = (short)predictor_encoder.residual((int)buf[i]);
+        quant_value = quantize((int)residual,qtbits);
+        predictor_encoder.updateBufferConst((int)quant_value);
+        buf[i] = (short)quant_value;
+        m += buf[i]>=0?2*buf[i]:-2*buf[i]-1;
     }
-    m=(int)ceil(-1/log2(average/(average+1.0)));
+    m = m/num_items;
+    m = m*16;
+    m = (uint)ceil(-1/log2(m/(m+1.0)));
 
     golomb golomb_encoder(m,outfile);
-    
-    for(i=0 ; i<num ; i++)
+
+    for(i=0 ; i<num_items ; i++)
     {
         if(this->calc_hist){
             if (this->histogram_residual.find(buf[i])!= this->histogram_residual.end()){ //if the element exists
@@ -44,10 +46,10 @@ void lossy_predictive::lossypredictive_encode(char* outfile){
                 this->histogram_residual[buf[i]]=1;
             }
         }
-        golomb_encoder.signed_stream_encode(buf[i]);
+        golomb_encoder.signed_stream_encode((int)buf[i]);
     }
     golomb_encoder.close_stream_write();
-    printf("Read %d items\n",num);
+    printf("Read %d items\n",num_items);
     free(buf);
     if(this->calc_hist){
         for(std::map<int,int>::iterator it = this->histogram_residual.begin(); it != this->histogram_residual.end(); ++it) {
@@ -59,7 +61,7 @@ void lossy_predictive::lossypredictive_encode(char* outfile){
 }
 
 int lossy_predictive::quantize(int sample,int nbits){
-    int delta = (2147483647 - (-2147483648)) / (pow(2,nbits)-1);
+    int delta = (32767 - (-32768)) / (pow(2,nbits)-1);
     int qtsample = delta*floor(sample/delta+0.5);
     return qtsample; 
 }
@@ -73,12 +75,12 @@ void lossy_predictive::dispHistogram(){
     switch(this->qtbits){
         case 16:
             {
-                hist_w = 610; hist_h = 600; 
+                hist_w = 600; hist_h = 600; 
                 Mat histImage(hist_h, hist_w, CV_8UC1, Scalar(255, 255, 255)); 
                 c = 0;
                 count = 0;
                 for(std::map<int,int>::iterator it = histogram_residual.begin(); it != histogram_residual.end(); ++it) {
-                    if(count % 50 == 0){
+                    if(count % 95 == 0){
                         line(histImage, Point(c, hist_h), Point(c, hist_h-it->second),Scalar(0,0,0), 2,8,0);
                         c++;
                     }     
@@ -90,12 +92,12 @@ void lossy_predictive::dispHistogram(){
             }
         case 8:
             { 
-                hist_w = 550; hist_h = 600; 
+                hist_w = 520; hist_h = 600; 
                 Mat histImage(hist_h, hist_w, CV_8UC1, Scalar(255, 255, 255)); 
                 c = 0;
                 count = 0;
                 for(std::map<int,int>::iterator it = histogram_residual.begin(); it != histogram_residual.end(); ++it) {
-                    for(int k=0;k < 3; k++){
+                    for(int k=0;k < 2; k++){
                         line(histImage, Point(c, hist_h), Point(c, hist_h-(it->second/280)),Scalar(0,0,0), 2,8,0);
                         c++;
                     } 
@@ -113,7 +115,7 @@ void lossy_predictive::dispHistogram(){
                 c = 0;
                 count = 0;
                 for(std::map<int,int>::iterator it = histogram_residual.begin(); it != histogram_residual.end(); ++it) {
-                    for(int k=0;k < 60; k++){
+                    for(int k=0;k < 40; k++){
                         line(histImage, Point(c, hist_h), Point(c, hist_h-(it->second/3400)),Scalar(0,0,0), 1,8,0);
                         c++;
                     }                         
@@ -133,7 +135,8 @@ void lossy_predictive::dispHistogram(){
 
 void lossy_predictive::lossypredictive_decode(char* infile)
 {
-    int channels,num_items, *code;
+    int channels,num_items;
+    short *code;
     int count = 0;
     predictor predictor_decoder(true);
     golomb golomb_decoder(this->m,infile);
@@ -148,7 +151,7 @@ void lossy_predictive::lossypredictive_decode(char* infile)
 
     sf_close(inFile);
 
-    code = (int*)malloc(sizeof(int)*num_items);
+    code = (short*)malloc(sizeof(short)*num_items);
 
     while(count < num_items){
 
@@ -159,7 +162,7 @@ void lossy_predictive::lossypredictive_decode(char* infile)
 
     const char* outfilename = "lossyoutput.wav";
     SNDFILE* outFile = sf_open (outfilename, SFM_WRITE, &inFileInfo);
-    sf_write_int (outFile, code, num_items) ;
+    sf_write_short(outFile, code, num_items) ;
     sf_close(outFile) ;
 }
 
@@ -167,7 +170,7 @@ int main(int argc, char* argv[])
 {
     
     string file = "./wavfiles/sample01.wav";
-    string binfile = "testfile.bin";
+    string binfile = "lossy.bin";
     if(argc != 4){
         cout << "Incorrect argument list, use is: ./lossyaudio <nomeficheiro> <nbitsqnt> <hist?>"<<endl;
     }

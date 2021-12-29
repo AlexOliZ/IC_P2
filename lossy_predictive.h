@@ -32,7 +32,8 @@ class lossy_predictive {
         
     private:
         bool calc_hist;
-        int m,qtbits;
+        uint m;
+        int qtbits;
         char* filename;
         map <int, int> histogram_residual;
         double entropy;

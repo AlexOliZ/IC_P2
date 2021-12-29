@@ -32,7 +32,7 @@ class lossless_predictive {
         
     private:
         bool calc_hist;
-        int m;
+        uint m;
         char* filename;
         map <int, int> histogram_original;
         map <int, int> histogram_residual;

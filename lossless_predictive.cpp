@@ -9,8 +9,8 @@ static int* check_validity;
 
 SF_INFO lossless_predictive::predictive_encode(char* outfile){
 
-    int *buf,i,predictor_val,num_items,num,channels;
-    uint average=0;
+    int i,predictor_val,num_items,channels;
+    short *buf;
     predictor predictor_encoder(false);
     double pak=0;
 
@@ -24,12 +24,10 @@ SF_INFO lossless_predictive::predictive_encode(char* outfile){
     num_items = inFileInfo.frames*channels;
 
     /* Allocate space for the data to be read, then read it. */
-    buf = (int *) malloc(num_items*sizeof(int));
-    num = sf_read_int(inFile,buf,num_items);
-
- 
+    buf = (short *) malloc(num_items*sizeof(short));
+    sf_read_short(inFile,buf,num_items);
     sf_close(inFile);
-    cout << "sizeof " << sizeof(SF_INFO) << endl;
+
     for(i=0 ; i<num_items ; i++){
         if(this->calc_hist){
             if (this->histogram_original.find(buf[i])!= this->histogram_original.end()){ //if the element exists
@@ -38,16 +36,13 @@ SF_INFO lossless_predictive::predictive_encode(char* outfile){
                 this->histogram_original[buf[i]]=1;
             }
         }
-        buf[i] = predictor_encoder.residual(buf[i]);
-        average += buf[i]>=0?2*buf[i]:-2*buf[i]-1;
+        buf[i] = (short)predictor_encoder.residual((int)buf[i]);
+        m += buf[i]>=0?2*buf[i]:-2*buf[i]-1;
     }
-    //average = average/num_items;
-    cout << "average: " << average << endl;
-    this->m=(uint)ceil(-1/log2(average/(average+1.0)));
-    cout << "M: " << this->m << endl;
-    cout << "size: " << (64*num_items) << endl;
+    m = m/num_items;
+    m = m*16;
+    m = (uint)ceil(-1/log2(m/(m+1.0)));
 
-    
 
     golomb golomb_encoder(this->m,outfile);
     
@@ -88,12 +83,12 @@ SF_INFO lossless_predictive::predictive_encode(char* outfile){
 
 void lossless_predictive::dispHistogram(){
     if(this->calc_hist){ 
-        int hist_w = 610; int hist_h = 600; 
+        int hist_w = 600; int hist_h = 600; 
         Mat histImage(hist_h, hist_w, CV_8UC1, Scalar(255, 255, 255)); 
         int c = 0;
         int count = 0;
         for(std::map<int,int>::iterator it = histogram_residual.begin(); it != histogram_residual.end(); ++it) {
-            if(count % 50 == 0){
+            if(count % 95 == 0){
                 line(histImage, Point(c, hist_h), Point(c, hist_h-it->second),Scalar(0,0,0), 2,8,0);
                 c++;
             }     
@@ -115,11 +110,12 @@ void lossless_predictive::predictive_decode(char* infile,SF_INFO info)
 {
     predictor predictor_decoder(false);
     golomb golomb_decoder(this->m,infile);
-    int num_items,*code;
+    int num_items;
+    short *code;
     int count = 0;
 
     num_items = info.channels*info.frames;
-    code = (int*)malloc(sizeof(int)*num_items);
+    code = (short*)malloc(sizeof(short)*num_items);
     count = 0;
     while(1){
         code[count] = predictor_decoder.reconstruct(golomb_decoder.signed_stream_decode());
@@ -130,9 +126,9 @@ void lossless_predictive::predictive_decode(char* infile,SF_INFO info)
     }
     golomb_decoder.close_stream_read();
 
-    const char* outfilename = "output.wav";
+    const char* outfilename = "lossless.wav";
     SNDFILE* outFile = sf_open (outfilename, SFM_WRITE, &info);
-    sf_write_int (outFile, code, num_items) ;
+    sf_write_short (outFile, code, num_items) ;
     sf_close(outFile) ;
     free(code);
 }
@@ -140,7 +136,7 @@ void lossless_predictive::predictive_decode(char* infile,SF_INFO info)
 int main(int argc, char* argv[])
 {
     string file = "./wavfiles/sample01.wav";
-    string binfile = "testfile.bin";
+    string binfile = "lossless.bin";
     lossless_predictive lossless((char*)file.data(),true);
     SF_INFO info = lossless.predictive_encode((char*)binfile.data());
     lossless.predictive_decode((char*)binfile.data(),info);
