@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['yuv_83',['YUV',['../classlossless__codec.html#a7eb968583835230c0bf68c08b2582605',1,'lossless_codec::YUV()'],['../classlossy__coding.html#af2b28272f7635552f05381f8ad1abd39',1,'lossy_coding::YUV()']]]
+  ['updatebuffer_112',['updateBuffer',['../classpredictor.html#a127e69073a419c57d9127e8253d0986e',1,'predictor']]],
+  ['updatebufferconst_113',['updateBufferConst',['../classpredictor.html#aa596c1a9a18838fd30570302c67b367e',1,'predictor']]]
 ];

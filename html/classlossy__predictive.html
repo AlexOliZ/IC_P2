@@ -91,25 +91,237 @@ $(document).ready(function(){initNavTree('classlossy__predictive.html',''); init
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a8d4fd1f5b06f669879e3a47d4ba3242d"><td class="memItemLeft" align="right" valign="top"><a id="a8d4fd1f5b06f669879e3a47d4ba3242d"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>lossy_predictive</b> (char *fname, bool hist)</td></tr>
-<tr class="separator:a8d4fd1f5b06f669879e3a47d4ba3242d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad1ecfff24de759534ecd7da0e9c0bb1f"><td class="memItemLeft" align="right" valign="top"><a id="ad1ecfff24de759534ecd7da0e9c0bb1f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>lossypredictive_encode</b> (char *outfile, int qtbits)</td></tr>
-<tr class="separator:ad1ecfff24de759534ecd7da0e9c0bb1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a74352ef36f3afca3eb6b677d58682d49"><td class="memItemLeft" align="right" valign="top"><a id="a74352ef36f3afca3eb6b677d58682d49"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>lossypredictive_decode</b> (char *infile)</td></tr>
+<tr class="memitem:a00ef1f1ed9280cf5f6350d9a94966922"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlossy__predictive.html#a00ef1f1ed9280cf5f6350d9a94966922">lossy_predictive</a> (char *fname, bool hist, int bits)</td></tr>
+<tr class="memdesc:a00ef1f1ed9280cf5f6350d9a94966922"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new lossy predictive object.  <a href="classlossy__predictive.html#a00ef1f1ed9280cf5f6350d9a94966922">More...</a><br /></td></tr>
+<tr class="separator:a00ef1f1ed9280cf5f6350d9a94966922"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae7641d91b66ec84b2cee145f7d881b8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlossy__predictive.html#aae7641d91b66ec84b2cee145f7d881b8">lossypredictive_encode</a> (char *outfile)</td></tr>
+<tr class="memdesc:aae7641d91b66ec84b2cee145f7d881b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads the soundfile, calculates the residuals and then sends to the bitstream each sample coded in golomb coding.  <a href="classlossy__predictive.html#aae7641d91b66ec84b2cee145f7d881b8">More...</a><br /></td></tr>
+<tr class="separator:aae7641d91b66ec84b2cee145f7d881b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74352ef36f3afca3eb6b677d58682d49"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlossy__predictive.html#a74352ef36f3afca3eb6b677d58682d49">lossypredictive_decode</a> (char *infile)</td></tr>
+<tr class="memdesc:a74352ef36f3afca3eb6b677d58682d49"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decodes the binary file throgh the bitstream and then recontructs, with the predictor, the original values In the end, writes in a new wav file the values retrieved in the previous step.  <a href="classlossy__predictive.html#a74352ef36f3afca3eb6b677d58682d49">More...</a><br /></td></tr>
 <tr class="separator:a74352ef36f3afca3eb6b677d58682d49"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa6be813745d640f5e5e1e7a03ac7a475"><td class="memItemLeft" align="right" valign="top"><a id="aa6be813745d640f5e5e1e7a03ac7a475"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setM</b> (uint m)</td></tr>
+<tr class="memitem:aa6be813745d640f5e5e1e7a03ac7a475"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlossy__predictive.html#aa6be813745d640f5e5e1e7a03ac7a475">setM</a> (uint m)</td></tr>
+<tr class="memdesc:aa6be813745d640f5e5e1e7a03ac7a475"><td class="mdescLeft">&#160;</td><td class="mdescRight">function used to change directly the m used in the golomb module  <a href="classlossy__predictive.html#aa6be813745d640f5e5e1e7a03ac7a475">More...</a><br /></td></tr>
 <tr class="separator:aa6be813745d640f5e5e1e7a03ac7a475"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab242504dbe971dc68c93216ced38381a"><td class="memItemLeft" align="right" valign="top"><a id="ab242504dbe971dc68c93216ced38381a"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>quantize</b> (int sample, int nbits)</td></tr>
+<tr class="memitem:ab242504dbe971dc68c93216ced38381a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlossy__predictive.html#ab242504dbe971dc68c93216ced38381a">quantize</a> (int sample, int nbits)</td></tr>
+<tr class="memdesc:ab242504dbe971dc68c93216ced38381a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Takes a audio sample and converts it to the nearest quantize step.  <a href="classlossy__predictive.html#ab242504dbe971dc68c93216ced38381a">More...</a><br /></td></tr>
 <tr class="separator:ab242504dbe971dc68c93216ced38381a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad5023c2390ff4c5a1d799b733dfffe1e"><td class="memItemLeft" align="right" valign="top"><a id="ad5023c2390ff4c5a1d799b733dfffe1e"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>getEntropy</b> ()</td></tr>
+<tr class="memitem:ad5023c2390ff4c5a1d799b733dfffe1e"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlossy__predictive.html#ad5023c2390ff4c5a1d799b733dfffe1e">getEntropy</a> ()</td></tr>
+<tr class="memdesc:ad5023c2390ff4c5a1d799b733dfffe1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the Entropy value of the residual values.  <a href="classlossy__predictive.html#ad5023c2390ff4c5a1d799b733dfffe1e">More...</a><br /></td></tr>
 <tr class="separator:ad5023c2390ff4c5a1d799b733dfffe1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac90367f56281532bed5e362e99a646c4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlossy__predictive.html#ac90367f56281532bed5e362e99a646c4">dispHistogram</a> ()</td></tr>
+<tr class="memdesc:ac90367f56281532bed5e362e99a646c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that displays the Histogram of the Residual values.  <a href="classlossy__predictive.html#ac90367f56281532bed5e362e99a646c4">More...</a><br /></td></tr>
+<tr class="separator:ac90367f56281532bed5e362e99a646c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a00ef1f1ed9280cf5f6350d9a94966922"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a00ef1f1ed9280cf5f6350d9a94966922">&#9670;&nbsp;</a></span>lossy_predictive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">lossy_predictive::lossy_predictive </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>fname</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>hist</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>bits</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Construct a new lossy predictive object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fname</td><td>soundfile to be read </td></tr>
+    <tr><td class="paramname">hist</td><td>flag to determine whether histograms are calculated or not </td></tr>
+    <tr><td class="paramname">bits</td><td>number of bits to quantize the audio </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ac90367f56281532bed5e362e99a646c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac90367f56281532bed5e362e99a646c4">&#9670;&nbsp;</a></span>dispHistogram()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void lossy_predictive::dispHistogram </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function that displays the Histogram of the Residual values. </p>
+
+</div>
+</div>
+<a id="ad5023c2390ff4c5a1d799b733dfffe1e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5023c2390ff4c5a1d799b733dfffe1e">&#9670;&nbsp;</a></span>getEntropy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double lossy_predictive::getEntropy </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the Entropy value of the residual values. </p>
+<dl class="section return"><dt>Returns</dt><dd>Entropy calculated </dd></dl>
+
+</div>
+</div>
+<a id="a74352ef36f3afca3eb6b677d58682d49"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74352ef36f3afca3eb6b677d58682d49">&#9670;&nbsp;</a></span>lossypredictive_decode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void lossy_predictive::lossypredictive_decode </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>infile</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Decodes the binary file throgh the bitstream and then recontructs, with the predictor, the original values In the end, writes in a new wav file the values retrieved in the previous step. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">infile</td><td>binary file containing the residuals coded in golomb coding </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aae7641d91b66ec84b2cee145f7d881b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae7641d91b66ec84b2cee145f7d881b8">&#9670;&nbsp;</a></span>lossypredictive_encode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void lossy_predictive::lossypredictive_encode </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>outfile</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Reads the soundfile, calculates the residuals and then sends to the bitstream each sample coded in golomb coding. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">outfile</td><td>file to where the bitstream writes </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ab242504dbe971dc68c93216ced38381a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab242504dbe971dc68c93216ced38381a">&#9670;&nbsp;</a></span>quantize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int lossy_predictive::quantize </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>sample</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nbits</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Takes a audio sample and converts it to the nearest quantize step. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sample</td><td>audio sample given </td></tr>
+    <tr><td class="paramname">nbits</td><td>number of bits to quantize the audio sample </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Return ths audio sample quantized to nbits </dd></dl>
+
+</div>
+</div>
+<a id="aa6be813745d640f5e5e1e7a03ac7a475"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa6be813745d640f5e5e1e7a03ac7a475">&#9670;&nbsp;</a></span>setM()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void lossy_predictive::setM </td>
+          <td>(</td>
+          <td class="paramtype">uint&#160;</td>
+          <td class="paramname"><em>m</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>function used to change directly the m used in the golomb module </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">m</td><td>the value that will be set to the variable m </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="lossy__predictive_8h_source.html">lossy_predictive.h</a></li>
 <li>lossy_predictive.cpp</li>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['yuv_40',['YUV',['../classlossless__codec.html#a7eb968583835230c0bf68c08b2582605',1,'lossless_codec::YUV()'],['../classlossy__coding.html#af2b28272f7635552f05381f8ad1abd39',1,'lossy_coding::YUV()']]]
+  ['valorpixeldec_52',['ValorPixelDec',['../classlossless__codec.html#a8bc8d7b9fd6a7787855b24c2268f82c9',1,'lossless_codec::ValorPixelDec()'],['../classlossy__coding.html#a2f905e170923fd853bc9768a708b3861',1,'lossy_coding::ValorPixelDec()']]]
 ];

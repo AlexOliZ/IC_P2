@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['write_5fbyte_37',['write_byte',['../classbit__stream.html#adb038dc6203c95253703829784dfcbf3',1,'bit_stream']]],
-  ['writebit_38',['writeBit',['../classbit__stream.html#ae2c72fa673a5a675d717ee0931a8bade',1,'bit_stream']]],
-  ['writebits_39',['writeBits',['../classbit__stream.html#a68e18b56d06429dd7bbc1aa6da284636',1,'bit_stream::writeBits(int val, uint n)'],['../classbit__stream.html#af2d415fa22c67b61643eb8614b538253',1,'bit_stream::writeBits(char *val, uint n)']]]
+  ['updatebuffer_50',['updateBuffer',['../classpredictor.html#a127e69073a419c57d9127e8253d0986e',1,'predictor']]],
+  ['updatebufferconst_51',['updateBufferConst',['../classpredictor.html#aa596c1a9a18838fd30570302c67b367e',1,'predictor']]]
 ];

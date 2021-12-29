@@ -91,28 +91,209 @@ $(document).ready(function(){initNavTree('classpredictor.html',''); initResizabl
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a12864d3c4e232d3cd1f193e15dd0d2fc"><td class="memItemLeft" align="right" valign="top"><a id="a12864d3c4e232d3cd1f193e15dd0d2fc"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>predictor</b> (bool lossy)</td></tr>
+<tr class="memitem:a12864d3c4e232d3cd1f193e15dd0d2fc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpredictor.html#a12864d3c4e232d3cd1f193e15dd0d2fc">predictor</a> (bool lossy)</td></tr>
+<tr class="memdesc:a12864d3c4e232d3cd1f193e15dd0d2fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new predictor object.  <a href="classpredictor.html#a12864d3c4e232d3cd1f193e15dd0d2fc">More...</a><br /></td></tr>
 <tr class="separator:a12864d3c4e232d3cd1f193e15dd0d2fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aed3175d8987c82f23ee46d234a6266d6"><td class="memItemLeft" align="right" valign="top"><a id="aed3175d8987c82f23ee46d234a6266d6"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>predict</b> ()</td></tr>
+<tr class="memitem:aed3175d8987c82f23ee46d234a6266d6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpredictor.html#aed3175d8987c82f23ee46d234a6266d6">predict</a> ()</td></tr>
+<tr class="memdesc:aed3175d8987c82f23ee46d234a6266d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Predicts the next value using a set of equations.  <a href="classpredictor.html#aed3175d8987c82f23ee46d234a6266d6">More...</a><br /></td></tr>
 <tr class="separator:aed3175d8987c82f23ee46d234a6266d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6a2e970231a879adb82b4466ca31b0a0"><td class="memItemLeft" align="right" valign="top"><a id="a6a2e970231a879adb82b4466ca31b0a0"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>residual</b> (int sample)</td></tr>
-<tr class="separator:a6a2e970231a879adb82b4466ca31b0a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad54eed825e03bcf72cf9540e9975b2bc"><td class="memItemLeft" align="right" valign="top"><a id="ad54eed825e03bcf72cf9540e9975b2bc"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>reconstruct</b> (int residual)</td></tr>
+<tr class="memitem:a3ca14337f37a043c2839c96a0265cf1c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpredictor.html#a3ca14337f37a043c2839c96a0265cf1c">residual</a> (int residual)</td></tr>
+<tr class="memdesc:a3ca14337f37a043c2839c96a0265cf1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the residual of the audio sample.  <a href="classpredictor.html#a3ca14337f37a043c2839c96a0265cf1c">More...</a><br /></td></tr>
+<tr class="separator:a3ca14337f37a043c2839c96a0265cf1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad54eed825e03bcf72cf9540e9975b2bc"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpredictor.html#ad54eed825e03bcf72cf9540e9975b2bc">reconstruct</a> (int <a class="el" href="classpredictor.html#a3ca14337f37a043c2839c96a0265cf1c">residual</a>)</td></tr>
+<tr class="memdesc:ad54eed825e03bcf72cf9540e9975b2bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reconstructs the original sample from the residual given.  <a href="classpredictor.html#ad54eed825e03bcf72cf9540e9975b2bc">More...</a><br /></td></tr>
 <tr class="separator:ad54eed825e03bcf72cf9540e9975b2bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa596c1a9a18838fd30570302c67b367e"><td class="memItemLeft" align="right" valign="top"><a id="aa596c1a9a18838fd30570302c67b367e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>updateBufferConst</b> (int quant)</td></tr>
+<tr class="memitem:aa596c1a9a18838fd30570302c67b367e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpredictor.html#aa596c1a9a18838fd30570302c67b367e">updateBufferConst</a> (int quant)</td></tr>
+<tr class="memdesc:aa596c1a9a18838fd30570302c67b367e"><td class="mdescLeft">&#160;</td><td class="mdescRight">updates the buffer, this is used for lossy only  <a href="classpredictor.html#aa596c1a9a18838fd30570302c67b367e">More...</a><br /></td></tr>
 <tr class="separator:aa596c1a9a18838fd30570302c67b367e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5262899cdba06f6ca88da7a0179530c8"><td class="memItemLeft" align="right" valign="top"><a id="a5262899cdba06f6ca88da7a0179530c8"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>showBuffer</b> ()</td></tr>
+<tr class="memitem:a5262899cdba06f6ca88da7a0179530c8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpredictor.html#a5262899cdba06f6ca88da7a0179530c8">showBuffer</a> ()</td></tr>
+<tr class="memdesc:a5262899cdba06f6ca88da7a0179530c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Displays the contents of the buffer.  <a href="classpredictor.html#a5262899cdba06f6ca88da7a0179530c8">More...</a><br /></td></tr>
 <tr class="separator:a5262899cdba06f6ca88da7a0179530c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a127e69073a419c57d9127e8253d0986e"><td class="memItemLeft" align="right" valign="top"><a id="a127e69073a419c57d9127e8253d0986e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>updateBuffer</b> (int sample)</td></tr>
+<tr class="memitem:a127e69073a419c57d9127e8253d0986e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpredictor.html#a127e69073a419c57d9127e8253d0986e">updateBuffer</a> (int sample)</td></tr>
+<tr class="memdesc:a127e69073a419c57d9127e8253d0986e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the buffer with the new calculated value.  <a href="classpredictor.html#a127e69073a419c57d9127e8253d0986e">More...</a><br /></td></tr>
 <tr class="separator:a127e69073a419c57d9127e8253d0986e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a12864d3c4e232d3cd1f193e15dd0d2fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a12864d3c4e232d3cd1f193e15dd0d2fc">&#9670;&nbsp;</a></span>predictor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">predictor::predictor </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>lossy</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Construct a new predictor object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lossy</td><td>flags to determine if the predictive using is losing or not </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="aed3175d8987c82f23ee46d234a6266d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed3175d8987c82f23ee46d234a6266d6">&#9670;&nbsp;</a></span>predict()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int predictor::predict </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Predicts the next value using a set of equations. </p>
+<dl class="section return"><dt>Returns</dt><dd>The predicted value </dd></dl>
+
+</div>
+</div>
+<a id="ad54eed825e03bcf72cf9540e9975b2bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad54eed825e03bcf72cf9540e9975b2bc">&#9670;&nbsp;</a></span>reconstruct()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int predictor::reconstruct </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>residual</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Reconstructs the original sample from the residual given. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">residual</td><td>Residual given </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>int </dd></dl>
+
+</div>
+</div>
+<a id="a3ca14337f37a043c2839c96a0265cf1c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ca14337f37a043c2839c96a0265cf1c">&#9670;&nbsp;</a></span>residual()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int predictor::residual </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>residual</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculates the residual of the audio sample. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sample</td><td>Audio sample given </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns the residual value of the given sample </dd></dl>
+
+</div>
+</div>
+<a id="a5262899cdba06f6ca88da7a0179530c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5262899cdba06f6ca88da7a0179530c8">&#9670;&nbsp;</a></span>showBuffer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void predictor::showBuffer </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Displays the contents of the buffer. </p>
+
+</div>
+</div>
+<a id="a127e69073a419c57d9127e8253d0986e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a127e69073a419c57d9127e8253d0986e">&#9670;&nbsp;</a></span>updateBuffer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void predictor::updateBuffer </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>sample</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Updates the buffer with the new calculated value. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sample</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aa596c1a9a18838fd30570302c67b367e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa596c1a9a18838fd30570302c67b367e">&#9670;&nbsp;</a></span>updateBufferConst()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void predictor::updateBufferConst </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>quant</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>updates the buffer, this is used for lossy only </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">quant</td><td>The value to be given to the buffer </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="predictor_8h_source.html">predictor.h</a></li>
 <li>predictor.cpp</li>

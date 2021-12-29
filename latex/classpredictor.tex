@@ -3,27 +3,130 @@
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
+\mbox{\hyperlink{classpredictor_a12864d3c4e232d3cd1f193e15dd0d2fc}{predictor}} (bool lossy)
+\begin{DoxyCompactList}\small\item\em Construct a new predictor object. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classpredictor_aed3175d8987c82f23ee46d234a6266d6}{predict}} ()
+\begin{DoxyCompactList}\small\item\em Predicts the next value using a set of equations. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classpredictor_a3ca14337f37a043c2839c96a0265cf1c}{residual}} (int residual)
+\begin{DoxyCompactList}\small\item\em Calculates the residual of the audio sample. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classpredictor_ad54eed825e03bcf72cf9540e9975b2bc}{reconstruct}} (int \mbox{\hyperlink{classpredictor_a3ca14337f37a043c2839c96a0265cf1c}{residual}})
+\begin{DoxyCompactList}\small\item\em Reconstructs the original sample from the residual given. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classpredictor_aa596c1a9a18838fd30570302c67b367e}{update\+Buffer\+Const}} (int quant)
+\begin{DoxyCompactList}\small\item\em updates the buffer, this is used for lossy only \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classpredictor_a5262899cdba06f6ca88da7a0179530c8}{show\+Buffer}} ()
+\begin{DoxyCompactList}\small\item\em Displays the contents of the buffer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classpredictor_a127e69073a419c57d9127e8253d0986e}{update\+Buffer}} (int sample)
+\begin{DoxyCompactList}\small\item\em Updates the buffer with the new calculated value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
 \mbox{\Hypertarget{classpredictor_a12864d3c4e232d3cd1f193e15dd0d2fc}\label{classpredictor_a12864d3c4e232d3cd1f193e15dd0d2fc}} 
-{\bfseries predictor} (bool lossy)
-\item 
+\index{predictor@{predictor}!predictor@{predictor}}
+\index{predictor@{predictor}!predictor@{predictor}}
+\doxysubsubsection{\texorpdfstring{predictor()}{predictor()}}
+{\footnotesize\ttfamily predictor\+::predictor (\begin{DoxyParamCaption}\item[{bool}]{lossy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct a new predictor object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em lossy} & flags to determine if the predictive using is losing or not \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
 \mbox{\Hypertarget{classpredictor_aed3175d8987c82f23ee46d234a6266d6}\label{classpredictor_aed3175d8987c82f23ee46d234a6266d6}} 
-int {\bfseries predict} ()
-\item 
-\mbox{\Hypertarget{classpredictor_a6a2e970231a879adb82b4466ca31b0a0}\label{classpredictor_a6a2e970231a879adb82b4466ca31b0a0}} 
-int {\bfseries residual} (int sample)
-\item 
+\index{predictor@{predictor}!predict@{predict}}
+\index{predict@{predict}!predictor@{predictor}}
+\doxysubsubsection{\texorpdfstring{predict()}{predict()}}
+{\footnotesize\ttfamily int predictor\+::predict (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Predicts the next value using a set of equations. 
+
+\begin{DoxyReturn}{Returns}
+The predicted value 
+\end{DoxyReturn}
 \mbox{\Hypertarget{classpredictor_ad54eed825e03bcf72cf9540e9975b2bc}\label{classpredictor_ad54eed825e03bcf72cf9540e9975b2bc}} 
-int {\bfseries reconstruct} (int residual)
-\item 
-\mbox{\Hypertarget{classpredictor_aa596c1a9a18838fd30570302c67b367e}\label{classpredictor_aa596c1a9a18838fd30570302c67b367e}} 
-void {\bfseries update\+Buffer\+Const} (int quant)
-\item 
+\index{predictor@{predictor}!reconstruct@{reconstruct}}
+\index{reconstruct@{reconstruct}!predictor@{predictor}}
+\doxysubsubsection{\texorpdfstring{reconstruct()}{reconstruct()}}
+{\footnotesize\ttfamily int predictor\+::reconstruct (\begin{DoxyParamCaption}\item[{int}]{residual }\end{DoxyParamCaption})}
+
+
+
+Reconstructs the original sample from the residual given. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em residual} & Residual given \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classpredictor_a3ca14337f37a043c2839c96a0265cf1c}\label{classpredictor_a3ca14337f37a043c2839c96a0265cf1c}} 
+\index{predictor@{predictor}!residual@{residual}}
+\index{residual@{residual}!predictor@{predictor}}
+\doxysubsubsection{\texorpdfstring{residual()}{residual()}}
+{\footnotesize\ttfamily int predictor\+::residual (\begin{DoxyParamCaption}\item[{int}]{residual }\end{DoxyParamCaption})}
+
+
+
+Calculates the residual of the audio sample. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sample} & Audio sample given \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the residual value of the given sample 
+\end{DoxyReturn}
 \mbox{\Hypertarget{classpredictor_a5262899cdba06f6ca88da7a0179530c8}\label{classpredictor_a5262899cdba06f6ca88da7a0179530c8}} 
-void {\bfseries show\+Buffer} ()
-\item 
+\index{predictor@{predictor}!showBuffer@{showBuffer}}
+\index{showBuffer@{showBuffer}!predictor@{predictor}}
+\doxysubsubsection{\texorpdfstring{showBuffer()}{showBuffer()}}
+{\footnotesize\ttfamily void predictor\+::show\+Buffer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Displays the contents of the buffer. 
+
 \mbox{\Hypertarget{classpredictor_a127e69073a419c57d9127e8253d0986e}\label{classpredictor_a127e69073a419c57d9127e8253d0986e}} 
-void {\bfseries update\+Buffer} (int sample)
-\end{DoxyCompactItemize}
+\index{predictor@{predictor}!updateBuffer@{updateBuffer}}
+\index{updateBuffer@{updateBuffer}!predictor@{predictor}}
+\doxysubsubsection{\texorpdfstring{updateBuffer()}{updateBuffer()}}
+{\footnotesize\ttfamily void predictor\+::update\+Buffer (\begin{DoxyParamCaption}\item[{int}]{sample }\end{DoxyParamCaption})}
+
+
+
+Updates the buffer with the new calculated value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sample} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classpredictor_aa596c1a9a18838fd30570302c67b367e}\label{classpredictor_aa596c1a9a18838fd30570302c67b367e}} 
+\index{predictor@{predictor}!updateBufferConst@{updateBufferConst}}
+\index{updateBufferConst@{updateBufferConst}!predictor@{predictor}}
+\doxysubsubsection{\texorpdfstring{updateBufferConst()}{updateBufferConst()}}
+{\footnotesize\ttfamily void predictor\+::update\+Buffer\+Const (\begin{DoxyParamCaption}\item[{int}]{quant }\end{DoxyParamCaption})}
+
+
+
+updates the buffer, this is used for lossy only 
+
+
+\begin{DoxyParams}{Parameters}
+{\em quant} & The value to be given to the buffer \\
+\hline
+\end{DoxyParams}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

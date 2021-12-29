@@ -23,9 +23,10 @@ class  lossy_coding{
         /**
          * @brief 
          * 
-         * @param valorPixel pixel value
-         * @param valorPrevisto expected pixel value
-         * @return int -> residual for each value of the predicted pixel
+         * @param y address for the matrix y
+         * @param u address for the matrix u
+         * @param v address for the matrix v
+         * @param ImagemRBG final image matrix
          */
         void RGB (Mat y, Mat u, Mat v, Mat &ImagemRBG);
         /**
@@ -33,6 +34,7 @@ class  lossy_coding{
          * 
          * @param valorPixel pixel value
          * @param valorPrevisto expected pixel value
+         * @param quantization quantization parameter set as program argument
          * @return int -> residual for each value of the predicted pixel
          */
         int erroEnc (int valorPixel, int valorPrevisto, int quantization);
@@ -41,7 +43,8 @@ class  lossy_coding{
          * 
          * @param erro residual
          * @param valorPrevisto expected pixel value
-         * @return int -> pixel value for each value of the predicted pixel
+         * @param quantization quantization parameter set as program argument
+         * @return int -> pixel value for each value of the predicted pixel 
          */
         int ValorPixelDec (int erro, int valorPrevisto, int quantization);
         /**
